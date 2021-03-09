@@ -17,7 +17,7 @@ bool Guess(int number) {
         return true;
     }
     else {
-        std::cout << "Wrong" << endl;
+        std::cout << "Wrong" << std::endl;
         return false;
     }
 }
