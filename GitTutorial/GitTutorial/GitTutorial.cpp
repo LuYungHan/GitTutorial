@@ -16,10 +16,8 @@ bool Guess(int number) {
         target = -1;
         return true;
     }
-    else {
-        std::cout << "Wrong" << std::endl;
-        return false;
-    }
+    else if (number < target) std::cout << "Smaller" << std::endl;
+    else if (number > target) std::cout << "Bigger" << std::endl;
 }
 
 int main(array<System::String ^> ^args)
