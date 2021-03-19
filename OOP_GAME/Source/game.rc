@@ -74,7 +74,7 @@ IDB_BALL4               BITMAP                  "..\\res\\ball4.bmp"
 
 IDB_ERASER1             BITMAP                  "..\\res\\eraser1.bmp"
 
-IDB_BACKGROUND          BITMAP                  "..\\res\\ntutcsie.bmp"
+IDB_BACKGROUND          BITMAP                  "..\\res\\map.bmp"
 
 IDB_CORNER              BITMAP                  "..\\res\\corner.bmp"
 
