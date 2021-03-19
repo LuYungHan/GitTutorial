@@ -113,21 +113,26 @@ void CGameStateInit::OnShow()
 	logo.SetTopLeft((SIZE_X - logo.Width())/2, SIZE_Y/8);
 	logo.ShowBitmap();
 	//
+	
+	//
 	// Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好
 	//
 	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
 	CFont f,*fp;
-	f.CreatePointFont(160,"Arial Black");	// 產生 font f; 160表示16 point的字
+	f.CreatePointFont(165,"Joystix");	// 產生 font f; 160表示16 point的字
 	fp=pDC->SelectObject(&f);					// 選用 font f
 	pDC->SetBkColor(RGB(0,0,0));
-	pDC->SetTextColor(RGB(255, 128, 0));
-	pDC->TextOut(120,220,"Please click to start the Game!!!");
+	pDC->SetTextColor(RGB(255, 255, 0));
+	pDC->TextOut(255,317,"R E A D Y !");
 	pDC->TextOut(5,395,"Press Ctrl-F to switch in between window mode and full screen mode.");
+	
 	if (ENABLE_GAME_PAUSE)
 		pDC->TextOut(5,425,"Press Ctrl-Q to pause the Game.");
 	pDC->TextOut(5,455,"Press Alt-F4 or ESC to Quit.");
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+
+	
 }								
 
 /////////////////////////////////////////////////////////////////////////////
@@ -172,7 +177,7 @@ void CGameStateOver::OnShow()
 {
 	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
 	CFont f,*fp;
-	f.CreatePointFont(160,"Times New Roman");	// 產生 font f; 160表示16 point的字
+	f.CreatePointFont(110,"Joystix");	// 產生 font f; 160表示16 point的字
 	fp=pDC->SelectObject(&f);					// 選用 font f
 	pDC->SetBkColor(RGB(0,0,0));
 	pDC->SetTextColor(RGB(255,255,0));
@@ -222,7 +227,8 @@ void CGameStateRun::OnBeginState()
 	hits_left.SetTopLeft(HITS_LEFT_X,HITS_LEFT_Y);		// 指定剩下撞擊數的座標
 	CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
 	CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
-	CAudio::Instance()->Play(AUDIO_NTUT, true);			// 撥放 MIDI
+	//CAudio::Instance()->Play(AUDIO_NTUT, true);			// 撥放 MIDI
+	CAudio::Instance()->Play(AUDIO_PACMAN, true);
 }
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
@@ -260,7 +266,9 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			//
 			if (hits_left.GetInteger() <= 0) {
 				CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
-				CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
+			//	CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
+				CAudio::Instance()->Stop(AUDIO_PACMAN);	// 停止 MIDI
+
 				GotoGameState(GAME_STATE_OVER);
 			}
 		}
@@ -300,7 +308,9 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	hits_left.LoadBitmap();									
 	CAudio::Instance()->Load(AUDIO_DING,  "sounds\\ding.wav");	// 載入編號0的聲音ding.wav
 	CAudio::Instance()->Load(AUDIO_LAKE,  "sounds\\lake.mp3");	// 載入編號1的聲音lake.mp3
-	CAudio::Instance()->Load(AUDIO_NTUT,  "sounds\\ntut.mid");	// 載入編號2的聲音ntut.mid
+	//CAudio::Instance()->Load(AUDIO_NTUT,  "sounds\\ntut.mid");	// 載入編號2的聲音ntut.mid
+	CAudio::Instance()->Load(AUDIO_PACMAN, "sounds\\pacman_music01.mp3");	// 載入編號4的聲音pacman_music01.mp3
+
 	//
 	// 此OnInit動作會接到CGameStaterOver::OnInit()，所以進度還沒到100%
 	//
