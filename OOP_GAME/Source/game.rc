@@ -126,7 +126,7 @@ IDC_GAMECURSOR          CURSOR                  "..\\res\\gamecurs.cur"
 // PNG
 //
 
-IDB_PNG1                PNG                     "D:\\Han_data\\物件導向實習\\pacman picture\\map.png"
+// IDB_PNG1                PNG                     "D:\\Han_data\\OOPL\\pacman picture\\map.png"
 
 #endif    // 中文 (繁體，台灣) resources
 /////////////////////////////////////////////////////////////////////////////
