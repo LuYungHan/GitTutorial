@@ -225,10 +225,10 @@ void CGameStateRun::OnBeginState()
 	help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 	hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
 	hits_left.SetTopLeft(HITS_LEFT_X,HITS_LEFT_Y);		// 指定剩下撞擊數的座標
-	CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
-	CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
+	//CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE //先暫時關一下，之後再開(你會調聲音的大小嗎?)
+	//CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE //先暫時關一下，之後再開
 	//CAudio::Instance()->Play(AUDIO_NTUT, true);			// 撥放 MIDI
-	CAudio::Instance()->Play(AUDIO_PACMAN, true);
+	//CAudio::Instance()->Play(AUDIO_PACMAN, true);		//先暫時關一下，之後再開
 }
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
@@ -259,7 +259,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	for (i = 0; i < NUMBALLS; i++)
 		if (ball[i].IsAlive() && ball[i].HitEraser(&eraser)) {
 			ball[i].SetIsAlive(false);
-			CAudio::Instance()->Play(AUDIO_DING);
+			//CAudio::Instance()->Play(AUDIO_DING);		//先暫時關一下，之後再開
 			hits_left.Add(-1);
 			//
 			// 若剩餘碰撞次數為0，則跳到Game Over狀態
@@ -324,18 +324,35 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_UP    = 0x26; // keyboard上箭頭
 	const char KEY_RIGHT = 0x27; // keyboard右箭頭
 	const char KEY_DOWN  = 0x28; // keyboard下箭頭
-	if (nChar == KEY_LEFT)
+	if (nChar == KEY_LEFT) {
 		eraser.SetMovingLeft(true);
-	if (nChar == KEY_RIGHT)
+		eraser.SetMovingDown(false);
+		eraser.SetMovingRight(false);
+		eraser.SetMovingUp(false);
+	}
+	if (nChar == KEY_RIGHT) {
+		eraser.SetMovingLeft(false);
+		eraser.SetMovingDown(false);
 		eraser.SetMovingRight(true);
-	if (nChar == KEY_UP)
+		eraser.SetMovingUp(false);
+	}
+	if (nChar == KEY_UP) {
+		eraser.SetMovingLeft(false);
+		eraser.SetMovingDown(false);
+		eraser.SetMovingRight(false);
 		eraser.SetMovingUp(true);
-	if (nChar == KEY_DOWN)
+	}
+	if (nChar == KEY_DOWN) {
+		eraser.SetMovingLeft(false);
 		eraser.SetMovingDown(true);
+		eraser.SetMovingRight(false);
+		eraser.SetMovingUp(false);
+	}
 }
 
 void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
+	/*
 	const char KEY_LEFT  = 0x25; // keyboard左箭頭
 	const char KEY_UP    = 0x26; // keyboard上箭頭
 	const char KEY_RIGHT = 0x27; // keyboard右箭頭
@@ -348,6 +365,7 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 		eraser.SetMovingUp(false);
 	if (nChar == KEY_DOWN)
 		eraser.SetMovingDown(false);
+	*/
 }
 
 void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作

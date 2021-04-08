@@ -73,6 +73,7 @@ namespace game_framework {
 	{
 		const int STEP_SIZE = 2;
 		animation.OnMove();
+		
 		if (isMovingLeft)
 			x -= STEP_SIZE;
 		if (isMovingRight)
