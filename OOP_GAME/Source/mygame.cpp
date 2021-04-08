@@ -193,7 +193,7 @@ void CGameStateOver::OnShow()
 /////////////////////////////////////////////////////////////////////////////
 
 CGameStateRun::CGameStateRun(CGame *g)
-: CGameState(g), NUMBALLS(28)
+: CGameState(g), NUMBALLS(1200)
 {
 	ball = new CBall [NUMBALLS];
 }
@@ -205,11 +205,11 @@ CGameStateRun::~CGameStateRun()
 
 void CGameStateRun::OnBeginState()
 {
-	const int BALL_GAP = 90;
+	const int BALL_GAP = 40;
 	const int BALL_XY_OFFSET = 45;
-	const int BALL_PER_ROW = 7;
+	const int BALL_PER_ROW = 24;
 	const int HITS_LEFT = 10;
-	const int HITS_LEFT_X = 590;
+	const int HITS_LEFT_X = 790;
 	const int HITS_LEFT_Y = 0;
 	const int BACKGROUND_X = 0;
 	const int ANIMATION_SPEED = 15;
@@ -247,7 +247,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	// 移動球
 	//
 	int i;
-	for (i=0; i < NUMBALLS; i++)
+	for (i = 0; i < NUMBALLS; i++)
 		ball[i].OnMove();
 	//
 	// 移動擦子
@@ -256,7 +256,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	//
 	// 判斷擦子是否碰到球
 	//
-	for (i=0; i < NUMBALLS; i++)
+	for (i = 0; i < NUMBALLS; i++)
 		if (ball[i].IsAlive() && ball[i].HitEraser(&eraser)) {
 			ball[i].SetIsAlive(false);
 			CAudio::Instance()->Play(AUDIO_DING);
@@ -276,8 +276,9 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	// 移動彈跳的球
 	//
 	bball.OnMove();
-}
+	blueball.OnMove();
 
+}
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 {
 	//
@@ -305,6 +306,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	corner.LoadBitmap(IDB_CORNER);							// 載入角落圖形
 	corner.ShowBitmap(background);							// 將corner貼到background
 	bball.LoadBitmap();										// 載入圖形
+	blueball.LoadBitmap();
 	hits_left.LoadBitmap();									
 	CAudio::Instance()->Load(AUDIO_DING,  "sounds\\ding.wav");	// 載入編號0的聲音ding.wav
 	CAudio::Instance()->Load(AUDIO_LAKE,  "sounds\\lake.mp3");	// 載入編號1的聲音lake.mp3
@@ -389,6 +391,7 @@ void CGameStateRun::OnShow()
 	for (int i=0; i < NUMBALLS; i++)
 		ball[i].OnShow();				// 貼上第i號球
 	bball.OnShow();						// 貼上彈跳的球
+	blueball.OnShow();
 	eraser.OnShow();					// 貼上擦子
 	//
 	//  貼上左上及右下角落的圖

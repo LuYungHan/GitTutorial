@@ -16,6 +16,10 @@
 #define IDB_BALL2                       135
 #define IDB_BALL3                       136
 #define IDB_BALL4                       137
+#define IDB_BALLLEFT1                   158
+#define IDB_BALLLEFT2                   159
+#define IDB_BALLLEFT3                   160
+#define IDB_BALLLEFT4                   161
 #define IDB_0                           138
 #define IDB_1                           139
 #define IDB_2                           140

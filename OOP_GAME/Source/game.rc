@@ -72,6 +72,14 @@ IDB_BALL3               BITMAP                  "..\\res\\ball3.bmp"
 
 IDB_BALL4               BITMAP                  "..\\res\\ball4.bmp"
 
+IDB_BALLLEFT1           BITMAP                  "..\\res\\ballLeft1 .bmp"
+
+IDB_BALLLEFT2           BITMAP                  "..\\res\\ballLeft2.bmp"
+
+IDB_BALLLEFT3           BITMAP                  "..\\res\\ballLeft3 .bmp"
+
+IDB_BALLLEFT4           BITMAP                  "..\\res\\ballLeft4 .bmp"
+
 IDB_ERASER1             BITMAP                  "..\\res\\eraser1.bmp"
 
 IDB_BACKGROUND          BITMAP                  "..\\Bitmaps\\level1.bmp"
