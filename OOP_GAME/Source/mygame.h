@@ -41,6 +41,7 @@
 #include "CEraser.h"
 #include "CBall.h"
 #include "CBouncingBall.h"
+
 #include "BackgroundMap.h"
 
 namespace game_framework {
@@ -50,9 +51,10 @@ namespace game_framework {
 
 	enum AUDIO_ID {				// 定義各種音效的編號
 		AUDIO_DING,				// 0
-		AUDIO_LAKE,				// 1
+	//	AUDIO_LAKE,				// 1
 	//	AUDIO_NTUT,				// 2
-		AUDIO_PACMAN			// 3
+		AUDIO_PACMAN,			// 3
+		AUDIO_DEATH
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -103,6 +105,8 @@ namespace game_framework {
 		CEraser			eraser;		// 拍子
 		CInteger		hits_left;	// 剩下的撞擊數
 		CBouncingBall   bball;		// 反覆彈跳的球
+		CBouncingBall   blueball;		// 反覆彈跳的球
+	
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

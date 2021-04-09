@@ -9,6 +9,7 @@ namespace game_framework {
 	public:
 		CBouncingBall();
 
+
 		void LoadBitmap();		// 載入圖形
 		void OnMove();			// 移動
 		void OnShow();			// 將圖形貼到畫面
