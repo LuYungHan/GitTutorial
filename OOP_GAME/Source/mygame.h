@@ -41,7 +41,7 @@
 #include "CEraser.h"
 #include "CBall.h"
 #include "CBouncingBall.h"
-
+//#include "BlueGhost.h"
 #include "BackgroundMap.h"
 
 namespace game_framework {
@@ -69,6 +69,10 @@ namespace game_framework {
 		void OnBeginState();							// 設定每次重玩所需的變數
 		void OnKeyUp(UINT, UINT, UINT); 				// 處理鍵盤Up的動作
 		void OnLButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
+		int s[2][3] = {
+			{1,2,3},
+			{3,4,5}
+		};
 	protected:
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
@@ -104,8 +108,8 @@ namespace game_framework {
 		CMovingBitmap	corner;		// 角落圖
 		CEraser			eraser;		// 拍子
 		CInteger		hits_left;	// 剩下的撞擊數
-		CBouncingBall   bball;		// 反覆彈跳的球
-		CBouncingBall   blueball;		// 反覆彈跳的球
+		CBouncingBall   bball;		// 反覆彈跳的紅色鬼
+		//BlueGhost   blueball;		// 反覆彈跳的藍色鬼
 	
 	};
 
