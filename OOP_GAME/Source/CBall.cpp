@@ -4,7 +4,7 @@
 #include <ddraw.h>
 #include "audio.h"
 #include "gamelib.h"
-#include "CEraser.h"
+#include "Pacman.h"
 #include "CBall.h"
 
 namespace game_framework {
@@ -18,11 +18,11 @@ namespace game_framework {
 		x = y = dx = dy = index = delay_counter = 0;
 	}
 
-	bool CBall::HitEraser(CEraser *eraser)
+	bool CBall::HitEraser(Pacman *pacman)
 	{
 		// 檢測擦子所構成的矩形是否碰到球
-		return HitRectangle(eraser->GetX1(), eraser->GetY1(),
-			eraser->GetX2(), eraser->GetY2());
+		return HitRectangle(pacman->GetX1(), pacman->GetY1(),
+			pacman->GetX2(), pacman->GetY2());
 	}
 
 	bool CBall::HitRectangle(int tx1, int ty1, int tx2, int ty2)

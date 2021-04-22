@@ -4,11 +4,11 @@
 #include <ddraw.h>
 #include "audio.h"
 #include "gamelib.h"
-#include "CEraser.h"
+#include "Pacman.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
-	// CEraser: Eraser class
+	// Pacman: Pacman class
 	/////////////////////////////////////////////////////////////////////////////
 	int backgroundArray[479][636] = {
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -64,32 +64,32 @@ namespace game_framework {
 
 	};
 
-	CEraser::CEraser()
+	Pacman::Pacman()
 	{
 		Initialize();
 	}
 
-	int CEraser::GetX1()
+	int Pacman::GetX1()
 	{
 		return x;
 	}
 
-	int CEraser::GetY1()
+	int Pacman::GetY1()
 	{
 		return y;
 	}
 
-	int CEraser::GetX2()
+	int Pacman::GetX2()
 	{
 		return x + animation.Width();
 	}
 
-	int CEraser::GetY2()
+	int Pacman::GetY2()
 	{
 		return y + animation.Height();
 	}
 
-	void CEraser::Initialize()
+	void Pacman::Initialize()
 	{
 		const int X_POS = 305;
 		const int Y_POS = 340;
@@ -98,7 +98,7 @@ namespace game_framework {
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
 	}
 
-	void CEraser::LoadBitmap()
+	void Pacman::LoadBitmap()
 	{
 		//animation.OnMove();
 		//if (isMovingLeft == true) {
@@ -122,7 +122,7 @@ namespace game_framework {
 	
 	}
 
-	void CEraser::OnMove()
+	void Pacman::OnMove()
 	{
 		const int STEP_SIZE = 2;
 		animation.OnMove();
@@ -153,32 +153,32 @@ namespace game_framework {
 		}
 	}
 
-	void CEraser::SetMovingDown(bool flag)
+	void Pacman::SetMovingDown(bool flag)
 	{
 		isMovingDown = flag;
 	}
 
-	void CEraser::SetMovingLeft(bool flag)
+	void Pacman::SetMovingLeft(bool flag)
 	{
 		isMovingLeft = flag;
 	}
 
-	void CEraser::SetMovingRight(bool flag)
+	void Pacman::SetMovingRight(bool flag)
 	{
 		isMovingRight = flag;
 	}
 
-	void CEraser::SetMovingUp(bool flag)
+	void Pacman::SetMovingUp(bool flag)
 	{
 		isMovingUp = flag;
 	}
 
-	void CEraser::SetXY(int nx, int ny)
+	void Pacman::SetXY(int nx, int ny)
 	{
 		x = nx; y = ny;
 	}
 
-	void CEraser::OnShow()
+	void Pacman::OnShow()
 	{
 		animation.SetTopLeft(x, y);
 		animation.OnShow();

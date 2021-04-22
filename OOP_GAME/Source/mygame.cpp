@@ -224,7 +224,7 @@ void CGameStateRun::OnBeginState()
 		ball[i].SetDelay(x_pos);
 		ball[i].SetIsAlive(true);
 	}
-	eraser.Initialize();
+	pacman.Initialize();
 	background.SetTopLeft(BACKGROUND_X,0);				// 設定背景的起始座標
 	help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 	hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
@@ -257,12 +257,12 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	//
 	// 移動擦子
 	//
-	eraser.OnMove();
+	pacman.OnMove();
 	//
 	// 判斷擦子是否碰到球
 	//
 	for (i = 0; i < NUMBALLS; i++)
-		if (ball[i].IsAlive() && ball[i].HitEraser(&eraser)) {
+		if (ball[i].IsAlive() && ball[i].HitEraser(&pacman)) {
 			ball[i].SetIsAlive(false);
 			CAudio::Instance()->Play(AUDIO_DING);
 			hits_left.Add(-1);
@@ -297,7 +297,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	int i;
 	for (i = 0; i < NUMBALLS; i++)	
 		ball[i].LoadBitmap();								// 載入第i個球的圖形
-	eraser.LoadBitmap();
+	pacman.LoadBitmap();
 	background.LoadBitmap(IDB_BACKGROUND);					// 載入背景的圖形
 	//
 	// 完成部分Loading動作，提高進度
@@ -340,28 +340,28 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	//	eraser.SetMovingDown(true);
 
 	if (nChar == KEY_LEFT) {
-		eraser.SetMovingLeft(true);
-		eraser.SetMovingDown(false);
-		eraser.SetMovingRight(false);
-		eraser.SetMovingUp(false);
+		pacman.SetMovingLeft(true);
+		pacman.SetMovingDown(false);
+		pacman.SetMovingRight(false);
+		pacman.SetMovingUp(false);
 	}
 	if (nChar == KEY_RIGHT) {
-		eraser.SetMovingLeft(false);
-		eraser.SetMovingDown(false);
-		eraser.SetMovingRight(true);
-		eraser.SetMovingUp(false);
+		pacman.SetMovingLeft(false);
+		pacman.SetMovingDown(false);
+		pacman.SetMovingRight(true);
+		pacman.SetMovingUp(false);
 	}
 	if (nChar == KEY_UP) {
-		eraser.SetMovingLeft(false);
-		eraser.SetMovingDown(false);
-		eraser.SetMovingRight(false);
-		eraser.SetMovingUp(true);
+		pacman.SetMovingLeft(false);
+		pacman.SetMovingDown(false);
+		pacman.SetMovingRight(false);
+		pacman.SetMovingUp(true);
 	}
 	if (nChar == KEY_DOWN) {
-		eraser.SetMovingLeft(false);
-		eraser.SetMovingDown(true);
-		eraser.SetMovingRight(false);
-		eraser.SetMovingUp(false);
+		pacman.SetMovingLeft(false);
+		pacman.SetMovingDown(true);
+		pacman.SetMovingRight(false);
+		pacman.SetMovingUp(false);
 	}
 }
 
@@ -383,12 +383,12 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 
 void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 {
-	eraser.SetMovingLeft(true);
+	pacman.SetMovingLeft(true);
 }
 
 void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 {
-	eraser.SetMovingLeft(false);
+	pacman.SetMovingLeft(false);
 }
 
 void CGameStateRun::OnMouseMove(UINT nFlags, CPoint point)	// 處理滑鼠的動作
@@ -398,12 +398,12 @@ void CGameStateRun::OnMouseMove(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 
 void CGameStateRun::OnRButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 {
-	eraser.SetMovingRight(true);
+	pacman.SetMovingRight(true);
 }
 
 void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 {
-	eraser.SetMovingRight(false);
+	pacman.SetMovingRight(false);
 }
 
 void CGameStateRun::OnShow()
@@ -423,7 +423,7 @@ void CGameStateRun::OnShow()
 		ball[i].OnShow();				// 貼上第i號球
 	bball.OnShow();						// 貼上彈跳的球
 //	blueball.OnShow();
-	eraser.OnShow();					// 貼上擦子
+	pacman.OnShow();					// 貼上擦子
 	//
 	//  貼上左上及右下角落的圖
 	//
