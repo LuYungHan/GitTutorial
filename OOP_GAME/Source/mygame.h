@@ -41,7 +41,7 @@
 #include "Pacman.h"
 #include "CBall.h"
 #include "CBouncingBall.h"
-//#include "BlueGhost.h"
+#include "BlueGhost.h"
 #include "BackgroundMap.h"
 
 namespace game_framework {
@@ -109,7 +109,7 @@ namespace game_framework {
 		Pacman			pacman;		// 拍子
 		CInteger		hits_left;	// 剩下的撞擊數
 		CBouncingBall   bball;		// 反覆彈跳的紅色鬼
-		//BlueGhost   blueball;		// 反覆彈跳的藍色鬼
+		BlueGhost     blueball;		// 反覆彈跳的藍色鬼
 	
 	};
 

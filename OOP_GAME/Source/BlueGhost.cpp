@@ -16,7 +16,7 @@ using namespace game_framework;
 BlueGhost::BlueGhost()
 {
 	const int INITIAL_VELOCITY = 15;	// 初始左右速度
-	const int FLOOR = 350;				// 地板座標
+	const int FLOOR = 200;				// 地板座標
 	floor = FLOOR;
 	y = 180; x = FLOOR - 1;				// y座標比地板高1點(站在地板上)
 	rising = true;

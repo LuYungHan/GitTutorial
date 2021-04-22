@@ -281,7 +281,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	// 移動彈跳的球
 	//
 	bball.OnMove();
-//	blueball.OnMove();
+	blueball.OnMove();
 
 }
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -311,7 +311,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	corner.LoadBitmap(IDB_CORNER);							// 載入角落圖形
 	corner.ShowBitmap(background);							// 將corner貼到background
 	bball.LoadBitmap();										// 載入圖形
-//	blueball.LoadBitmap();
+	blueball.LoadBitmap();
 	hits_left.LoadBitmap();									
 	CAudio::Instance()->Load(AUDIO_DING,  "sounds\\pacman_chomp.wav");	// 載入編號0的聲音ding.wav
 	//CAudio::Instance()->Load(AUDIO_LAKE,  "sounds\\lake.mp3");	// 載入編號1的聲音lake.mp3
@@ -422,7 +422,7 @@ void CGameStateRun::OnShow()
 	for (int i=0; i < NUMBALLS; i++)
 		ball[i].OnShow();				// 貼上第i號球
 	bball.OnShow();						// 貼上彈跳的球
-//	blueball.OnShow();
+	blueball.OnShow();
 	pacman.OnShow();					// 貼上擦子
 	//
 	//  貼上左上及右下角落的圖
