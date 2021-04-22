@@ -126,10 +126,11 @@
     <ClCompile Include="Source\CBouncingBall.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Source\Pacman.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
+=======
     <ClCompile Include="Source\BlueGhost.cpp">
+>>>>>>> 53dd77b62ad79e8f23250065a6518e19c6375491
       <Filter>MyGame</Filter>
     </ClCompile>
   </ItemGroup>
@@ -167,10 +168,11 @@
     <ClInclude Include="Source\CBouncingBall.h">
       <Filter>MyGame</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Source\Pacman.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
+=======
     <ClInclude Include="Source\BlueGhost.h">
+>>>>>>> 53dd77b62ad79e8f23250065a6518e19c6375491
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>
