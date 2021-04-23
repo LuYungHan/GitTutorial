@@ -197,14 +197,16 @@ void CGameStateOver::OnShow()
 /////////////////////////////////////////////////////////////////////////////
 
 CGameStateRun::CGameStateRun(CGame *g)
-: CGameState(g), NUMBALLS(3200)
+: CGameState(g), NUMBALLS(3200),GHOSTBLUE(1)
 {
 	ball = new CBall [NUMBALLS];
+	blueball_arr = new BlueGhost[GHOSTBLUE];
 }
 
 CGameStateRun::~CGameStateRun()
 {
 	delete [] ball;
+	delete[]  blueball_arr;
 }
 
 void CGameStateRun::OnBeginState()
@@ -251,7 +253,7 @@ void CGameStateRun::OnMove()							// ²¾°Ê¹CÀ¸¤¸¯À
 	//
 	// ²¾°Ê²y
 	//
-	int i;
+	int i,j;
 	for (i = 0; i < NUMBALLS; i++)
 		ball[i].OnMove();
 	//
@@ -261,7 +263,7 @@ void CGameStateRun::OnMove()							// ²¾°Ê¹CÀ¸¤¸¯À
 	//
 	// §PÂ_À¿¤l¬O§_¸I¨ì²y
 	//
-	for (i = 0; i < NUMBALLS; i++)
+	for (i = 0, j = 0; (i < NUMBALLS) || (j < GHOSTBLUE); i++, j++) {
 		if (ball[i].IsAlive() && ball[i].HitEraser(&pacman)) {
 			ball[i].SetIsAlive(false);
 			CAudio::Instance()->Play(AUDIO_DING);
@@ -270,13 +272,46 @@ void CGameStateRun::OnMove()							// ²¾°Ê¹CÀ¸¤¸¯À
 			// ­Y³Ñ¾l¸I¼²¦¸¼Æ¬°0¡A«h¸õ¨ìGame Overª¬ºA
 			//
 			if (hits_left.GetInteger() <= 0) {
-			//	CAudio::Instance()->Stop(AUDIO_LAKE);	// °±¤î WAVE
-			//	CAudio::Instance()->Stop(AUDIO_NTUT);	// °±¤î MIDI
+				//	CAudio::Instance()->Stop(AUDIO_LAKE);	// °±¤î WAVE
+				//	CAudio::Instance()->Stop(AUDIO_NTUT);	// °±¤î MIDI
 				CAudio::Instance()->Stop(AUDIO_PACMAN);	// °±¤î MIDI
 
 				GotoGameState(GAME_STATE_OVER);
 			}
+
+			/*if (blueball_arr[j].IsAlive() && blueball_arr[j].HitEraser(&pacman)) {
+					blueball_arr[j].SetIsAlive(false);
+					//CAudio::Instance()->Play(AUDIO_DING);
+					hits_ghost.Add(-1);
+					//
+					// ­Y³Ñ¾l¸I¼²¦¸¼Æ¬°0¡A«h¸õ¨ìGame Overª¬ºA
+					//
+					if (hits_ghost.GetInteger() <= 0) {
+						//	CAudio::Instance()->Stop(AUDIO_LAKE);	// °±¤î WAVE
+						//	CAudio::Instance()->Stop(AUDIO_NTUT);	// °±¤î MIDI
+						CAudio::Instance()->Stop(AUDIO_DEATH);	// °±¤î MIDI
+
+						GotoGameState(GAME_STATE_OVER);
+					}*/
 		}
+	}
+/*	// §PÂ_À¿¤l¬O§_¸I¨ì°­
+	for (i = 0; i < GHOSTBLUE; i++)
+		if (blueball_arr[i].IsAlive() && blueball_arr[i].HitEraser(&pacman)) {
+			blueball_arr[i].SetIsAlive(false);
+			//CAudio::Instance()->Play(AUDIO_DING);
+			hits_ghost.Add(-1);
+			//
+			// ­Y³Ñ¾l¸I¼²¦¸¼Æ¬°0¡A«h¸õ¨ìGame Overª¬ºA
+			//
+			if (hits_ghost.GetInteger() <= 0) {
+				//	CAudio::Instance()->Stop(AUDIO_LAKE);	// °±¤î WAVE
+				//	CAudio::Instance()->Stop(AUDIO_NTUT);	// °±¤î MIDI
+				CAudio::Instance()->Stop(AUDIO_DEATH);	// °±¤î MIDI
+
+				GotoGameState(GAME_STATE_OVER);
+			}
+		}*/
 	//
 	// ²¾°Ê¼u¸õªº²y
 	//
