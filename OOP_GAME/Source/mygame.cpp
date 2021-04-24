@@ -280,19 +280,20 @@ void CGameStateRun::OnMove()							// ²¾°Ê¹CÀ¸¤¸¯À
 			}
 
 			/*if (blueball_arr[j].IsAlive() && blueball_arr[j].HitEraser(&pacman)) {
-					blueball_arr[j].SetIsAlive(false);
-					//CAudio::Instance()->Play(AUDIO_DING);
-					hits_ghost.Add(-1);
-					//
-					// ­Y³Ñ¾l¸I¼²¦¸¼Æ¬°0¡A«h¸õ¨ìGame Overª¬ºA
-					//
-					if (hits_ghost.GetInteger() <= 0) {
-						//	CAudio::Instance()->Stop(AUDIO_LAKE);	// °±¤î WAVE
-						//	CAudio::Instance()->Stop(AUDIO_NTUT);	// °±¤î MIDI
-						CAudio::Instance()->Stop(AUDIO_DEATH);	// °±¤î MIDI
+				blueball_arr[j].SetIsAlive(false);
+				//CAudio::Instance()->Play(AUDIO_DING);
+				hits_ghost.Add(-1);
+				//
+				// ­Y³Ñ¾l¸I¼²¦¸¼Æ¬°0¡A«h¸õ¨ìGame Overª¬ºA
+				//
+				if (hits_ghost.GetInteger() <= 0) {
+					//	CAudio::Instance()->Stop(AUDIO_LAKE);	// °±¤î WAVE
+					//	CAudio::Instance()->Stop(AUDIO_NTUT);	// °±¤î MIDI
+					CAudio::Instance()->Stop(AUDIO_DEATH);	// °±¤î MIDI
 
-						GotoGameState(GAME_STATE_OVER);
-					}*/
+					GotoGameState(GAME_STATE_OVER);
+				}
+			}*/
 		}
 	}
 /*	// §PÂ_À¿¤l¬O§_¸I¨ì°­
