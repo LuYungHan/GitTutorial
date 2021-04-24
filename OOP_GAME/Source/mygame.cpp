@@ -561,7 +561,7 @@ void CGameStateInit::OnInit()
 	//
 	// 開始載入資料
 	//
-	logo.LoadBitmap(IDB_BACKGROUND);
+	logo.LoadBitmap(IDB_BACKGROUNDBEGIN);
 	Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 	//
 	// 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
@@ -592,7 +592,7 @@ void CGameStateInit::OnShow()
 	//
 	// 貼上logo
 	//
-	logo.SetTopLeft((SIZE_X - logo.Width())/2, SIZE_Y/8);
+	logo.SetTopLeft(0,0);
 	logo.ShowBitmap();
 	//
 	
@@ -605,7 +605,7 @@ void CGameStateInit::OnShow()
 	fp=pDC->SelectObject(&f);					// 選用 font f
 	pDC->SetBkColor(RGB(0,0,0));
 	pDC->SetTextColor(RGB(255, 255, 0));
-	pDC->TextOut(255,317,"R E A D Y !");
+	pDC->TextOut(266,261,"READY !!");
 	pDC->TextOut(5,395,"Press Ctrl-F to switch in between window mode and full screen mode.");
 	
 	if (ENABLE_GAME_PAUSE)

@@ -86,6 +86,8 @@ IDB_ERASER1             BITMAP                  "..\\res\\eraser1.bmp"
 
 IDB_BACKGROUND          BITMAP                  "..\\Bitmaps\\level1.bmp"
 
+IDB_BACKGROUNDBEGIN     BITMAP      			"..\\res\\level1begin.bmp"
+
 IDB_CORNER              BITMAP                  "..\\res\\corner.bmp"
 
 IDB_0                   BITMAP                  "..\\res\\bmp0.bmp"
