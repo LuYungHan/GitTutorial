@@ -109,6 +109,7 @@ namespace game_framework {
 		CMovingBitmap	background;	// 背景圖
 		CMovingBitmap	help;		// 說明圖
 		CBall			*ball;		// 球的陣列
+		CBall			*bigball;		// 大球的陣列
 		BlueGhost       *blueball_arr;		// 反覆彈跳的藍色鬼
 		CMovingBitmap	corner;		// 角落圖
 		Pacman			pacman;		// 拍子

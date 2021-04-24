@@ -46,6 +46,7 @@ namespace game_framework {
 	{
 		bmp.LoadBitmap(IDB_BALL, RGB(0, 0, 0));			// 載入球的圖形
 		bmp_center.LoadBitmap(IDB_CENTER, RGB(0, 0, 0));	// 載入球圓心的圖形
+		bmp_big.LoadBitmap(IDB_BIGBALL, RGB(0, 0, 0));			// 載入大球的圖形
 	}
 
 	void CBall::OnMove()
@@ -91,8 +92,17 @@ namespace game_framework {
 		if (is_alive) {
 			bmp.SetTopLeft(x + dx, y + dy);
 			bmp.ShowBitmap();
+			//bmp_big.SetTopLeft(x + dx, y + dy);
+			//bmp_big.ShowBitmap();
 			bmp_center.SetTopLeft(x, y);
 			bmp_center.ShowBitmap();
+		}
+	}
+
+	void CBall::OnShowBig() {
+		if (is_alive) {
+			bmp_big.SetTopLeft(x + dx, y + dy);
+			bmp_big.ShowBitmap();
 		}
 	}
 }

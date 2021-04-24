@@ -64,6 +64,8 @@ END
 
 IDB_BALL                BITMAP                  "..\\res\ball.bmp"
 
+IDB_BIGBALL    			BITMAP					"..\\res\bigball.bmp"
+
 IDB_BALL1               BITMAP                  "..\\res\\ball1.bmp"
 
 IDB_BALL2               BITMAP                  "..\\res\\ball2.bmp"
