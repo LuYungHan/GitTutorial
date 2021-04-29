@@ -29,5 +29,9 @@ namespace game_framework {
 		bool isMovingLeft;			// 是否正在往左移動
 		bool isMovingRight;			// 是否正在往右移動
 		bool isMovingUp;			// 是否正在往上移動
+		//int CGameStateInit::backgroundArray[479][636];
+		//CGameStateInit backgroundArray;
+		//int CGameStateInit::backgroundArray;
+		int game_framework::backgroundArray;
 	};
 }

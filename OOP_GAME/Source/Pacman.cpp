@@ -5,6 +5,7 @@
 #include "audio.h"
 #include "gamelib.h"
 #include "Pacman.h"
+#include "mygame.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -79,9 +80,15 @@ namespace game_framework {
 	{
 		const int STEP_SIZE = 2;
 		animation.OnMove();
-
-		if (isMovingLeft)
-			x -= STEP_SIZE;
+		int y = GetY1(), x = GetX1();
+		if (isMovingLeft) {
+			if (backgroundArray[y][x - STEP_SIZE]==1) {
+				x = x;
+			}
+			else {
+				x -= STEP_SIZE;
+			}
+		}
 		if (isMovingRight)
 			x += STEP_SIZE;
 		if (isMovingUp)
