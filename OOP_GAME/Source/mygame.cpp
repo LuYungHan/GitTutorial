@@ -801,7 +801,16 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 				}
 			}*/
 		}
+		/*
+		if (blueball.HitEraser(&pacman)) {
+			j++;		//失去一條命
+			//blueball.Initialize();
+			//pacman.OnShow();
+		}
+		*/
 	}
+
+	
 /*	// 判斷擦子是否碰到鬼
 	for (i = 0; i < GHOSTBLUE; i++)
 		if (blueball_arr[i].IsAlive() && blueball_arr[i].HitEraser(&pacman)) {

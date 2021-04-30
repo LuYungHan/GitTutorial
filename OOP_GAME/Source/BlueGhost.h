@@ -19,6 +19,7 @@ public:
 	void OnMove();			// 移動
 	void SetIsAlive(bool alive);							// 設定是否活著
 	void OnShow();			// 將圖形貼到畫面
+	//void Initialize();				// 設定初始值
 
 protected:
 	CMovingBitmap bmp;			// 鬼的圖
