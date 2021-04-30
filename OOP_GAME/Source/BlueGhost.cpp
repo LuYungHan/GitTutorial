@@ -27,7 +27,20 @@ BlueGhost::BlueGhost()
 	is_alive = true;
 	xx = yy = dxx = dyy = 0;
 }
+/*
+void BlueGhost::Initialize() {
+	const int INITIAL_VELOCITY = 15;	// 初始左右速度
+	const int FLOOR = 225;				// 地板座標
+	floor = FLOOR;
+	x = 260; y = FLOOR - 1;				// y座標比地板高1點(站在地板上)
+	rising = true;
+	initial_velocity = INITIAL_VELOCITY;
+	velocity = initial_velocity;
 
+	is_alive = true;
+	xx = yy = dxx = dyy = 0;
+}
+*/
 bool BlueGhost::HitEraser(Pacman *pacman)
 {
 	// 檢測擦子所構成的矩形是否碰到球
