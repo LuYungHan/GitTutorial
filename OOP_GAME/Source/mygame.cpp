@@ -765,7 +765,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	//
 	// 移動擦子
 	//
-	pacman.OnMove();
+	pacman.OnMove(backgroundArray);
 	//
 	// 判斷擦子是否碰到球
 	//
@@ -895,25 +895,25 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	//	eraser.SetMovingDown(true);
 	int y = pacman.GetY1();
 	int x = pacman.GetX1();
-	if (nChar == KEY_LEFT&& backgroundArray[y][x-1] == 0) {
+	if (nChar == KEY_LEFT) {
 		pacman.SetMovingLeft(true);
 		pacman.SetMovingDown(false);
 		pacman.SetMovingRight(false);
 		pacman.SetMovingUp(false);
 	}
-	if (nChar == KEY_RIGHT && backgroundArray[y][x+1] == 0) {
+	if (nChar == KEY_RIGHT) {
 		pacman.SetMovingLeft(false);
 		pacman.SetMovingDown(false);
 		pacman.SetMovingRight(true);
 		pacman.SetMovingUp(false);
 	}
-	if (nChar == KEY_UP && (backgroundArray[y-1][x] == 0)) {
+	if (nChar == KEY_UP) {
 		pacman.SetMovingLeft(false);
 		pacman.SetMovingDown(false);
 		pacman.SetMovingRight(false);
 		pacman.SetMovingUp(true);
 	}
-	if (nChar == KEY_DOWN && (backgroundArray[y+1][x] == 0)) {
+	if (nChar == KEY_DOWN) {
 		pacman.SetMovingLeft(false);
 		pacman.SetMovingDown(true);
 		pacman.SetMovingRight(false);

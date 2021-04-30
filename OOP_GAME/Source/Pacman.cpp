@@ -75,19 +75,44 @@ namespace game_framework {
 		animation.AddBitmap(IDB_BALL1, RGB(255, 255, 255));
 	}
 
-	void Pacman::OnMove()
+	void Pacman::OnMove(int backgroundArray[479][636])
 	{
 		const int STEP_SIZE = 2;
 		animation.OnMove();
-
-		if (isMovingLeft)
-			x -= STEP_SIZE;
-		if (isMovingRight)
-			x += STEP_SIZE;
-		if (isMovingUp)
-			y -= STEP_SIZE;
-		if (isMovingDown)
-			y += STEP_SIZE;
+		int x_right = GetX2();
+		int y_bottom = GetY2();
+		if (isMovingLeft) {
+			if (backgroundArray[y][x - STEP_SIZE] == 1||backgroundArray[y_bottom][x-STEP_SIZE]==1) {
+				x = x;
+			}
+			else {
+				x -= STEP_SIZE;
+			}
+		}
+		if (isMovingRight) {
+			if (backgroundArray[y][x_right + STEP_SIZE] == 1||backgroundArray[y_bottom][x_right+STEP_SIZE]==1) {
+				x = x;
+			}
+			else {
+				x += STEP_SIZE;
+			}
+		}
+		if (isMovingUp) {
+			if (backgroundArray[y-STEP_SIZE][x] == 1||backgroundArray[y-STEP_SIZE][x_right]==1) {
+				y = y;
+			}
+			else {
+				y -= STEP_SIZE;
+			}
+		}
+		if (isMovingDown) {
+			if (backgroundArray[y_bottom + STEP_SIZE][x] == 1||backgroundArray[y_bottom+STEP_SIZE][x_right]==1) {
+				y = y;
+			}
+			else {
+				y += STEP_SIZE;
+			}
+		}
 	}
 
 	void Pacman::SetMovingDown(bool flag)
