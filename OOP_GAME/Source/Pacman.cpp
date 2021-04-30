@@ -49,7 +49,12 @@ namespace game_framework {
 
 	void Pacman::LoadBitmap()
 	{
-
+			animation1.AddBitmap(IDB_BALL1, RGB(255, 255, 255));
+			animation1.AddBitmap(IDB_BALL2, RGB(255, 255, 255));
+			animation1.AddBitmap(IDB_BALL3, RGB(255, 255, 255));
+			animation1.AddBitmap(IDB_BALL4, RGB(255, 255, 255));
+			animation1.AddBitmap(IDB_BALL2, RGB(255, 255, 255));
+			animation1.AddBitmap(IDB_BALL1, RGB(255, 255, 255));
 			animation.AddBitmap(IDB_BALLLEFT1, RGB(255, 255, 255));
 			animation.AddBitmap(IDB_BALLLEFT2, RGB(255, 255, 255));
 			animation.AddBitmap(IDB_BALLLEFT3, RGB(255, 255, 255));
@@ -57,23 +62,11 @@ namespace game_framework {
 			animation.AddBitmap(IDB_BALLLEFT2, RGB(255, 255, 255));
 			animation.AddBitmap(IDB_BALLLEFT1, RGB(255, 255, 255));
 
-/*			animation.AddBitmap(IDB_BALL1, RGB(255, 255, 255));
-			animation.AddBitmap(IDB_BALL2, RGB(255, 255, 255));
-			animation.AddBitmap(IDB_BALL3, RGB(255, 255, 255));
-			animation.AddBitmap(IDB_BALL4, RGB(255, 255, 255));
-			animation.AddBitmap(IDB_BALL2, RGB(255, 255, 255));
-			animation.AddBitmap(IDB_BALL1, RGB(255, 255, 255));*/
+
+
+			animationCenter.AddBitmap(IDB_BALL3, RGB(255, 255, 255));
 	}
 
-	void Pacman::LoadBitmapLeft()
-	{
-		animation.AddBitmap(IDB_BALL1, RGB(255, 255, 255));
-		animation.AddBitmap(IDB_BALL2, RGB(255, 255, 255));
-		animation.AddBitmap(IDB_BALL3, RGB(255, 255, 255));
-		animation.AddBitmap(IDB_BALL4, RGB(255, 255, 255));
-		animation.AddBitmap(IDB_BALL2, RGB(255, 255, 255));
-		animation.AddBitmap(IDB_BALL1, RGB(255, 255, 255));
-	}
 
 	void Pacman::OnMove()
 	{
@@ -117,7 +110,20 @@ namespace game_framework {
 
 	void Pacman::OnShow()
 	{
+		animationCenter.SetTopLeft(x, y);
+		animationCenter.OnShow();
+		if (isMovingRight) {
+			animation1.SetTopLeft(x, y);
+			animation1.OnShow();
+		}
+		if (isMovingLeft) {
+			animation.SetTopLeft(x, y);
+			animation.OnShow();
+		}
+	}
+/*	void Pacman::OnShowLeft()
+	{
 		animation.SetTopLeft(x, y);
 		animation.OnShow();
-	}
+	}*/
 }
