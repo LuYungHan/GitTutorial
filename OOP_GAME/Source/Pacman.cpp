@@ -41,7 +41,7 @@ namespace game_framework {
 	void Pacman::Initialize()
 	{
 		const int X_POS = 305;
-		const int Y_POS = 340;
+		const int Y_POS = 342;
 		x = X_POS;
 		y = Y_POS;
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
@@ -50,51 +50,87 @@ namespace game_framework {
 
 	void Pacman::LoadBitmap()
 	{
-
-			animation.AddBitmap(IDB_BALLLEFT1, RGB(255, 255, 255));
+		
+			animationRight.AddBitmap(IDB_BALL1, RGB(255, 255, 255));		//right
+			animationRight.AddBitmap(IDB_BALL2, RGB(255, 255, 255));
+			animationRight.AddBitmap(IDB_BALL3, RGB(255, 255, 255));
+			animationRight.AddBitmap(IDB_BALL4, RGB(255, 255, 255));
+			animationRight.AddBitmap(IDB_BALL2, RGB(255, 255, 255));
+			animationRight.AddBitmap(IDB_BALL1, RGB(255, 255, 255));
+			animation.AddBitmap(IDB_BALLLEFT1, RGB(255, 255, 255));		//left
 			animation.AddBitmap(IDB_BALLLEFT2, RGB(255, 255, 255));
 			animation.AddBitmap(IDB_BALLLEFT3, RGB(255, 255, 255));
 			animation.AddBitmap(IDB_BALLLEFT4, RGB(255, 255, 255));
 			animation.AddBitmap(IDB_BALLLEFT2, RGB(255, 255, 255));
-			animation.AddBitmap(IDB_BALLLEFT1, RGB(255, 255, 255));
-
-/*			animation.AddBitmap(IDB_BALL1, RGB(255, 255, 255));
-			animation.AddBitmap(IDB_BALL2, RGB(255, 255, 255));
-			animation.AddBitmap(IDB_BALL3, RGB(255, 255, 255));
-			animation.AddBitmap(IDB_BALL4, RGB(255, 255, 255));
-			animation.AddBitmap(IDB_BALL2, RGB(255, 255, 255));
-			animation.AddBitmap(IDB_BALL1, RGB(255, 255, 255));*/
+			animation.AddBitmap(IDB_BALLLEFT1, RGB(255, 255, 255));	
+			animationUp.AddBitmap(IDB_BALLUP1, RGB(255, 255, 255));	//Up
+			animationUp.AddBitmap(IDB_BALLUP2, RGB(255, 255, 255));
+			animationUp.AddBitmap(IDB_BALLUP3, RGB(255, 255, 255));
+			animationUp.AddBitmap(IDB_BALLUP4, RGB(255, 255, 255));
+			animationUp.AddBitmap(IDB_BALLUP2, RGB(255, 255, 255));
+			animationUp.AddBitmap(IDB_BALLUP1, RGB(255, 255, 255));
+//			animationDown.AddBitmap(IDB_BALLLEFT1, RGB(255, 255, 255));		//Down
+			animationCenter.AddBitmap(IDB_BALL3, RGB(255, 255, 255));	//center
 	}
 
-	void Pacman::LoadBitmapLeft()
-	{
-		animation.AddBitmap(IDB_BALL1, RGB(255, 255, 255));
-		animation.AddBitmap(IDB_BALL2, RGB(255, 255, 255));
-		animation.AddBitmap(IDB_BALL3, RGB(255, 255, 255));
-		animation.AddBitmap(IDB_BALL4, RGB(255, 255, 255));
-		animation.AddBitmap(IDB_BALL2, RGB(255, 255, 255));
-		animation.AddBitmap(IDB_BALL1, RGB(255, 255, 255));
-	}
 
-	void Pacman::OnMove()
+	void Pacman::OnMove(int backgroundArray[479][636])
+
 	{
 		const int STEP_SIZE = 2;
 		animation.OnMove();
+<<<<<<< HEAD
 		int y = GetY1(), x = GetX1();
 		if (isMovingLeft) {
 			if (backgroundArray[y][x - STEP_SIZE]==1) {
+=======
+		animationRight.OnMove();
+		animationCenter.OnMove();
+		animationUp.OnMove();
+		int x_right = GetX2();
+		int y_bottom = GetY2();
+		if (isMovingLeft) {
+			if (backgroundArray[y][x - STEP_SIZE] == 1||backgroundArray[y_bottom][x-STEP_SIZE]==1) {
+>>>>>>> 98b9a75d65e5d2f9bcaebae26b2a112626e3bd24
 				x = x;
 			}
 			else {
 				x -= STEP_SIZE;
 			}
 		}
+<<<<<<< HEAD
 		if (isMovingRight)
 			x += STEP_SIZE;
 		if (isMovingUp)
 			y -= STEP_SIZE;
 		if (isMovingDown)
 			y += STEP_SIZE;
+=======
+		if (isMovingRight) {
+			if (backgroundArray[y][x_right + STEP_SIZE] == 1||backgroundArray[y_bottom][x_right+STEP_SIZE]==1) {
+				x = x;
+			}
+			else {
+				x += STEP_SIZE;
+			}
+		}
+		if (isMovingUp) {
+			if (backgroundArray[y-STEP_SIZE][x] == 1||backgroundArray[y-STEP_SIZE][x_right]==1) {
+				y = y;
+			}
+			else {
+				y -= STEP_SIZE;
+			}
+		}
+		if (isMovingDown) {
+			if (backgroundArray[y_bottom + STEP_SIZE][x] == 1||backgroundArray[y_bottom+STEP_SIZE][x_right]==1) {
+				y = y;
+			}
+			else {
+				y += STEP_SIZE;
+			}
+		}
+>>>>>>> 98b9a75d65e5d2f9bcaebae26b2a112626e3bd24
 	}
 
 	void Pacman::SetMovingDown(bool flag)
@@ -124,7 +160,32 @@ namespace game_framework {
 
 	void Pacman::OnShow()
 	{
+		animationCenter.SetTopLeft(x, y);
+		animationCenter.OnShow();
+		if (isMovingRight) {
+			animationRight.SetTopLeft(x, y);
+			animationRight.OnShow();
+		}
+		if (isMovingLeft) {
+			animation.SetTopLeft(x, y);
+			animation.OnShow();
+			
+		}
+		if (isMovingUp) {
+			animationUp.SetTopLeft(x, y);
+			animationUp.OnShow();
+
+		}
+/*		if (isMovingDown) {
+			animationDown.SetTopLeft(x, y);
+			animationDown.OnShow();
+
+		}*/
+
+	}
+/*	void Pacman::OnShowLeft()
+	{
 		animation.SetTopLeft(x, y);
 		animation.OnShow();
-	}
+	}*/
 }
