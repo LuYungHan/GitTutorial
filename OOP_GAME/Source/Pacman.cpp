@@ -5,7 +5,6 @@
 #include "audio.h"
 #include "gamelib.h"
 #include "Pacman.h"
-#include "mygame.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -79,11 +78,6 @@ namespace game_framework {
 	{
 		const int STEP_SIZE = 2;
 		animation.OnMove();
-<<<<<<< HEAD
-		int y = GetY1(), x = GetX1();
-		if (isMovingLeft) {
-			if (backgroundArray[y][x - STEP_SIZE]==1) {
-=======
 		animationRight.OnMove();
 		animationCenter.OnMove();
 		animationUp.OnMove();
@@ -91,21 +85,12 @@ namespace game_framework {
 		int y_bottom = GetY2();
 		if (isMovingLeft) {
 			if (backgroundArray[y][x - STEP_SIZE] == 1||backgroundArray[y_bottom][x-STEP_SIZE]==1) {
->>>>>>> 98b9a75d65e5d2f9bcaebae26b2a112626e3bd24
 				x = x;
 			}
 			else {
 				x -= STEP_SIZE;
 			}
 		}
-<<<<<<< HEAD
-		if (isMovingRight)
-			x += STEP_SIZE;
-		if (isMovingUp)
-			y -= STEP_SIZE;
-		if (isMovingDown)
-			y += STEP_SIZE;
-=======
 		if (isMovingRight) {
 			if (backgroundArray[y][x_right + STEP_SIZE] == 1||backgroundArray[y_bottom][x_right+STEP_SIZE]==1) {
 				x = x;
@@ -130,7 +115,6 @@ namespace game_framework {
 				y += STEP_SIZE;
 			}
 		}
->>>>>>> 98b9a75d65e5d2f9bcaebae26b2a112626e3bd24
 	}
 
 	void Pacman::SetMovingDown(bool flag)

@@ -38,6 +38,5 @@ namespace game_framework {
 		//int CGameStateInit::backgroundArray[479][636];
 		//CGameStateInit backgroundArray;
 		//int CGameStateInit::backgroundArray;
-		int game_framework::backgroundArray;
 	};
 }
