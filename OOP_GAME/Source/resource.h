@@ -26,6 +26,10 @@
 #define IDB_BALLUP2						164
 #define IDB_BALLUP3						165
 #define IDB_BALLUP4						166
+#define IDB_BALLDOWN1					168
+#define IDB_BALLDOWN2					169
+#define IDB_BALLDOWN3					170
+#define IDB_BALLDOWN4					171
 #define IDB_0                           138
 #define IDB_1                           139
 #define IDB_2                           140

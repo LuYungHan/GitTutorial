@@ -68,7 +68,12 @@ namespace game_framework {
 			animationUp.AddBitmap(IDB_BALLUP4, RGB(255, 255, 255));
 			animationUp.AddBitmap(IDB_BALLUP2, RGB(255, 255, 255));
 			animationUp.AddBitmap(IDB_BALLUP1, RGB(255, 255, 255));
-//			animationDown.AddBitmap(IDB_BALLLEFT1, RGB(255, 255, 255));		//Down
+			animationDown.AddBitmap(IDB_BALLDOWN1, RGB(255, 255, 255));		//Down
+			animationDown.AddBitmap(IDB_BALLDOWN2, RGB(255, 255, 255));
+			animationDown.AddBitmap(IDB_BALLDOWN3, RGB(255, 255, 255));
+			animationDown.AddBitmap(IDB_BALLDOWN4, RGB(255, 255, 255));
+			animationDown.AddBitmap(IDB_BALLDOWN2, RGB(255, 255, 255));
+			animationDown.AddBitmap(IDB_BALLDOWN1, RGB(255, 255, 255));
 			animationCenter.AddBitmap(IDB_BALL3, RGB(255, 255, 255));	//center
 	}
 
@@ -81,6 +86,7 @@ namespace game_framework {
 		animationRight.OnMove();
 		animationCenter.OnMove();
 		animationUp.OnMove();
+		animationDown.OnMove();
 		int x_right = GetX2();
 		int y_bottom = GetY2();
 		if (isMovingLeft) {
@@ -160,16 +166,11 @@ namespace game_framework {
 			animationUp.OnShow();
 
 		}
-/*		if (isMovingDown) {
+		if (isMovingDown) {
 			animationDown.SetTopLeft(x, y);
 			animationDown.OnShow();
 
-		}*/
+		}
 
 	}
-/*	void Pacman::OnShowLeft()
-	{
-		animation.SetTopLeft(x, y);
-		animation.OnShow();
-	}*/
 }

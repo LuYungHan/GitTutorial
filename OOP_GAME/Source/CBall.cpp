@@ -92,8 +92,6 @@ namespace game_framework {
 		if (is_alive) {
 			bmp.SetTopLeft(x + dx, y + dy);
 			bmp.ShowBitmap();
-			//bmp_big.SetTopLeft(x + dx, y + dy);
-			//bmp_big.ShowBitmap();
 			bmp_center.SetTopLeft(x, y);
 			bmp_center.ShowBitmap();
 		}

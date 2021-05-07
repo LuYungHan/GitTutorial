@@ -70,12 +70,7 @@ namespace game_framework {
 		void OnKeyUp(UINT, UINT, UINT); 				// 處理鍵盤Up的動作
 		void OnLButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
 		int	 backgroundArray[479][636]; //背景數字矩陣
-		/*
-		int s[2][3] = {
-			{1,2,3},
-			{3,4,5}
-		};
-		*/
+
 	protected:
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
@@ -114,7 +109,7 @@ namespace game_framework {
 		CMovingBitmap	corner;		// 角落圖
 		Pacman			pacman;		// 拍子
 		CInteger		hits_left;	// 剩下的撞擊數
-		CInteger		score;		//總共的得分數
+//		CInteger		score;		//總共的得分數
 		CInteger        hits_ghost;
 		CBouncingBall   bball;		// 反覆彈跳的紅色鬼
 		BlueGhost       blueball;		// 反覆彈跳的藍色鬼

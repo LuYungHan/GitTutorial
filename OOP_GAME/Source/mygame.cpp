@@ -696,11 +696,14 @@ void CGameStateRun::OnBeginState()
 	const int BALL_GAP = 20;
 	const int BALL_XY_OFFSET = 45;
 	const int BALL_PER_ROW = 32;
-	const int HITS_LEFT = 100;
-	const int HITS_LEFT_X = 790;
+	const int HITS_LEFT = 0;
+	const int HITS_LEFT_X = 590;
 	const int HITS_LEFT_Y = 0;
 	const int BACKGROUND_X = 0;
 	const int ANIMATION_SPEED = 15;
+	const int SCORE_LEFT_X = 0;
+	const int SCORE_LEFT_Y = 0;
+	const int TOTAL_SCORE = 0;
 	int i = 0;
 	//for (int i = 32; i < NUMBALLS; i++) {
 		for (int x_pos = 0; x_pos < 479; x_pos++) {
@@ -737,6 +740,8 @@ void CGameStateRun::OnBeginState()
 	help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 	hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
 	hits_left.SetTopLeft(HITS_LEFT_X,HITS_LEFT_Y);		// 指定剩下撞擊數的座標
+	//score.SetInteger(TOTAL_SCORE);						// 指定目前得分數
+	//score.SetTopLeft(SCORE_LEFT_X, SCORE_LEFT_Y);			// 指定目前得分數座標
 	//CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
 	CAudio::Instance()->Play(AUDIO_DEATH, false);
 	CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
@@ -760,12 +765,13 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	// 移動球
 	//
 	int i,j;
-	for (i = 0; i < NUMBALLS; i++)
-		ball[i].OnMove();
+	//for (i = 0; i < NUMBALLS; i++)
+	//	ball[i].OnMove();
 	//
 	// 移動擦子
 	//
 	pacman.OnMove(backgroundArray);
+	blueball.OnMove();
 	//
 	// 判斷擦子是否碰到球
 	//
@@ -773,19 +779,19 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		if (ball[i].IsAlive() && ball[i].HitEraser(&pacman)) {
 			ball[i].SetIsAlive(false);
 			CAudio::Instance()->Play(AUDIO_DING);
-			hits_left.Add(-1);
+			hits_left.Add(5);
 			//
 			// 若剩餘碰撞次數為0，則跳到Game Over狀態
 			//
-			if (hits_left.GetInteger() <= 0) {
+			if (hits_left.GetInteger() >= 1260) {
 				//	CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
 				//	CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
 				CAudio::Instance()->Stop(AUDIO_PACMAN);	// 停止 MIDI
 
 				GotoGameState(GAME_STATE_OVER);
 			}
-
-			/*if (blueball_arr[j].IsAlive() && blueball_arr[j].HitEraser(&pacman)) {
+			/*
+			if (blueball_arr[j].IsAlive() && blueball_arr[j].HitEraser(&pacman)) {
 				blueball_arr[j].SetIsAlive(false);
 				//CAudio::Instance()->Play(AUDIO_DING);
 				hits_ghost.Add(-1);
@@ -799,7 +805,8 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 					GotoGameState(GAME_STATE_OVER);
 				}
-			}*/
+			}
+			*/
 		}
 		/*
 		if (blueball.HitEraser(&pacman)) {
@@ -832,7 +839,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	// 移動彈跳的球
 	//
 	bball.OnMove();
-	blueball.OnMove();
+	
 
 }
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -862,6 +869,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		}
 	}*/
 	pacman.LoadBitmap();
+	blueball.LoadBitmap();
 	background.LoadBitmap(IDB_BACKGROUND);					// 載入背景的圖形
 	//
 	// 完成部分Loading動作，提高進度
@@ -875,8 +883,8 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	corner.LoadBitmap(IDB_CORNER);							// 載入角落圖形
 	corner.ShowBitmap(background);							// 將corner貼到background
 	bball.LoadBitmap();										// 載入圖形
-	blueball.LoadBitmap();
-	hits_left.LoadBitmap();									
+	
+	hits_left.LoadBitmap();	
 	CAudio::Instance()->Load(AUDIO_DING,  "sounds\\pacman_chomp.wav");	// 載入編號0的聲音ding.wav
 	//CAudio::Instance()->Load(AUDIO_LAKE,  "sounds\\lake.mp3");	// 載入編號1的聲音lake.mp3
 	//CAudio::Instance()->Load(AUDIO_NTUT,  "sounds\\ntut.mid");	// 載入編號2的聲音ntut.mid

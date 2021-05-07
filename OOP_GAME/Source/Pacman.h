@@ -29,7 +29,7 @@ namespace game_framework {
 		CAnimation animationRight;		// 擦子的動畫右邊
 		CAnimation animationCenter;		// 擦子的動畫中間
 		CAnimation animationUp;		// 擦子的動畫右邊
-//		CAnimation animationDown;		// 擦子的動畫中間
+		CAnimation animationDown;		// 擦子的動畫中間
 		int x, y;					// 擦子左上角座標
 		bool isMovingDown;			// 是否正在往下移動
 		bool isMovingLeft;			// 是否正在往左移動
