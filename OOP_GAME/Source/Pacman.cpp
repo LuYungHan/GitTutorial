@@ -76,7 +76,7 @@ namespace game_framework {
 	void Pacman::OnMove(int backgroundArray[479][636])
 
 	{
-		const int STEP_SIZE = 2;
+		const int STEP_SIZE = 4;
 		animation.OnMove();
 		animationRight.OnMove();
 		animationCenter.OnMove();
@@ -85,7 +85,8 @@ namespace game_framework {
 		int y_bottom = GetY2();
 		if (isMovingLeft) {
 			if (backgroundArray[y][x - STEP_SIZE] == 1||backgroundArray[y_bottom][x-STEP_SIZE]==1) {
-				x = x;
+				x = x+1;
+				SetMovingLeft(false);
 			}
 			else {
 				x -= STEP_SIZE;
@@ -93,7 +94,8 @@ namespace game_framework {
 		}
 		if (isMovingRight) {
 			if (backgroundArray[y][x_right + STEP_SIZE] == 1||backgroundArray[y_bottom][x_right+STEP_SIZE]==1) {
-				x = x;
+				x = x-1;
+				SetMovingRight(false);
 			}
 			else {
 				x += STEP_SIZE;
@@ -101,7 +103,8 @@ namespace game_framework {
 		}
 		if (isMovingUp) {
 			if (backgroundArray[y-STEP_SIZE][x] == 1||backgroundArray[y-STEP_SIZE][x_right]==1) {
-				y = y;
+				y = y+1;
+				SetMovingUp(false);
 			}
 			else {
 				y -= STEP_SIZE;
@@ -109,7 +112,8 @@ namespace game_framework {
 		}
 		if (isMovingDown) {
 			if (backgroundArray[y_bottom + STEP_SIZE][x] == 1||backgroundArray[y_bottom+STEP_SIZE][x_right]==1) {
-				y = y;
+				y = y-1;
+				SetMovingDown(false);
 			}
 			else {
 				y += STEP_SIZE;

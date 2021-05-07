@@ -697,7 +697,7 @@ void CGameStateRun::OnBeginState()
 	const int BALL_XY_OFFSET = 45;
 	const int BALL_PER_ROW = 32;
 	const int HITS_LEFT = 100;
-	const int HITS_LEFT_X = 790;
+	const int HITS_LEFT_X = 590;
 	const int HITS_LEFT_Y = 0;
 	const int BACKGROUND_X = 0;
 	const int ANIMATION_SPEED = 15;
@@ -808,11 +808,11 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			}*/
 		}
 		
-		if (blueball.HitEraser(&pacman)) {
-			j++;		//失去一條命
+		//if (blueball.HitEraser(&pacman)) {
+			//j++;		//失去一條命
 			//blueball.Initialize();
 			//pacman.OnShow();
-		}
+		//}
 		
 	}
 
