@@ -85,7 +85,8 @@
 enum GAME_STATES {
 	GAME_STATE_INIT,
 	GAME_STATE_RUN,
-	GAME_STATE_OVER
+	GAME_STATE_OVER,
+	GAME_STATE_SECOND
 };
 
 /////////////////////////////////////////////////////////////////////////////

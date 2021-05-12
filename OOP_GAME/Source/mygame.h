@@ -57,6 +57,7 @@ namespace game_framework {
 		AUDIO_DEATH
 	};
 
+
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的遊戲開頭畫面物件
 	// 每個Member function的Implementation都要弄懂
@@ -109,7 +110,7 @@ namespace game_framework {
 		CMovingBitmap	corner;		// 角落圖
 		Pacman			pacman;		// 拍子
 		CInteger		hits_left;	// 剩下的撞擊數
-//		CInteger		score;		//總共的得分數
+		CInteger		score;		//總共的得分數
 		CInteger        hits_ghost;
 		CBouncingBall   bball;		// 反覆彈跳的紅色鬼
 		BlueGhost       blueball;		// 反覆彈跳的藍色鬼

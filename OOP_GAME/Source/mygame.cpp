@@ -696,9 +696,11 @@ void CGameStateRun::OnBeginState()
 	const int BALL_GAP = 20;
 	const int BALL_XY_OFFSET = 45;
 	const int BALL_PER_ROW = 32;
+
 	const int HITS_LEFT = 0;
-	const int HITS_LEFT_X = 590;
-	const int HITS_LEFT_Y = 0;
+
+	const int HITS_LEFT_X = 150;
+	const int HITS_LEFT_Y = 15;
 	const int BACKGROUND_X = 0;
 	const int ANIMATION_SPEED = 15;
 	const int SCORE_LEFT_X = 0;
@@ -736,6 +738,8 @@ void CGameStateRun::OnBeginState()
 		//ball[i].SetIsAlive(true);
 	//}
 	pacman.Initialize();
+	blueball.OnShow();
+	blueball.SetIsAlive(true);
 	background.SetTopLeft(BACKGROUND_X,0);				// 設定背景的起始座標
 	help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 	hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
@@ -764,13 +768,17 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	//
 	// 移動球
 	//
-	int i,j;
+	int i, j;
 	//for (i = 0; i < NUMBALLS; i++)
 	//	ball[i].OnMove();
 	//
 	// 移動擦子
 	//
 	pacman.OnMove(backgroundArray);
+	blueball.OnMove();
+	//
+	//移動鬼
+	//
 	blueball.OnMove();
 	//
 	// 判斷擦子是否碰到球
@@ -783,7 +791,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			//
 			// 若剩餘碰撞次數為0，則跳到Game Over狀態
 			//
-			if (hits_left.GetInteger() >= 1260) {
+			if (hits_left.GetInteger() >= 1220) {
 				//	CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
 				//	CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
 				CAudio::Instance()->Stop(AUDIO_PACMAN);	// 停止 MIDI
@@ -808,39 +816,37 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			}
 			*/
 		}
-		/*
-		if (blueball.HitEraser(&pacman)) {
-			j++;		//失去一條命
+
+		//if (blueball.HitEraser(&pacman)) {
+			//j++;		//失去一條命
 			//blueball.Initialize();
 			//pacman.OnShow();
-		}
-		*/
+		//}
+
 	}
 
-	
-/*	// 判斷擦子是否碰到鬼
-	for (i = 0; i < GHOSTBLUE; i++)
-		if (blueball_arr[i].IsAlive() && blueball_arr[i].HitEraser(&pacman)) {
-			blueball_arr[i].SetIsAlive(false);
-			//CAudio::Instance()->Play(AUDIO_DING);
-			hits_ghost.Add(-1);
-			//
-			// 若剩餘碰撞次數為0，則跳到Game Over狀態
-			//
-			if (hits_ghost.GetInteger() <= 0) {
-				//	CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
-				//	CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
-				CAudio::Instance()->Stop(AUDIO_DEATH);	// 停止 MIDI
 
-				GotoGameState(GAME_STATE_OVER);
-			}
-		}*/
-	//
-	// 移動彈跳的球
-	//
+	/*	// 判斷擦子是否碰到鬼
+		for (i = 0; i < GHOSTBLUE; i++)
+			if (blueball_arr[i].IsAlive() && blueball_arr[i].HitEraser(&pacman)) {
+				blueball_arr[i].SetIsAlive(false);
+				//CAudio::Instance()->Play(AUDIO_DING);
+				hits_ghost.Add(-1);
+				//
+				// 若剩餘碰撞次數為0，則跳到Game Over狀態
+				//
+				if (hits_ghost.GetInteger() <= 0) {
+					//	CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
+					//	CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
+					CAudio::Instance()->Stop(AUDIO_DEATH);	// 停止 MIDI
+
+					GotoGameState(GAME_STATE_OVER);
+				}
+			}*/
+			//
+			// 移動彈跳的球
+			//
 	bball.OnMove();
-	
-
 }
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 {
@@ -1016,8 +1022,8 @@ void CGameStateRun::OnShow()
 	
 				// 貼上第i號球
 	bball.OnShow();						// 貼上彈跳的球
-	blueball.OnShow();
 	pacman.OnShow();					// 貼上擦子
+	blueball.OnShow();
 	//
 	//  貼上左上及右下角落的圖
 	//
