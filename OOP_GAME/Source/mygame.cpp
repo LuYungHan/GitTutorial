@@ -917,28 +917,52 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	int y = pacman.GetY1();
 	int x = pacman.GetX1();
 	if (nChar == KEY_LEFT) {
+		pacman.SetTryingDown(false);
+		pacman.SetTryingLeft(true);
+		pacman.SetTryingRight(false);
+		pacman.SetTryingUp(false);
+		/*
 		pacman.SetMovingLeft(true);
 		pacman.SetMovingDown(false);
 		pacman.SetMovingRight(false);
 		pacman.SetMovingUp(false);
+		*/
 	}
 	if (nChar == KEY_RIGHT) {
+		pacman.SetTryingDown(false);
+		pacman.SetTryingLeft(false);
+		pacman.SetTryingRight(true);
+		pacman.SetTryingUp(false);
+		/*
 		pacman.SetMovingLeft(false);
 		pacman.SetMovingDown(false);
 		pacman.SetMovingRight(true);
 		pacman.SetMovingUp(false);
+		*/
 	}
 	if (nChar == KEY_UP) {
+		pacman.SetTryingDown(false);
+		pacman.SetTryingLeft(false);
+		pacman.SetTryingRight(false);
+		pacman.SetTryingUp(true);
+		/*
 		pacman.SetMovingLeft(false);
 		pacman.SetMovingDown(false);
 		pacman.SetMovingRight(false);
 		pacman.SetMovingUp(true);
+		*/
 	}
 	if (nChar == KEY_DOWN) {
+		pacman.SetTryingDown(true);
+		pacman.SetTryingLeft(false);
+		pacman.SetTryingRight(false);
+		pacman.SetTryingUp(false);
+		/*
 		pacman.SetMovingLeft(false);
 		pacman.SetMovingDown(true);
 		pacman.SetMovingRight(false);
 		pacman.SetMovingUp(false);
+		*/
 	}
 }
 

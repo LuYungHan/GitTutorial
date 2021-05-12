@@ -44,6 +44,7 @@ namespace game_framework {
 		x = X_POS;
 		y = Y_POS;
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
+		tryingDown = tryingLeft = tryingRight = tryingUp = false;
 	}
 
 
@@ -89,42 +90,123 @@ namespace game_framework {
 		animationDown.OnMove();
 		int x_right = GetX2();
 		int y_bottom = GetY2();
-		if (isMovingLeft) {
-			if (backgroundArray[y][x - STEP_SIZE] == 1||backgroundArray[y_bottom][x-STEP_SIZE]==1) {
-				x = x+1;
+		if (tryingDown) {
+			SetTryingLeft(false);
+			SetTryingRight(false);
+			SetTryingUp(false);
+			if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1) {
+				SetMovingDown(false);
+			}
+			else {
+				SetMovingDown(true);
+				SetTryingDown(false);
 				SetMovingLeft(false);
+				SetMovingRight(false);
+				SetMovingUp(false);
+			}
+		}
+		if (tryingRight) {
+			SetTryingLeft(false);
+			SetTryingDown(false);
+			SetTryingUp(false);
+			if (backgroundArray[y][x_right + STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
+				SetMovingRight(false);
+			}
+			else {
+				SetMovingRight(true);
+				SetTryingRight(false);
+				SetMovingLeft(false);
+				SetMovingDown(false);
+				SetMovingUp(false);
+			}
+		}
+		if (tryingLeft) {
+			SetTryingDown(false);
+			SetTryingRight(false);
+			SetTryingUp(false);
+			if (backgroundArray[y][x - STEP_SIZE] == 1 || backgroundArray[y_bottom][x - STEP_SIZE] == 1) {
+				SetMovingLeft(false);
+			}
+			else {
+				SetMovingLeft(true);
+				SetTryingLeft(false);
+				SetMovingDown(false);
+				SetMovingRight(false);
+				SetMovingUp(false);
+			}
+		}
+		if (tryingUp) {
+			SetTryingLeft(false);
+			SetTryingRight(false);
+			SetTryingDown(false);
+			if (backgroundArray[y - STEP_SIZE][x] == 1 || backgroundArray[y - STEP_SIZE][x_right] == 1) {
+				SetMovingUp(false);
+			}
+			else {
+				SetMovingUp(true);
+				SetTryingUp(false);
+				SetMovingLeft(false);
+				SetMovingRight(false);
+				SetMovingDown(false);
+			}
+		}
+
+		if (isMovingLeft) {
+			SetTryingLeft(false);
+			if (backgroundArray[y][x - STEP_SIZE] == 1 || backgroundArray[y_bottom][x - STEP_SIZE] == 1) {
+				x = x;
 			}
 			else {
 				x -= STEP_SIZE;
 			}
 		}
 		if (isMovingRight) {
-			if (backgroundArray[y][x_right + STEP_SIZE] == 1||backgroundArray[y_bottom][x_right+STEP_SIZE]==1) {
-				x = x-1;
-				SetMovingRight(false);
+			SetTryingRight(false);
+			if (backgroundArray[y][x_right + STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
+				x = x;
 			}
 			else {
 				x += STEP_SIZE;
 			}
 		}
 		if (isMovingUp) {
-			if (backgroundArray[y-STEP_SIZE][x] == 1||backgroundArray[y-STEP_SIZE][x_right]==1) {
-				y = y+1;
-				SetMovingUp(false);
+			SetTryingUp(false);
+			if (backgroundArray[y - STEP_SIZE][x] == 1 || backgroundArray[y - STEP_SIZE][x_right] == 1) {
+				y = y;
 			}
 			else {
 				y -= STEP_SIZE;
 			}
 		}
 		if (isMovingDown) {
-			if (backgroundArray[y_bottom + STEP_SIZE][x] == 1||backgroundArray[y_bottom+STEP_SIZE][x_right]==1) {
-				y = y-1;
-				SetMovingDown(false);
+			SetTryingDown(false);
+			if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1) {
+				y = y;
 			}
 			else {
 				y += STEP_SIZE;
 			}
 		}
+	}
+
+	void Pacman::SetTryingDown(bool flag) 
+	{
+		tryingDown = flag;
+	}
+
+	void Pacman::SetTryingLeft(bool flag)
+	{
+		tryingLeft = flag;
+	}
+
+	void Pacman::SetTryingRight(bool flag)
+	{
+		tryingRight = flag;
+	}
+
+	void Pacman::SetTryingUp(bool flag)
+	{
+		tryingUp = flag;
 	}
 
 	void Pacman::SetMovingDown(bool flag)
@@ -159,21 +241,22 @@ namespace game_framework {
 		if (isMovingRight) {
 			animationRight.SetTopLeft(x, y);
 			animationRight.OnShow();
+			SetTryingRight(false);
 		}
 		if (isMovingLeft) {
 			animation.SetTopLeft(x, y);
 			animation.OnShow();
-			
+			SetTryingLeft(false);
 		}
 		if (isMovingUp) {
 			animationUp.SetTopLeft(x, y);
 			animationUp.OnShow();
-
+			SetTryingUp(false);
 		}
 		if (isMovingDown) {
 			animationDown.SetTopLeft(x, y);
 			animationDown.OnShow();
-
+			SetTryingDown(false);
 		}
 
 	}

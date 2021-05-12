@@ -24,6 +24,11 @@ namespace game_framework {
 		void SetMovingRight(bool flag); // 設定是否正在往右移動
 		void SetMovingUp(bool flag);	// 設定是否正在往上移動
 		void SetXY(int nx, int ny);		// 設定擦子左上角座標
+
+		void SetTryingDown(bool flag);	// 設定嘗試往下移動
+		void SetTryingLeft(bool flag);	// 設定嘗試往左移動
+		void SetTryingRight(bool flag);	// 設定嘗試往右移動
+		void SetTryingUp(bool flag);	// 設定嘗試往上移動
 	protected:
 		CAnimation animation;		// 擦子的動畫左邊
 		CAnimation animationRight;		// 擦子的動畫右邊
@@ -35,6 +40,11 @@ namespace game_framework {
 		bool isMovingLeft;			// 是否正在往左移動
 		bool isMovingRight;			// 是否正在往右移動
 		bool isMovingUp;			// 是否正在往上移動
+
+		bool tryingDown;			//是否可以往下
+		bool tryingLeft;			//是否可以往左
+		bool tryingRight;			//是否可以往右
+		bool tryingUp;				//是否可以往上
 		//int CGameStateInit::backgroundArray[479][636];
 		//CGameStateInit backgroundArray;
 		//int CGameStateInit::backgroundArray;
