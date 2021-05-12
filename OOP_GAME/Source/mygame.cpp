@@ -738,8 +738,7 @@ void CGameStateRun::OnBeginState()
 		//ball[i].SetIsAlive(true);
 	//}
 	pacman.Initialize();
-	blueball.OnShow();
-	blueball.SetIsAlive(true);
+	blueball.Initialize();
 	background.SetTopLeft(BACKGROUND_X,0);				// 設定背景的起始座標
 	help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 	hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
@@ -775,7 +774,6 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	// 移動擦子
 	//
 	pacman.OnMove(backgroundArray);
-	blueball.OnMove();
 	//
 	//移動鬼
 	//
@@ -816,13 +814,13 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			}
 			*/
 		}
+		
+		if (blueball.HitEraser(&pacman)) {
+			j--;
+			pacman.Initialize();
 
-		//if (blueball.HitEraser(&pacman)) {
-			//j++;		//失去一條命
-			//blueball.Initialize();
-			//pacman.OnShow();
-		//}
-
+		}
+		
 	}
 
 
@@ -1024,6 +1022,7 @@ void CGameStateRun::OnShow()
 	bball.OnShow();						// 貼上彈跳的球
 	pacman.OnShow();					// 貼上擦子
 	blueball.OnShow();
+	blueball.SetIsAlive(true);
 	//
 	//  貼上左上及右下角落的圖
 	//

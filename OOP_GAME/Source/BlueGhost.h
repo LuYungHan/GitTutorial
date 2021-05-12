@@ -19,7 +19,7 @@ public:
 	void OnMove();			// 移動
 	void SetIsAlive(bool alive);							// 設定是否活著
 	void OnShow();			// 將圖形貼到畫面
-	//void Initialize();				// 設定初始值
+	void Initialize();				// 設定初始值
 
 protected:
 	CMovingBitmap bmp;			// 鬼的圖
@@ -29,13 +29,15 @@ protected:
 //	int delay_counter;			// 調整旋轉速度的計數器
 //	int delay;					// 旋轉的速度
 	bool is_alive;				// 是否活著
-private:
 	int x, y;				// 圖形座標
 	int floor;				// 地板的Y座標
 	bool rising;			// true表上升、false表下降
 	int initial_velocity;	// 初始速度
 	int velocity;			// 目前的速度(點/次)
 	CAnimation animation;	// 利用動畫作圖形
+
+private:
+	
 	
 
 	bool HitRectangle(int tx1, int ty1, int tx2, int ty2);	// 是否碰到參數範圍的矩形

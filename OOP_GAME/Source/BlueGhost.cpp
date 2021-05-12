@@ -16,6 +16,8 @@ using namespace game_framework;
 
 BlueGhost::BlueGhost()
 {
+	Initialize();
+	/*
 	const int INITIAL_VELOCITY = 15;	// 初始左右速度
 	const int FLOOR = 225;				// 地板座標
 	floor = FLOOR;
@@ -26,8 +28,9 @@ BlueGhost::BlueGhost()
 
 	is_alive = true;
 	xx = yy = dxx = dyy = 0;
+	*/
 }
-/*
+
 void BlueGhost::Initialize() {
 	const int INITIAL_VELOCITY = 15;	// 初始左右速度
 	const int FLOOR = 225;				// 地板座標
@@ -40,7 +43,7 @@ void BlueGhost::Initialize() {
 	is_alive = true;
 	xx = yy = dxx = dyy = 0;
 }
-*/
+
 bool BlueGhost::HitEraser(Pacman *pacman)
 {
 	// 檢測擦子所構成的矩形是否碰到球
@@ -52,7 +55,7 @@ bool BlueGhost::HitRectangle(int tx1, int ty1, int tx2, int ty2)
 	int x1 = xx + dxx;				// 球的左上角x座標
 	int y1 = yy + dyy;				// 球的左上角y座標
 	int x2 = x1 + animation.Width();	// 球的右下角x座標
-	int y2 = y1 + bmp.Height();	// 球的右下角y座標
+	int y2 = y1 + animation.Height();	// 球的右下角y座標
 								//
 								// 檢測球的矩形與參數矩形是否有交集
 								//
