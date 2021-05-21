@@ -818,7 +818,7 @@ void CGameStateRun::OnMove()							// ²¾°Ê¹CÀ¸¤¸¯À
 		if (blueball.HitEraser(&pacman)) {
 			j--;
 			pacman.Initialize();
-
+			pacman.OnShow();
 		}
 		
 	}
