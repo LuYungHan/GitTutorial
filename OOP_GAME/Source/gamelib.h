@@ -79,7 +79,7 @@
 #define ENABLE_AUDIO		 true		// 啟動音效介面
 
 /////////////////////////////////////////////////////////////////////////////
-// 定義CGame及CGameState所使用的三個狀態常數
+// 定義CGame及CGameState所使用的四個狀態常數
 /////////////////////////////////////////////////////////////////////////////
 
 enum GAME_STATES {
@@ -276,6 +276,7 @@ namespace game_framework {
 	class CGameStateInit;
 	class CGameStateRun;
 	class CGameStateOver;
+	class CGameStateSecond;
 
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的各種狀態之Base class(是一個abstract class)
@@ -342,9 +343,9 @@ namespace game_framework {
 	private:
 		bool			running;			// 遊戲是否正在進行中(未被Pause)
 		bool            suspended;			// 遊戲是否被suspended
-		const int		NUM_GAME_STATES;	// 遊戲的狀態數(3個狀態)
+		const int		NUM_GAME_STATES;	// 遊戲的狀態數(4個狀態)
 		CGameState		*gameState;			// pointer指向目前的遊戲狀態
-		CGameState		*gameStateTable[3];	// 遊戲狀態物件的pointer
+		CGameState		*gameStateTable[4];	// 遊戲狀態物件的pointer
 		static CGame	instance;			// 遊戲唯一的instance
 	};
 

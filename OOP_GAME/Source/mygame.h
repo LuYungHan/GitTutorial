@@ -78,6 +78,28 @@ namespace game_framework {
 		CMovingBitmap logo;								// csie的logo
 	};
 
+
+	/////////////////////////////////////////////////////////////////////////////
+	// 這個class為遊戲的第二關畫面物件
+	// 每個Member function的Implementation都要弄懂
+	/////////////////////////////////////////////////////////////////////////////
+
+	class CGameStateSecond : public CGameState {
+	public:
+		CGameStateSecond(CGame *g);
+		void OnInit();  								// 遊戲的初值及圖形設定
+		void OnBeginState();							// 設定每次重玩所需的變數
+		void OnKeyUp(UINT, UINT, UINT); 				// 處理鍵盤Up的動作
+		void OnLButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
+		int	 backgroundArray[479][636]; //背景數字矩陣
+
+	protected:
+		void OnShow();									// 顯示這個狀態的遊戲畫面
+	private:
+		CMovingBitmap logo;								// csie的logo
+	};
+
+
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的遊戲執行物件，主要的遊戲程式都在這裡
 	// 每個Member function的Implementation都要弄懂
