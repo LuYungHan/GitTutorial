@@ -498,9 +498,9 @@ CGame::CGame()
 	running = true;
 	suspended = false;
 	gameStateTable[GAME_STATE_INIT] = new CGameStateInit(this);
-	gameStateTable[GAME_STATE_SECOND] = new CGameStateSecond(this);
 	gameStateTable[GAME_STATE_RUN]  = new CGameStateRun(this);
 	gameStateTable[GAME_STATE_OVER] = new CGameStateOver(this);
+	gameStateTable[GAME_STATE_SECOND] = new CGameStateSecond(this);
 	gameState = NULL;
 }
 
