@@ -1061,7 +1061,7 @@ namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 
 	CGameStateSecond::CGameStateSecond(CGame *g)
-		: CGameState(g), NUMBALLS(10000), GHOSTBLUE(2), CGameStateRun(g)
+		: CGameStateRun(g), NUMBALLS(10000), GHOSTBLUE(2)
 	{
 		ball = new CBall[NUMBALLS];
 		blueball_arr = new BlueGhost[GHOSTBLUE];

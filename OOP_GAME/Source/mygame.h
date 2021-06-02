@@ -124,7 +124,7 @@ namespace game_framework {
 	// 每個Member function的Implementation都要弄懂
 	/////////////////////////////////////////////////////////////////////////////
 
-	class CGameStateSecond : public CGameState, public CGameStateRun{
+	class CGameStateSecond : public CGameStateRun{
 	public:
 		CGameStateSecond(CGame *g);
 		~CGameStateSecond();
