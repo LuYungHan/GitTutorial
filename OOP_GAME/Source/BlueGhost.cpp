@@ -30,8 +30,28 @@ BlueGhost::BlueGhost()
 	xx = yy = dxx = dyy = 0;
 	*/
 }
+int BlueGhost::GetX1()
+{
+	return x;
+}
+
+int BlueGhost::GetY1()
+{
+	return y;
+}
+
+int BlueGhost::GetX2()
+{
+	return x + animation.Width();
+}
+
+int BlueGhost::GetY2()
+{
+	return y + animation.Height();
+}
 
 void BlueGhost::Initialize() {
+	
 	const int INITIAL_VELOCITY = 15;	// 初始左右速度
 	const int FLOOR = 225;				// 地板座標
 	floor = FLOOR;
@@ -42,6 +62,9 @@ void BlueGhost::Initialize() {
 
 	is_alive = true;
 	xx = yy = dxx = dyy = 0;
+	isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
+	tryingDown = tryingLeft = tryingRight = tryingUp = false;
+	
 }
 
 bool BlueGhost::HitEraser(Pacman *pacman)
@@ -73,9 +96,149 @@ void BlueGhost::LoadBitmap()
 		animation.AddBitmap(filename[i], RGB(0, 0, 0));
 }
 
-void BlueGhost::OnMove()
+void BlueGhost::TrackPacman(Pacman *pacman)
 {
 	if (rising) {			// 左右狀態
+		if (pacman->GetY1() < GetY1()) {
+			y -= velocity / 3;	// 當速度 > 0時，x軸左右(移動velocity個點，velocity的單位為 點/次)
+			velocity -= 3;		// 受重力影響，下次的左速度降低
+		}
+		else {
+			rising = false; // 當速度 <= 0，上升終止，下次改為右移
+			velocity = 1;	// 下降的初速(velocity)為1
+		}
+	}
+	else {				// 下降狀態
+		if (y < floor - 1) {  // 當y座標還沒碰到地板
+			y += velocity / 3;	// y軸下降(移動velocity個點，velocity的單位為 點/次)
+			velocity += 3;		// 受重力影響，下次的下降速度增加
+		}
+		else {
+			y = floor - 1;  // 當y座標低於地板，更正為地板上
+			rising = true;	// 探底反彈，下次改為上升
+			velocity = initial_velocity; // 重設上升初始速度
+		}
+	}
+}
+
+void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman)
+{
+	const int STEP_SIZE = 4;
+	animation.OnMove();
+
+	int x_right = GetX2();
+	int y_bottom = GetY2();
+	/*if (pacman->GetX2() < x_right) {
+		x_right -= STEP_SIZE;
+	}else {
+		x_right += STEP_SIZE;
+	}
+	if (pacman->GetY2() < y_bottom) {
+		y_bottom -= STEP_SIZE;
+	}else {
+		y_bottom += STEP_SIZE;
+	}*/
+	//for (;(abs(pacman->GetX2() - x_right)) > 5;) {
+		if ((pacman->GetX2() > x_right) && (pacman->GetY2() > y_bottom)) {
+			SetTryingLeft(false);
+			SetTryingRight(false);
+			SetTryingUp(false);
+			if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1) {
+				SetMovingDown(false);
+			}
+			else {
+				SetMovingDown(true);
+				SetTryingDown(false);
+				SetMovingLeft(false);
+				SetMovingRight(false);
+				SetMovingUp(false);
+			}
+		}
+		if ((pacman->GetX2() > x_right) && (pacman->GetY2() > y_bottom)) {
+			SetTryingLeft(false);
+			SetTryingDown(false);
+			SetTryingUp(false);
+			if (backgroundArray[y][x_right + STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
+				SetMovingRight(false);
+			}
+			else {
+				SetMovingRight(true);
+				SetTryingRight(false);
+				SetMovingLeft(false);
+				SetMovingDown(false);
+				SetMovingUp(false);
+			}
+		}
+		if ((pacman->GetX2() < x_right) && (pacman->GetY2() < y_bottom)) {
+			SetTryingDown(false);
+			SetTryingRight(false);
+			SetTryingUp(false);
+			if (backgroundArray[y][x - STEP_SIZE] == 1 || backgroundArray[y_bottom][x - STEP_SIZE] == 1) {
+				SetMovingLeft(false);
+			}
+			else {
+				SetMovingLeft(true);
+				SetTryingLeft(false);
+				SetMovingDown(false);
+				SetMovingRight(false);
+				SetMovingUp(false);
+			}
+		}
+		if ((pacman->GetX2() < x_right) && (pacman->GetY2() < y_bottom)) {
+			SetTryingLeft(false);
+			SetTryingRight(false);
+			SetTryingDown(false);
+			if (backgroundArray[y - STEP_SIZE][x] == 1 || backgroundArray[y - STEP_SIZE][x_right] == 1) {
+				SetMovingUp(false);
+			}
+			else {
+				SetMovingUp(true);
+				SetTryingUp(false);
+				SetMovingLeft(false);
+				SetMovingRight(false);
+				SetMovingDown(false);
+			}
+		}
+
+		if ((pacman->GetX2() < x_right) && (pacman->GetY2() < y_bottom)) {
+			SetTryingLeft(false);
+			if (backgroundArray[y][x - STEP_SIZE] == 1 || backgroundArray[y_bottom][x - STEP_SIZE] == 1) {
+				x = x;
+			}
+			else {
+				x -= STEP_SIZE;
+			}
+		}
+		if ((pacman->GetX2() > x_right) && (pacman->GetY2() > y_bottom)) {
+			SetTryingRight(false);
+			if (backgroundArray[y][x_right + STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
+				x = x;
+			}
+			else {
+				x += STEP_SIZE;
+			}
+		}
+		if ((pacman->GetX2() < x_right) && (pacman->GetY2() < y_bottom)) {
+			SetTryingUp(false);
+			if (backgroundArray[y - STEP_SIZE][x] == 1 || backgroundArray[y - STEP_SIZE][x_right] == 1) {
+				y = y;
+			}
+			else {
+				y -= STEP_SIZE;
+			}
+		}
+		if ((pacman->GetX2() > x_right) && (pacman->GetY2() > y_bottom)) {
+			SetTryingDown(false);
+			if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1) {
+				y = y;
+			}
+			else {
+				y += STEP_SIZE;
+			}
+		}
+		//Sleep(3000);
+	//}
+	/*if (rising) {			// 左右狀態
 		if (velocity > 0) {
 			y -= velocity/3;	// 當速度 > 0時，x軸左右(移動velocity個點，velocity的單位為 點/次)
 			velocity-=3;		// 受重力影響，下次的左速度降低
@@ -95,10 +258,51 @@ void BlueGhost::OnMove()
 			rising = true;	// 探底反彈，下次改為上升
 			velocity = initial_velocity; // 重設上升初始速度
 		}
-	}
-	animation.OnMove();		// 執行一次animation.OnMove()，animation才會換圖
+		
+	}*/
+	//animation.OnMove();		// 執行一次animation.OnMove()，animation才會換圖
 }
 
+
+void BlueGhost::SetTryingDown(bool flag)
+{
+	tryingDown = flag;
+}
+
+void BlueGhost::SetTryingLeft(bool flag)
+{
+	tryingLeft = flag;
+}
+
+void BlueGhost::SetTryingRight(bool flag)
+{
+	tryingRight = flag;
+}
+
+void BlueGhost::SetTryingUp(bool flag)
+{
+	tryingUp = flag;
+}
+
+void BlueGhost::SetMovingDown(bool flag)
+{
+	isMovingDown = flag;
+}
+
+void BlueGhost::SetMovingLeft(bool flag)
+{
+	isMovingLeft = flag;
+}
+
+void BlueGhost::SetMovingRight(bool flag)
+{
+	isMovingRight = flag;
+}
+
+void BlueGhost::SetMovingUp(bool flag)
+{
+	isMovingUp = flag;
+}
 void BlueGhost::SetIsAlive(bool alive)
 {
 	is_alive = alive;
@@ -110,5 +314,6 @@ void BlueGhost::OnShow()
 		animation.SetTopLeft(x, y);
 		animation.OnShow();
 	}
+	
 
 }

@@ -668,7 +668,7 @@ void CGameStateOver::OnShow()
 	pDC->SetBkColor(RGB(0,0,0));
 	pDC->SetTextColor(RGB(255,255,0));
 	char str[80];								// Demo 數字對字串的轉換
-	sprintf(str, "Game Over ! (%d)", counter / 30);
+	sprintf(str, "Winner ! (%d)", counter / 30);
 	pDC->TextOut(240,210,str);
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
@@ -777,7 +777,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	//
 	//移動鬼
 	//
-	blueball.OnMove();
+	blueball.OnMove(backgroundArray, &pacman);
 	//
 	// 判斷擦子是否碰到球
 	//
@@ -789,15 +789,15 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			//
 			// 若剩餘碰撞次數為0，則跳到Game Over狀態
 			//
-			if (hits_left.GetInteger() >= 1220) {
+			if (hits_left.GetInteger() >= 5000) {
 				//	CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
 				//	CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
 				CAudio::Instance()->Stop(AUDIO_PACMAN);	// 停止 MIDI
 
 				GotoGameState(GAME_STATE_OVER);
 			}
-			/*
-			if (blueball_arr[j].IsAlive() && blueball_arr[j].HitEraser(&pacman)) {
+			
+			/*if (blueball_arr[j].IsAlive() && blueball_arr[j].HitEraser(&pacman)) {
 				blueball_arr[j].SetIsAlive(false);
 				//CAudio::Instance()->Play(AUDIO_DING);
 				hits_ghost.Add(-1);
@@ -811,15 +811,15 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 					GotoGameState(GAME_STATE_OVER);
 				}
-			}
-			*/
+			}*/
+			
 		}
 		
-		if (blueball.HitEraser(&pacman)) {
+		/*if (blueball.HitEraser(&pacman)) {
 			j--;
 			pacman.Initialize();
 
-		}
+		}*/
 		
 	}
 
@@ -859,6 +859,8 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	int i ;
 	for (i = 0; i < NUMBALLS; i++)	
 		ball[i].LoadBitmap();								// 載入第i個球的圖形
+	for (i = 0; i < GHOSTBLUE; i++)
+		blueball_arr[i].LoadBitmap();
 
 	/*for (j = 0; i < 479; i++) {
 		for (k = 0; j< 636  ; j++) {
