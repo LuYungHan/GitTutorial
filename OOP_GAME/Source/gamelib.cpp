@@ -608,7 +608,7 @@ void CGame::OnInitStates()
 	//
 	// ©I¥s¨C­Óª¬ºAªºOnInitialUpdate
 	//
-	for (int i = 0; i < NUM_GAME_STATES; i++)
+	for (int i = 0; i < NUM_GAME_STATES-1; i++)
 		gameStateTable[i]->OnInit();
 }
 
