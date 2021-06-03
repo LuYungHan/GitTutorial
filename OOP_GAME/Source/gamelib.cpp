@@ -493,13 +493,14 @@ void CGameState::OnCycle() // Template Method
 CGame CGame::instance;
 
 CGame::CGame()
-: NUM_GAME_STATES(3)
+: NUM_GAME_STATES(4)
 {
 	running = true;
 	suspended = false;
 	gameStateTable[GAME_STATE_INIT] = new CGameStateInit(this);
 	gameStateTable[GAME_STATE_RUN]  = new CGameStateRun(this);
 	gameStateTable[GAME_STATE_OVER] = new CGameStateOver(this);
+	gameStateTable[GAME_STATE_SECOND] = new CGameStateSecond(this);
 	gameState = NULL;
 }
 
@@ -607,7 +608,7 @@ void CGame::OnInitStates()
 	//
 	// ©I¥s¨C­Óª¬ºAªºOnInitialUpdate
 	//
-	for (int i = 0; i < NUM_GAME_STATES; i++)
+	for (int i = 0; i < NUM_GAME_STATES-1; i++)
 		gameStateTable[i]->OnInit();
 }
 
