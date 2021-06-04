@@ -82,7 +82,7 @@ namespace game_framework {
 	void Pacman::OnMove(int backgroundArray[479][636])
 
 	{
-		const int STEP_SIZE = 4;
+		const int STEP_SIZE = 3;
 		animation.OnMove();
 		animationRight.OnMove();
 		animationCenter.OnMove();
@@ -94,7 +94,9 @@ namespace game_framework {
 			SetTryingLeft(false);
 			SetTryingRight(false);
 			SetTryingUp(false);
-			if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1) {
+			if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1 ||
+				backgroundArray[y_bottom + 2*STEP_SIZE][x] == 1 || backgroundArray[y_bottom + 2*STEP_SIZE][x_right] == 1 ||
+				backgroundArray[y_bottom + 3 * STEP_SIZE][x] == 1 || backgroundArray[y_bottom + 3 * STEP_SIZE][x_right] == 1) {
 				SetMovingDown(false);
 			}
 			else {
@@ -109,7 +111,9 @@ namespace game_framework {
 			SetTryingLeft(false);
 			SetTryingDown(false);
 			SetTryingUp(false);
-			if (backgroundArray[y][x_right + STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
+			if (backgroundArray[y][x_right + STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] == 1 || 
+				backgroundArray[y][x_right + 2*STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + 2*STEP_SIZE] == 1 ||
+				backgroundArray[y][x_right + 3 * STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + 3 * STEP_SIZE] == 1) {
 				SetMovingRight(false);
 			}
 			else {
@@ -124,7 +128,9 @@ namespace game_framework {
 			SetTryingDown(false);
 			SetTryingRight(false);
 			SetTryingUp(false);
-			if (backgroundArray[y][x - STEP_SIZE] == 1 || backgroundArray[y_bottom][x - STEP_SIZE] == 1) {
+			if (backgroundArray[y][x - STEP_SIZE] == 1 || backgroundArray[y_bottom][x - STEP_SIZE] == 1 ||
+				backgroundArray[y][x - 2*STEP_SIZE] == 1 || backgroundArray[y_bottom][x - 2*STEP_SIZE] == 1 ||
+				backgroundArray[y][x - 3 * STEP_SIZE] == 1 || backgroundArray[y_bottom][x - 3 * STEP_SIZE] == 1) {
 				SetMovingLeft(false);
 			}
 			else {
@@ -139,7 +145,9 @@ namespace game_framework {
 			SetTryingLeft(false);
 			SetTryingRight(false);
 			SetTryingDown(false);
-			if (backgroundArray[y - STEP_SIZE][x] == 1 || backgroundArray[y - STEP_SIZE][x_right] == 1) {
+			if (backgroundArray[y - STEP_SIZE][x] == 1 || backgroundArray[y - STEP_SIZE][x_right] == 1 ||
+				backgroundArray[y - 2*STEP_SIZE][x] == 1 || backgroundArray[y - 2*STEP_SIZE][x_right] == 1 ||
+				backgroundArray[y - 3 * STEP_SIZE][x] == 1 || backgroundArray[y - 3 * STEP_SIZE][x_right] == 1) {
 				SetMovingUp(false);
 			}
 			else {

@@ -78,6 +78,7 @@ namespace game_framework {
 		CMovingBitmap logo;								// csie的logo
 	};
 
+
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的遊戲執行物件，主要的遊戲程式都在這裡
 	// 每個Member function的Implementation都要弄懂
@@ -99,6 +100,35 @@ namespace game_framework {
 	protected:
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
+	private:
+		const int		NUMBALLS;	// 球的總數
+		const int       GHOSTBLUE;  //blue ghost
+		CMovingBitmap	background;	// 背景圖
+		CMovingBitmap	help;		// 說明圖
+		CBall			*ball;		// 球的陣列
+		CBall			*bigball;		// 大球的陣列
+		BlueGhost       *blueball_arr;		// 反覆彈跳的藍色鬼
+		CMovingBitmap	corner;		// 角落圖
+		Pacman			pacman;		// 拍子
+		CInteger		hits_left;	// 剩下的撞擊數
+		CInteger		score;		//總共的得分數
+		CInteger        hits_ghost;
+		CBouncingBall   bball;		// 反覆彈跳的紅色鬼
+		BlueGhost       blueball;		// 反覆彈跳的藍色鬼
+
+	};
+
+
+	/////////////////////////////////////////////////////////////////////////////
+	// 這個class為遊戲的第二關畫面物件
+	// 每個Member function的Implementation都要弄懂
+	/////////////////////////////////////////////////////////////////////////////
+
+	class CGameStateSecond : public CGameStateRun{
+	public:
+		CGameStateSecond(CGame *g);
+		~CGameStateSecond();
+	protected:
 	private:
 		const int		NUMBALLS;	// 球的總數
 		const int       GHOSTBLUE;  //blue ghost

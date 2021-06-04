@@ -82,7 +82,8 @@ bool BlueGhost::HitRectangle(int tx1, int ty1, int tx2, int ty2)
 								//
 								// 檢測球的矩形與參數矩形是否有交集
 								//
-	return (tx2 >= x1 && tx1 <= x2 && ty2 >= y1 && ty1 <= y2);
+	//return (tx2 >= x1 && tx1 <= x2 && ty2 >= y1 && ty1 <= y2);
+	return ((y1 >= ty1 && y2 <= ty2) && (x1 <= tx1 || x2 >= tx2) || (x1 <= tx1 && x2 >= tx2) && (y1 >= ty2 || y2 <= ty1));
 }
 
 bool BlueGhost::IsAlive()
