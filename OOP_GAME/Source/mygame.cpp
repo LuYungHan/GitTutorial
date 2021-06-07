@@ -814,13 +814,13 @@ namespace game_framework {
 				}
 				*/
 			}
-
-			if (blueball.HitEraser(&pacman)) {
+			
+			if (blueball.HitEraser(&pacman)) {		//這個居然是跑出去左邊會執行的
 				j--;
 				pacman.Initialize();
 				pacman.OnShow();
 			}
-
+			
 		}
 
 
