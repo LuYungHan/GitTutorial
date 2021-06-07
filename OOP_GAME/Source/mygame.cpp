@@ -659,6 +659,7 @@ namespace game_framework {
 		ShowInitProgress(100);
 	}
 
+
 	void CGameStateOver::OnShow()
 	{
 		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
@@ -673,6 +674,7 @@ namespace game_framework {
 		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 	}
+
 
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的遊戲執行物件，主要的遊戲程式都在這裡
@@ -730,62 +732,79 @@ namespace game_framework {
 				}
 			}
 		}
-		//}*/// 設定球的起始座標
-			//int x_pos = i % BALL_PER_ROW;
-			//int y_pos = i / BALL_PER_ROW;
-			//ball[i].SetXY(x_pos * BALL_GAP + BALL_XY_OFFSET, y_pos * BALL_GAP + BALL_XY_OFFSET);
-			//ball[i].SetDelay(x_pos);
-			//ball[i].SetIsAlive(true);
-		//}
-		pacman.Initialize();
-		blueball.Initialize();
-		background.SetTopLeft(BACKGROUND_X, 0);				// 設定背景的起始座標
-		help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
-		hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
-		hits_left.SetTopLeft(HITS_LEFT_X, HITS_LEFT_Y);		// 指定剩下撞擊數的座標
-		//score.SetInteger(TOTAL_SCORE);						// 指定目前得分數
-		//score.SetTopLeft(SCORE_LEFT_X, SCORE_LEFT_Y);			// 指定目前得分數座標
-		//CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
-		CAudio::Instance()->Play(AUDIO_DEATH, false);
-		CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
-		//CAudio::Instance()->Play(AUDIO_NTUT, true);			// 撥放 MIDI
-		CAudio::Instance()->Play(AUDIO_PACMAN, true);
-	}
 
-	void CGameStateRun::OnMove()							// 移動遊戲元素
-	{
-		//
-		// 如果希望修改cursor的樣式，則將下面程式的commment取消即可
-		//
-		// SetCursor(AfxGetApp()->LoadCursor(IDC_GAMECURSOR));
-		//
-		// 移動背景圖的座標
-		//
-	//	if (background.Top() > SIZE_Y)
-	//		background.SetTopLeft(60 ,-background.Height());
-	//	background.SetTopLeft(background.Left(),background.Top()+1);
-		//
-		// 移動球
-		//
-		int i, j;
-		//for (i = 0; i < NUMBALLS; i++)
-		//	ball[i].OnMove();
-		//
-		// 移動擦子
-		//
-		pacman.OnMove(backgroundArray);
-		//
-		//移動鬼
-		//
-		blueball.OnMove();
-		//
-		// 判斷擦子是否碰到球
-		//
-		for (i = 0, j = 0; (i < NUMBALLS) || (j < GHOSTBLUE); i++, j++) {
-			if (ball[i].IsAlive() && ball[i].HitEraser(&pacman)) {
-				ball[i].SetIsAlive(false);
-				CAudio::Instance()->Play(AUDIO_DING);
-				hits_left.Add(5);
+	//}*/// 設定球的起始座標
+		//int x_pos = i % BALL_PER_ROW;
+		//int y_pos = i / BALL_PER_ROW;
+		//ball[i].SetXY(x_pos * BALL_GAP + BALL_XY_OFFSET, y_pos * BALL_GAP + BALL_XY_OFFSET);
+		//ball[i].SetDelay(x_pos);
+		//ball[i].SetIsAlive(true);
+	//}
+	pacman.Initialize();
+	blueball.Initialize();
+	background.SetTopLeft(BACKGROUND_X,0);				// 設定背景的起始座標
+	help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
+	hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
+	hits_left.SetTopLeft(HITS_LEFT_X,HITS_LEFT_Y);		// 指定剩下撞擊數的座標
+	//score.SetInteger(TOTAL_SCORE);						// 指定目前得分數
+	//score.SetTopLeft(SCORE_LEFT_X, SCORE_LEFT_Y);			// 指定目前得分數座標
+	//CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
+	CAudio::Instance()->Play(AUDIO_DEATH, false);
+	CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
+	//CAudio::Instance()->Play(AUDIO_NTUT, true);			// 撥放 MIDI
+	CAudio::Instance()->Play(AUDIO_PACMAN, true);
+}
+
+void CGameStateRun::OnMove()							// 移動遊戲元素
+{
+	//
+	// 如果希望修改cursor的樣式，則將下面程式的commment取消即可
+	//
+	// SetCursor(AfxGetApp()->LoadCursor(IDC_GAMECURSOR));
+	//
+	// 移動背景圖的座標
+	//
+//	if (background.Top() > SIZE_Y)
+//		background.SetTopLeft(60 ,-background.Height());
+//	background.SetTopLeft(background.Left(),background.Top()+1);
+	//
+	// 移動球
+	//
+	int i, j;
+	//for (i = 0; i < NUMBALLS; i++)
+	//	ball[i].OnMove();
+	//
+	// 移動擦子
+	//
+	pacman.OnMove(backgroundArray);
+	//
+	//移動鬼
+	//
+	blueball.OnMove(backgroundArray, &pacman);
+	//
+	// 判斷擦子是否碰到球
+	//
+	for (i = 0, j = 0; (i < NUMBALLS) || (j < GHOSTBLUE); i++, j++) {
+		if (ball[i].IsAlive() && ball[i].HitEraser(&pacman)) {
+			ball[i].SetIsAlive(false);
+			CAudio::Instance()->Play(AUDIO_DING);
+			hits_left.Add(5);
+			//
+			// 若剩餘碰撞次數為0，則跳到Game Over狀態
+			//
+			if (hits_left.GetInteger() >= 500) {
+				//	CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
+				//	CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
+				CAudio::Instance()->Stop(AUDIO_PACMAN);	// 停止 MIDI
+
+				GotoGameState(GAME_STATE_OVER);
+			}
+
+			/*if (blueball_arr[j].IsAlive() && blueball_arr[j].HitEraser(&pacman)) {
+				blueball_arr[j].SetIsAlive(false);
+				//CAudio::Instance()->Play(AUDIO_DING);
+				hits_ghost.Add(-1);
+
 				//
 				// 若剩餘碰撞次數為0，則跳到Game Over狀態
 				//
@@ -812,16 +831,18 @@ namespace game_framework {
 						GotoGameState(GAME_STATE_OVER);
 					}
 				}
+
+
 				*/
-			}
-			
+		}
+
 			if (blueball.HitEraser(&pacman)) {		//這個居然是跑出去左邊會執行的
 				j--;
 				pacman.Initialize();
 				pacman.OnShow();
 			}
-			
-		}
+	}
+
 
 
 		/*	// 判斷擦子是否碰到鬼
@@ -846,32 +867,26 @@ namespace game_framework {
 				//
 		bball.OnMove();
 	}
-	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
-	{
-		//
-		// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
-		//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
-		//
-		ShowInitProgress(33);	// 接個前一個狀態的進度，此處進度視為33%
-		//
-		// 開始載入資料
-		//
-		int i;
-		for (i = 0; i < NUMBALLS; i++)
-			ball[i].LoadBitmap();								// 載入第i個球的圖形
 
-		/*for (j = 0; i < 479; i++) {
-			for (k = 0; j< 636  ; j++) {
-				if (backgroundArray[j][k] == 99) {
-					ball[i].LoadBitmap();
-					i++;
-					if (i == NUMBALLS) {
-						break;
-					}
-				}
+void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
+{
+	//
+	// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
+	//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
+	//
+	ShowInitProgress(33);	// 接個前一個狀態的進度，此處進度視為33%
+	//
+	// 開始載入資料
+	//
+	int i ;
+	for (i = 0; i < NUMBALLS; i++)	
+		ball[i].LoadBitmap();								// 載入第i個球的圖形
+	for (i = 0; i < GHOSTBLUE; i++)
+		blueball_arr[i].LoadBitmap();
 
-			}
-		}*/
+
+		//	}
+		//}*/
 		pacman.LoadBitmap();
 		blueball.LoadBitmap();
 		background.LoadBitmap(IDB_BACKGROUND);					// 載入背景的圖形
