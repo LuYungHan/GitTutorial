@@ -836,9 +836,10 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 				*/
 		}
 
-			if (blueball.HitEraser(&pacman)) {		//這個居然是跑出去左邊會執行的
+			if (blueball.HitEraser(&pacman)) {
 				j--;
 				pacman.Initialize();
+				blueball.Initialize();
 				pacman.OnShow();
 			}
 	}
