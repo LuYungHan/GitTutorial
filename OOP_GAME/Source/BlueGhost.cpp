@@ -75,8 +75,6 @@ bool BlueGhost::HitEraser(Pacman *pacman)
 }
 bool BlueGhost::HitRectangle(int tx1, int ty1, int tx2, int ty2)
 {
-	//int x1 = xx + dxx;				// 球的左上角x座標
-	//int y1 = yy + dyy;				// 球的左上角y座標
 	int x1 = x;		//鬼的左上角x座標
 	int y1 = y;		//鬼的左上角y座標
 	int x2 = x1 + animation.Width();	// 球的右下角x座標
@@ -85,7 +83,6 @@ bool BlueGhost::HitRectangle(int tx1, int ty1, int tx2, int ty2)
 								// 檢測球的矩形與參數矩形是否有交集
 								//
 	return (tx2 >= x1 && tx1 <= x2 && ty2 >= y1 && ty1 <= y2);
-	//return ((y1 >= ty1 && y2 <= ty2) && (x1 <= tx1 || x2 >= tx2) || (x1 <= tx1 && x2 >= tx2) && (y1 >= ty2 || y2 <= ty1));
 }
 
 bool BlueGhost::IsAlive()
