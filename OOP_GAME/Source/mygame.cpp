@@ -746,6 +746,7 @@ namespace game_framework {
 	help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 	hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
 	hits_left.SetTopLeft(HITS_LEFT_X,HITS_LEFT_Y);		// 指定剩下撞擊數的座標
+	my_lives.SetInteger(3);								//指定最高生命數
 	//score.SetInteger(TOTAL_SCORE);						// 指定目前得分數
 	//score.SetTopLeft(SCORE_LEFT_X, SCORE_LEFT_Y);			// 指定目前得分數座標
 	//CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
@@ -770,7 +771,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	//
 	// 移動球
 	//
-	int i, j;
+	int i;
 	//for (i = 0; i < NUMBALLS; i++)
 	//	ball[i].OnMove();
 	//
@@ -784,7 +785,8 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	//
 	// 判斷擦子是否碰到球
 	//
-	for (i = 0, j = 0; (i < NUMBALLS) || (j < GHOSTBLUE); i++, j++) {
+	//for (i = 0, j = 0; (i < NUMBALLS) || (j < GHOSTBLUE); i++, j++) {
+	for (i = 0; i < NUMBALLS; i++) {
 		if (ball[i].IsAlive() && ball[i].HitEraser(&pacman)) {
 			ball[i].SetIsAlive(false);
 			CAudio::Instance()->Play(AUDIO_DING);
@@ -836,14 +838,17 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 				*/
 		}
 
-			if (blueball.HitEraser(&pacman)) {
-				j--;
-				pacman.Initialize();
-				blueball.Initialize();
-				pacman.OnShow();
-			}
+			
 	}
-
+	if (blueball.HitEraser(&pacman)) {
+		my_lives.Add(-1);
+		pacman.Initialize();
+		blueball.Initialize();
+		pacman.OnShow();
+	}
+	if (my_lives.GetInteger() == 0) {
+		GotoGameState(GAME_STATE_OVER);
+	}
 
 
 		/*	// 判斷擦子是否碰到鬼
