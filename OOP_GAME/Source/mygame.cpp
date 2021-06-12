@@ -780,7 +780,15 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	//
 	//移動鬼
 	//
-	blueball.OnMove(backgroundArray, &pacman);
+	int temp = 0;
+	temp = hits_left.GetInteger();
+	blueball.TrackPacman(&pacman, temp);     //前五秒blue ghost上下移
+	//Sleep(3000);
+	/*for (; (hits_left.GetInteger() /25)==0;) {
+		blueball.OnMove(backgroundArray, &pacman);
+		//Sleep(5000);
+	}*/
+	blueball.OnMove(backgroundArray, &pacman,temp);
 	//
 	// 判斷擦子是否碰到球
 	//
@@ -792,7 +800,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			//
 			// 若剩餘碰撞次數為0，則跳到Game Over狀態
 			//
-			if (hits_left.GetInteger() >= 500) {
+			if (hits_left.GetInteger() >= 1200) {
 				//	CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
 				//	CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
 				CAudio::Instance()->Stop(AUDIO_PACMAN);	// 停止 MIDI
@@ -830,13 +838,13 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 						GotoGameState(GAME_STATE_OVER);
 					}
-				}
+				}*/
 
 
-				*/
+				
 			}
-		/*
-			if (blueball.HitEraser(&pacman)) {
+		
+			/*if (blueball.HitEraser(&pacman)) {
 				j--;
 				pacman.Initialize();
 				pacman.OnShow();
@@ -866,7 +874,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 				//
 				// 移動彈跳的球
 				//
-		bball.OnMove();
+		bball.OnMove(backgroundArray, temp);
 	}
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定

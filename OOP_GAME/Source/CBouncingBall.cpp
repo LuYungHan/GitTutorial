@@ -21,7 +21,26 @@ namespace game_framework {
 		initial_velocity = INITIAL_VELOCITY;
 		velocity = initial_velocity;
 	}
+/*	int CBouncingBall::GetX1()
+	{
+		return x;
+	}
 
+	int CBouncingBall::GetY1()
+	{
+		return y;
+	}
+
+	int CBouncingBall::GetX2()
+	{
+		return x + animation.Width();
+	}
+
+	int CBouncingBall::GetY2()
+	{
+		return y + animation.Height();
+	}
+*/
 	void CBouncingBall::LoadBitmap()
 	{
 		char *filename[4] = { ".\\RES\\redghost01.bmp",".\\RES\\redghost02.bmp",".\\RES\\redghost03.bmp",".\\RES\\redghost04.bmp" };
@@ -29,28 +48,34 @@ namespace game_framework {
 			animation.AddBitmap(filename[i], RGB(0, 0, 0));
 	}
 
-	void CBouncingBall::OnMove()
+	void CBouncingBall::OnMove(int backgroundArray[479][636], int num)
 	{
-		if (rising) {			// 左右狀態
-			if (velocity > 0) {
-				x -= velocity;	// 當速度 > 0時，x軸左右(移動velocity個點，velocity的單位為 點/次)
-				velocity--;		// 受重力影響，下次的左速度降低
+		if (num < 25) {
+
+			if (rising) {			// 左右狀態
+				if (velocity > 0) {
+					x -= velocity;	// 當速度 > 0時，x軸左右(移動velocity個點，velocity的單位為 點/次)
+					velocity--;		// 受重力影響，下次的左速度降低
+				}
+				else {
+					rising = false; // 當速度 <= 0，上升終止，下次改為右移
+					velocity = 1;	// 下降的初速(velocity)為1
+				}
 			}
-			else {
-				rising = false; // 當速度 <= 0，上升終止，下次改為右移
-				velocity = 1;	// 下降的初速(velocity)為1
+			else {				// 下降狀態
+				if (x < floor - 1) {  // 當y座標還沒碰到地板
+					x += velocity;	// y軸下降(移動velocity個點，velocity的單位為 點/次)
+					velocity++;		// 受重力影響，下次的下降速度增加
+				}
+				else {
+					x = floor - 1;  // 當y座標低於地板，更正為地板上
+					rising = true;	// 探底反彈，下次改為上升
+					velocity = initial_velocity; // 重設上升初始速度
+				}
 			}
 		}
-		else {				// 下降狀態
-			if (x < floor - 1) {  // 當y座標還沒碰到地板
-				x += velocity;	// y軸下降(移動velocity個點，velocity的單位為 點/次)
-				velocity++;		// 受重力影響，下次的下降速度增加
-			}
-			else {
-				x = floor - 1;  // 當y座標低於地板，更正為地板上
-				rising = true;	// 探底反彈，下次改為上升
-				velocity = initial_velocity; // 重設上升初始速度
-			}
+		else {
+
 		}
 		animation.OnMove();		// 執行一次animation.OnMove()，animation才會換圖
 	}
