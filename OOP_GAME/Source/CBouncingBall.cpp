@@ -127,6 +127,8 @@ namespace game_framework {
 
 			int x_right = GetX2();
 			int y_bottom = GetY2();
+			int x_left = GetX1();
+			int y_top = GetY1();
 			/*if (pacman->GetX2() < x_right) {
 				x_right -= STEP_SIZE;
 			}else {
@@ -138,10 +140,10 @@ namespace game_framework {
 				y_bottom += STEP_SIZE;
 			}*/
 			//for (;(abs(pacman->GetX2() - x_right)) > 5;) {
-			if ((pacman->GetX2() > x_right) && (pacman->GetY2() > y_bottom)) {
-				SetTryingLeft(false);
-				SetTryingRight(false);
-				SetTryingUp(false);
+			if ((pacman->GetX2() > x_right) && (pacman->GetY2() > y_bottom) && (pacman->GetX1() > x_left) && (pacman->GetY2() > y_top)) {
+				//SetTryingLeft(false);
+				//SetTryingRight(false);
+				//SetTryingUp(false);
 				if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1) {
 					SetMovingDown(false);
 				}
@@ -153,10 +155,10 @@ namespace game_framework {
 					SetMovingUp(false);
 				}
 			}
-			if ((pacman->GetX2() > x_right) && (pacman->GetY2() > y_bottom)) {
-				SetTryingLeft(false);
-				SetTryingDown(false);
-				SetTryingUp(false);
+			if ((pacman->GetX2() > x_right) && (pacman->GetY2() > y_bottom)&&(pacman->GetX1() > x_left)&&(pacman->GetY2() > y_top)) {
+				//SetTryingLeft(false);
+				//SetTryingDown(false);
+				//SetTryingUp(false);
 				if (backgroundArray[y][x_right + STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
 					SetMovingRight(false);
 				}
@@ -168,10 +170,10 @@ namespace game_framework {
 					SetMovingUp(false);
 				}
 			}
-			if ((pacman->GetX2() < x_right) && (pacman->GetY2() < y_bottom)) {
-				SetTryingDown(false);
-				SetTryingRight(false);
-				SetTryingUp(false);
+			if ((pacman->GetX2() < x_right) && (pacman->GetY2() < y_bottom) && (pacman->GetX1() < x_left) && (pacman->GetY2() < y_top)) {
+				//SetTryingDown(false);
+				//SetTryingRight(false);
+				//SetTryingUp(false);
 				if (backgroundArray[y][x - STEP_SIZE] == 1 || backgroundArray[y_bottom][x - STEP_SIZE] == 1) {
 					SetMovingLeft(false);
 				}
@@ -183,10 +185,10 @@ namespace game_framework {
 					SetMovingUp(false);
 				}
 			}
-			if ((pacman->GetX2() < x_right) && (pacman->GetY2() < y_bottom)) {
-				SetTryingLeft(false);
-				SetTryingRight(false);
-				SetTryingDown(false);
+			if ((pacman->GetX2() < x_right) && (pacman->GetY2() < y_bottom) && (pacman->GetX1() < x_left) && (pacman->GetY2() < y_top)) {
+				//SetTryingLeft(false);
+				//SetTryingRight(false);
+				//SetTryingDown(false);
 				if (backgroundArray[y - STEP_SIZE][x] == 1 || backgroundArray[y - STEP_SIZE][x_right] == 1) {
 					SetMovingUp(false);
 				}
@@ -199,7 +201,7 @@ namespace game_framework {
 				}
 			}
 
-			if ((pacman->GetX2() < x_right) && (pacman->GetY2() < y_bottom)) {
+			if ((pacman->GetX2() < x_right) && (pacman->GetY2() < y_bottom) && (pacman->GetX1() < x_left) && (pacman->GetY2() < y_top)) {
 				SetTryingLeft(false);
 				if (backgroundArray[y][x - STEP_SIZE] == 1 || backgroundArray[y_bottom][x - STEP_SIZE] == 1) {
 					x = x;
@@ -208,7 +210,7 @@ namespace game_framework {
 					x -= STEP_SIZE;
 				}
 			}
-			if ((pacman->GetX2() > x_right) && (pacman->GetY2() > y_bottom)) {
+			if ((pacman->GetX2() > x_right) && (pacman->GetY2() > y_bottom) && (pacman->GetX1() > x_left) && (pacman->GetY2() > y_top)) {
 				SetTryingRight(false);
 				if (backgroundArray[y][x_right + STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
 					x = x;
@@ -217,7 +219,7 @@ namespace game_framework {
 					x += STEP_SIZE;
 				}
 			}
-			if ((pacman->GetX2() < x_right) && (pacman->GetY2() < y_bottom)) {
+			if ((pacman->GetX2() < x_right) && (pacman->GetY2() < y_bottom) && (pacman->GetX1() < x_left) && (pacman->GetY2() < y_top)) {
 				SetTryingUp(false);
 				if (backgroundArray[y - STEP_SIZE][x] == 1 || backgroundArray[y - STEP_SIZE][x_right] == 1) {
 					y = y;
@@ -226,7 +228,7 @@ namespace game_framework {
 					y -= STEP_SIZE;
 				}
 			}
-			if ((pacman->GetX2() > x_right) && (pacman->GetY2() > y_bottom)) {
+			if ((pacman->GetX2() > x_right) && (pacman->GetY2() > y_bottom) && (pacman->GetX1() > x_left) && (pacman->GetY2() > y_top)) {
 				SetTryingDown(false);
 				if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1) {
 					y = y;
@@ -235,6 +237,7 @@ namespace game_framework {
 					y += STEP_SIZE;
 				}
 			}
+			
 		}
 		//Sleep(3000);
 	//}

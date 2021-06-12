@@ -790,6 +790,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	int temp = 0;
 	temp = hits_left.GetInteger();
 	blueball.TrackPacman(&pacman, temp);     //前五秒blue ghost上下移
+	bball.TrackPacman(&pacman, temp);		//前五秒red ghost左右移
 	//Sleep(3000);
 	/*for (; (hits_left.GetInteger() /25)==0;) {
 		blueball.OnMove(backgroundArray, &pacman);
@@ -804,6 +805,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		if (ball[i].IsAlive() && ball[i].HitEraser(&pacman)) {
 			ball[i].SetIsAlive(false);
 			CAudio::Instance()->Play(AUDIO_DING);
+			CAudio::Instance()->Stop(AUDIO_PACMAN);	// 停止 MIDI
 			hits_left.Add(5);
 			//
 			// 若剩餘碰撞次數為0，則跳到Game Over狀態
@@ -863,14 +865,18 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 			
 	}
+	
+	// blueghost and redghost collision
 	if ((blueball.HitEraser(&pacman))||(bball.HitEraser(&pacman))) {
 		my_lives.Add(-1);
 		pacman.Initialize();
 		blueball.Initialize();
 		bball.Initialize();
 		pacman.OnShow();
+		CAudio::Instance()->Play(AUDIO_DEATH);
 
 	}
+	//three times of player's lives
 	if (my_lives.GetInteger() == 0) {
 		GotoGameState(GAME_STATE_OVER);
 	}
