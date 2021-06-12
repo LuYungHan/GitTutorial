@@ -628,10 +628,16 @@ namespace game_framework {
 
 	void CGameStateOver::OnMove()
 	{
+		if (counter == 150) {
+			CAudio::Instance()->Stop(AUDIO_PACMAN); // 停止 MIDI
+			CAudio::Instance()->Play(AUDIO_DEATH);	// 開啟 MIDI
+		}
 		counter--;
 		if (counter < 0) {
+			CAudio::Instance()->Stop(AUDIO_PACMAN); // 停止 MIDI
+			//CAudio::Instance()->Play(AUDIO_DEATH);	// 開啟 MIDI
 			GotoGameState(GAME_STATE_INIT);
-			CAudio::Instance()->Stop(AUDIO_DEATH);	// 停止 MIDI
+
 		}
 
 	}
@@ -639,7 +645,7 @@ namespace game_framework {
 	void CGameStateOver::OnBeginState()
 	{
 		counter = 30 * 5; // 5 seconds
-		CAudio::Instance()->Play(AUDIO_DEATH);
+		//CAudio::Instance()->Play(AUDIO_DEATH);
 	}
 
 	void CGameStateOver::OnInit()
@@ -843,7 +849,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 				}*/
 
 
-<<<<<<< HEAD
+
 				
 			}
 		
@@ -853,18 +859,17 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 				pacman.OnShow();
 			}*/
 
-=======
-				*/
->>>>>>> 7a6a9ed784eabf11e6990699b1d69dd92c2617f8
-		}
+
 
 			
 	}
-	if (blueball.HitEraser(&pacman)) {
+	if ((blueball.HitEraser(&pacman))||(bball.HitEraser(&pacman))) {
 		my_lives.Add(-1);
 		pacman.Initialize();
 		blueball.Initialize();
+		bball.Initialize();
 		pacman.OnShow();
+
 	}
 	if (my_lives.GetInteger() == 0) {
 		GotoGameState(GAME_STATE_OVER);
@@ -891,7 +896,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 				//
 				// 移動彈跳的球
 				//
-		bball.OnMove(backgroundArray, temp);
+		bball.OnMove(backgroundArray,&pacman, temp);
 	}
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
