@@ -113,6 +113,7 @@ namespace game_framework {
 		CInteger		hits_left;	// 剩下的撞擊數
 		CInteger		score;		//總共的得分數
 		CInteger        hits_ghost;
+		CInteger		my_lives;	//剩下的生命數
 		CBouncingBall   bball;		// 反覆彈跳的紅色鬼
 		BlueGhost       blueball;		// 反覆彈跳的藍色鬼
 
