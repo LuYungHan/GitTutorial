@@ -799,7 +799,7 @@ void CGameStateRun::OnMove()							// ²¾°Ê¹CÀ¸¤¸¯À
 				//	CAudio::Instance()->Stop(AUDIO_NTUT);	// °±¤î MIDI
 				CAudio::Instance()->Stop(AUDIO_PACMAN);	// °±¤î MIDI
 
-				GotoGameState(GAME_STATE_OVER);
+				GotoGameState(GAME_STATE_SECOND);
 			}
 
 			/*if (blueball_arr[j].IsAlive() && blueball_arr[j].HitEraser(&pacman)) {
