@@ -96,36 +96,39 @@ void BlueGhost::LoadBitmap()
 		animation.AddBitmap(filename[i], RGB(0, 0, 0));
 }
 
-void BlueGhost::TrackPacman(Pacman *pacman)
-{
-	if (rising) {			// 左右狀態
-		if (pacman->GetY1() < GetY1()) {
-			y -= velocity / 3;	// 當速度 > 0時，x軸左右(移動velocity個點，velocity的單位為 點/次)
-			velocity -= 3;		// 受重力影響，下次的左速度降低
+void BlueGhost::TrackPacman(Pacman *pacman,int num)
+{	
+	if (num < 25) {
+
+		if (rising) {			// 左右狀態
+			if (velocity > 0) {
+				y -= velocity / 3;	// 當速度 > 0時，x軸左右(移動velocity個點，velocity的單位為 點/次)
+				velocity -= 3;		// 受重力影響，下次的左速度降低
+			}
+			else {
+				rising = false; // 當速度 <= 0，上升終止，下次改為右移
+				velocity = 1;	// 下降的初速(velocity)為1
+			}
 		}
-		else {
-			rising = false; // 當速度 <= 0，上升終止，下次改為右移
-			velocity = 1;	// 下降的初速(velocity)為1
-		}
-	}
-	else {				// 下降狀態
-		if (y < floor - 1) {  // 當y座標還沒碰到地板
-			y += velocity / 3;	// y軸下降(移動velocity個點，velocity的單位為 點/次)
-			velocity += 3;		// 受重力影響，下次的下降速度增加
-		}
-		else {
-			y = floor - 1;  // 當y座標低於地板，更正為地板上
-			rising = true;	// 探底反彈，下次改為上升
-			velocity = initial_velocity; // 重設上升初始速度
+		else {				// 下降狀態
+			if (y < floor - 1) {  // 當y座標還沒碰到地板
+				y += velocity / 3;	// y軸下降(移動velocity個點，velocity的單位為 點/次)
+				velocity += 3;		// 受重力影響，下次的下降速度增加
+			}
+			else {
+				y = floor - 1;  // 當y座標低於地板，更正為地板上
+				rising = true;	// 探底反彈，下次改為上升
+				velocity = initial_velocity; // 重設上升初始速度
+			}
 		}
 	}
 }
 
-void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman)
+void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman,int num)
 {
-	const int STEP_SIZE = 4;
-	animation.OnMove();
+	if (num >= 25) {
 
+<<<<<<< HEAD
 	int x_right = GetX2();
 	int y_bottom = GetY2();
 	/*if (pacman->GetX2() < x_right) {
@@ -140,6 +143,25 @@ void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman)
 	}*/
 	//for (;(abs(pacman->GetX2() - x_right)) > 5;) {
 		if ((pacman->GetX2() > x_right) && (pacman->GetY2() > y_bottom)) {		//偵測在右上
+=======
+		const int STEP_SIZE = 4;
+		animation.OnMove();
+
+		int x_right = GetX2();
+		int y_bottom = GetY2();
+		/*if (pacman->GetX2() < x_right) {
+			x_right -= STEP_SIZE;
+		}else {
+			x_right += STEP_SIZE;
+		}
+		if (pacman->GetY2() < y_bottom) {
+			y_bottom -= STEP_SIZE;
+		}else {
+			y_bottom += STEP_SIZE;
+		}*/
+		//for (;(abs(pacman->GetX2() - x_right)) > 5;) {
+		if ((pacman->GetX2() > x_right) && (pacman->GetY2() > y_bottom)) {
+>>>>>>> 10ea9f8bc057ca4e8614a6c63acc6c199c579c16
 			SetTryingLeft(false);
 			SetTryingRight(false);
 			SetTryingUp(false);
@@ -236,6 +258,7 @@ void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman)
 				y += STEP_SIZE;
 			}
 		}
+	}
 		//Sleep(3000);
 	//}
 	/*if (rising) {			// 左右狀態
