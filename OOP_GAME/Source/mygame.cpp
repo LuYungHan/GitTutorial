@@ -810,12 +810,12 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			//
 			// 若剩餘碰撞次數為0，則跳到Game Over狀態
 			//
-			if (hits_left.GetInteger() >= 1200) {
+			if (hits_left.GetInteger() >= 200) {
 				//	CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
 				//	CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
 				CAudio::Instance()->Stop(AUDIO_PACMAN);	// 停止 MIDI
-
-				GotoGameState(GAME_STATE_SECOND);
+				GotoGameState_2(GAME_STATE_SECOND);
+				//GotoGameState(GAME_STATE_RUN);
 			}
 
 			/*if (blueball_arr[j].IsAlive() && blueball_arr[j].HitEraser(&pacman)) {
@@ -1124,5 +1124,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		delete[] ball;
 		delete[]  blueball_arr;
 	}
+
+	
 	
 }

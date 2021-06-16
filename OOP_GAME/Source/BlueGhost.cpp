@@ -128,22 +128,6 @@ void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman,int num)
 {
 	if (num >= 25) {
 
-<<<<<<< HEAD
-	int x_right = GetX2();
-	int y_bottom = GetY2();
-	/*if (pacman->GetX2() < x_right) {
-		x_right -= STEP_SIZE;
-	}else {
-		x_right += STEP_SIZE;
-	}
-	if (pacman->GetY2() < y_bottom) {
-		y_bottom -= STEP_SIZE;
-	}else {
-		y_bottom += STEP_SIZE;
-	}*/
-	//for (;(abs(pacman->GetX2() - x_right)) > 5;) {
-		if ((pacman->GetX2() > x_right) && (pacman->GetY2() > y_bottom)) {		//°»´ú¦b¥k¤W
-=======
 		const int STEP_SIZE = 4;
 		animation.OnMove();
 
@@ -161,7 +145,6 @@ void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman,int num)
 		}*/
 		//for (;(abs(pacman->GetX2() - x_right)) > 5;) {
 		if ((pacman->GetX2() > x_right) && (pacman->GetY2() > y_bottom)) {
->>>>>>> 10ea9f8bc057ca4e8614a6c63acc6c199c579c16
 			SetTryingLeft(false);
 			SetTryingRight(false);
 			SetTryingUp(false);
