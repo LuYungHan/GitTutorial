@@ -711,8 +711,8 @@ void CGame::SetGameState(int state)
 void CGame::SetGameState_2(int state) {
 	ASSERT(state >= 3 && state < NUM_GAME_STATES);
 	gameState = gameStateTable[state];
-	gameState->OnInit();
-	gameState->OnBeginState();
+	gameState->OnInit();				//loadbitmap
+	gameState->OnBeginState();			//showbitmap
 	OnDraw();
 	CSpecialEffect::SetCurrentTime();
 	running = true;

@@ -58,6 +58,7 @@
 #include "audio.h"
 #include "gamelib.h"
 #include "mygame.h"
+#include <iostream>
 
 namespace game_framework {
 
@@ -1115,6 +1116,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	CGameStateSecond::CGameStateSecond(CGame *g)
 		: CGameStateRun(g), NUMBALLS(10000), GHOSTBLUE(2)
 	{
+		std::cout << "into second" << endl;
 		ball = new CBall[NUMBALLS];
 		blueball_arr = new BlueGhost[GHOSTBLUE];
 	}
@@ -1124,7 +1126,115 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		delete[] ball;
 		delete[]  blueball_arr;
 	}
-
 	
+	void CGameStateSecond::OnInit()  								// 遊戲的初值及圖形設定
+	{
+		//
+		// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
+		//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
+		//
+		//ShowInitProgress(33);	// 接個前一個狀態的進度，此處進度視為33%
+		//
+		// 開始載入資料
+		//
+		int i;
+		for (i = 0; i < NUMBALLS; i++)
+			ball[i].LoadBitmap();								// 載入第i個球的圖形
+		for (i = 0; i < GHOSTBLUE; i++)
+			blueball_arr[i].LoadBitmap();
+
+
+		//	}
+		//}*/
+		pacman.LoadBitmap();
+		blueball.LoadBitmap();
+		background.LoadBitmap(IDB_BACKGROUND);					// 載入背景的圖形
+		//
+		// 完成部分Loading動作，提高進度
+		//
+		//ShowInitProgress(50);
+		//Sleep(300); // 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
+		//
+		// 繼續載入其他資料
+		//
+		help.LoadBitmap(IDB_HELP, RGB(255, 255, 255));				// 載入說明的圖形
+		corner.LoadBitmap(IDB_CORNER);							// 載入角落圖形
+		corner.ShowBitmap(background);							// 將corner貼到background
+		bball.LoadBitmap();										// 載入圖形
+
+		hits_left.LoadBitmap();
+		CAudio::Instance()->Load(AUDIO_DING, "sounds\\pacman_chomp.wav");	// 載入編號0的聲音ding.wav
+		//CAudio::Instance()->Load(AUDIO_LAKE,  "sounds\\lake.mp3");	// 載入編號1的聲音lake.mp3
+		//CAudio::Instance()->Load(AUDIO_NTUT,  "sounds\\ntut.mid");	// 載入編號2的聲音ntut.mid
+		CAudio::Instance()->Load(AUDIO_PACMAN, "sounds\\pacman_music01.mp3");	// 載入編號4的聲音pacman_music01.mp3
+		CAudio::Instance()->Load(AUDIO_DEATH, "sounds\\pacman_death.wav");	// 載入編號4的聲音pacman_music01.mp3
+
+		//
+		// 此OnInit動作會接到CGameStaterOver::OnInit()，所以進度還沒到100%
+		//
+	}
+
+	void CGameStateSecond::OnBeginState()
+	{
+		const int BALL_GAP = 20;
+		const int BALL_XY_OFFSET = 45;
+		const int BALL_PER_ROW = 32;
+
+		const int HITS_LEFT = 0;
+
+		const int HITS_LEFT_X = 150;
+		const int HITS_LEFT_Y = 15;
+		const int BACKGROUND_X = 0;
+		const int ANIMATION_SPEED = 15;
+		const int SCORE_LEFT_X = 0;
+		const int SCORE_LEFT_Y = 0;
+		const int TOTAL_SCORE = 0;
+		int i = 0;
+		//for (int i = 32; i < NUMBALLS; i++) {
+		for (int x_pos = 0; x_pos < 479; x_pos++) {
+			for (int y_pos = 0; y_pos < 636; y_pos++) {
+				if (backgroundArray[x_pos][y_pos] == 99) {
+					ball[i].SetXY(y_pos, x_pos);
+					ball[i].SetDelay(x_pos);
+					ball[i].SetIsAlive(true);
+					i++;
+					if (i == NUMBALLS) {
+						break;
+					}
+				}
+				else if (backgroundArray[x_pos][y_pos] == 88) {
+					ball[i].SetXY(y_pos, x_pos);
+					ball[i].SetDelay(x_pos);
+					ball[i].SetIsAlive(true);
+					i++;
+					if (i == NUMBALLS) {
+						break;
+					}
+				}
+			}
+		}
+
+		//}*/// 設定球的起始座標
+			//int x_pos = i % BALL_PER_ROW;
+			//int y_pos = i / BALL_PER_ROW;
+			//ball[i].SetXY(x_pos * BALL_GAP + BALL_XY_OFFSET, y_pos * BALL_GAP + BALL_XY_OFFSET);
+			//ball[i].SetDelay(x_pos);
+			//ball[i].SetIsAlive(true);
+		//}
+		pacman.Initialize();
+		blueball.Initialize();
+		background.SetTopLeft(BACKGROUND_X, 0);				// 設定背景的起始座標
+		help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
+		hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
+		hits_left.SetTopLeft(HITS_LEFT_X, HITS_LEFT_Y);		// 指定剩下撞擊數的座標
+		my_lives.SetInteger(3);								//指定最高生命數
+		//score.SetInteger(TOTAL_SCORE);						// 指定目前得分數
+		//score.SetTopLeft(SCORE_LEFT_X, SCORE_LEFT_Y);			// 指定目前得分數座標
+		//CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
+		CAudio::Instance()->Play(AUDIO_DEATH, false);
+		CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
+		//CAudio::Instance()->Play(AUDIO_NTUT, true);			// 撥放 MIDI
+		CAudio::Instance()->Play(AUDIO_PACMAN, true);
+	}
 	
 }

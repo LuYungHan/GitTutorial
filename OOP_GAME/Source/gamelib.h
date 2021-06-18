@@ -303,7 +303,7 @@ namespace game_framework {
 		virtual void OnRButtonUp(UINT nFlags, CPoint point) {}	// 處理滑鼠的動作
 	protected:
 		void GotoGameState(int state);							// 跳躍至指定的state
-		void GotoGameState_2(int state);						//跳躍至指定的state, for new states
+		void GotoGameState_2(int state);						// 跳躍至指定的state, for new states
 		void ShowInitProgress(int percent);						// 顯示初始化的進度
 		//
 		// virtual functions, 由繼承者提供implementation
