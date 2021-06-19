@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include <ddraw.h>
 #include "gamelib.h"
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
 //#include "Pacman.h"
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -16,6 +19,7 @@ namespace game_framework {
 		int  GetY1();					// ghost左上角 y 座標
 		int  GetX2();					// ghost右下角 x 座標
 		int  GetY2();					// ghost右下角 y 座標
+		int random_time;
 		void LoadBitmap();		// 載入圖形
 		void Initialize();				// 設定初始值
 		void TrackPacman(Pacman *pacman, int num);

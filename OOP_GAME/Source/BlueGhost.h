@@ -19,9 +19,11 @@ public:
 	bool HitEraser(Pacman *pacman);						// 是否碰到擦子
 	bool IsAlive();											// 是否活著
 	void LoadBitmap();		// 載入圖形
-	void OnMove(int backgroundArray[479][636], Pacman *pacman,int num);			// 移動
+	void OnMove(int backgroundArray[479][636], Pacman *pacman,int num);	
+	void OnMoveStar(int backgroundArray[479][636], Pacman *pacman, int num);// 移動
 	void SetIsAlive(bool alive);							// 設定是否活著
-	void OnShow();			// 將圖形貼到畫面
+	void OnShow(int backgroundArray[479][636]);			// 將圖形貼到畫面
+	void OnShowStar(int backgroundArray[479][636],  Pacman *pacman);
 	void Initialize();				// 設定初始值
 	void TrackPacman(Pacman *pacman, int num);
 	void SetMovingDown(bool flag);	// 設定是否正在往下移動
@@ -47,6 +49,7 @@ protected:
 	int initial_velocity;	// 初始速度
 	int velocity;			// 目前的速度(點/次)
 	CAnimation animation;	// 利用動畫作圖形
+	CAnimation animationStar;	// 利用動畫作圖形
 
 	bool isMovingDown;			// 是否正在往下移動
 	bool isMovingLeft;			// 是否正在往左移動

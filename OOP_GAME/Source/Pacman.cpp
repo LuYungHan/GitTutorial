@@ -82,7 +82,7 @@ namespace game_framework {
 	void Pacman::OnMove(int backgroundArray[479][636])
 
 	{
-		const int STEP_SIZE = 3;
+		const int STEP_SIZE = 4;
 		animation.OnMove();
 		animationRight.OnMove();
 		animationCenter.OnMove();

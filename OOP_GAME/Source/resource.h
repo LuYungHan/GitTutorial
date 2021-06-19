@@ -30,6 +30,7 @@
 #define IDB_BALLDOWN2					169
 #define IDB_BALLDOWN3					170
 #define IDB_BALLDOWN4					171
+#define IDB_STARGHOST					172 
 #define IDB_0                           138
 #define IDB_1                           139
 #define IDB_2                           140

@@ -54,7 +54,8 @@ namespace game_framework {
 	//	AUDIO_LAKE,				// 1
 	//	AUDIO_NTUT,				// 2
 		AUDIO_PACMAN,			// 3
-		AUDIO_DEATH
+		AUDIO_DEATH,			// 4
+		AUDIO_SIREN				// 5
 	};
 
 
