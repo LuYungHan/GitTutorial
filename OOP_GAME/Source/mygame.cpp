@@ -759,7 +759,7 @@ namespace game_framework {
 	//score.SetTopLeft(SCORE_LEFT_X, SCORE_LEFT_Y);			// 指定目前得分數座標
 	//CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
 	CAudio::Instance()->Play(AUDIO_DEATH, false);
-	CAudio::Instance()->Play(AUDIO_SIREN, false);
+	CAudio::Instance()->Play(AUDIO_SIREN, true);
 	CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
 	//CAudio::Instance()->Play(AUDIO_NTUT, true);			// 撥放 MIDI
 	CAudio::Instance()->Play(AUDIO_PACMAN, true);
@@ -794,7 +794,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	temp = hits_left.GetInteger();
 	blueball.TrackPacman(&pacman, temp);     //前五秒blue ghost上下移
 	bball.TrackPacman(&pacman, temp);		//前五秒red ghost左右移
-	//CAudio::Instance()->Play(AUDIO_SIREN,true);	// 開啟 MIDI
+	
 	//Sleep(3000);
 	/*for (; (hits_left.GetInteger() /25)==0;) {
 		blueball.OnMove(backgroundArray, &pacman);
@@ -807,6 +807,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	//
 	//for (i = 0, j = 0; (i < NUMBALLS) || (j < GHOSTBLUE); i++, j++) {
 	for (i = 0; i < NUMBALLS; i++) {
+		
 		if (ball[i].IsAlive() && ball[i].HitEraser(&pacman)) {
 			ball[i].SetIsAlive(false);
 			CAudio::Instance()->Play(AUDIO_DING);
