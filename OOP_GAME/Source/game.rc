@@ -62,7 +62,9 @@ END
 // Bitmap
 //
 
-IDB_BALL                BITMAP                  "..\\res\\ball.bmp"
+IDB_BALL                BITMAP                  "..\\res\ball.bmp"
+
+IDB_BIGBALL    			BITMAP					"..\\res\bigball.bmp"
 
 IDB_BALL1               BITMAP                  "..\\res\\ball1.bmp"
 
@@ -72,9 +74,35 @@ IDB_BALL3               BITMAP                  "..\\res\\ball3.bmp"
 
 IDB_BALL4               BITMAP                  "..\\res\\ball4.bmp"
 
+IDB_BALLLEFT1           BITMAP                  "..\\res\\ballLeft1 .bmp"
+
+IDB_BALLLEFT2           BITMAP                  "..\\res\\ballLeft2.bmp"
+
+IDB_BALLLEFT3           BITMAP                  "..\\res\\ballLeft3 .bmp"
+
+IDB_BALLLEFT4           BITMAP                  "..\\res\\ballLeft4 .bmp"
+
+IDB_BALLUP1				BITMAP                  "..\\res\\ballUp1 .bmp"
+
+IDB_BALLUP2				BITMAP                  "..\\res\\ballUp2.bmp"
+
+IDB_BALLUP3				BITMAP                  "..\\res\\ballUp3 .bmp"
+
+IDB_BALLUP4				BITMAP                  "..\\res\\ballUp4 .bmp"
+
+IDB_BALLDOWN1           BITMAP                  "..\\res\\ballDown1 .bmp"
+
+IDB_BALLDOWN2           BITMAP                  "..\\res\\ballDown2.bmp"
+
+IDB_BALLDOWN3           BITMAP                  "..\\res\\ballDown3 .bmp"
+
+IDB_BALLDOWN4           BITMAP                  "..\\res\\ballDown4.bmp"
+
 IDB_ERASER1             BITMAP                  "..\\res\\eraser1.bmp"
 
-IDB_BACKGROUND          BITMAP                  "..\\res\\ntutcsie.bmp"
+IDB_BACKGROUND          BITMAP                  "..\\Bitmaps\\level1.bmp"
+
+IDB_BACKGROUNDBEGIN     BITMAP      			"..\\res\\level1begin.bmp"
 
 IDB_CORNER              BITMAP                  "..\\res\\corner.bmp"
 

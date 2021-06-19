@@ -4,7 +4,7 @@
 #include <ddraw.h>
 #include "audio.h"
 #include "gamelib.h"
-#include "CEraser.h"
+#include "Pacman.h"
 #include "CBall.h"
 
 namespace game_framework {
@@ -18,11 +18,11 @@ namespace game_framework {
 		x = y = dx = dy = index = delay_counter = 0;
 	}
 
-	bool CBall::HitEraser(CEraser *eraser)
+	bool CBall::HitEraser(Pacman *pacman)
 	{
 		// 檢測擦子所構成的矩形是否碰到球
-		return HitRectangle(eraser->GetX1(), eraser->GetY1(),
-			eraser->GetX2(), eraser->GetY2());
+		return HitRectangle(pacman->GetX1(), pacman->GetY1(),
+			pacman->GetX2(), pacman->GetY2());
 	}
 
 	bool CBall::HitRectangle(int tx1, int ty1, int tx2, int ty2)
@@ -46,6 +46,7 @@ namespace game_framework {
 	{
 		bmp.LoadBitmap(IDB_BALL, RGB(0, 0, 0));			// 載入球的圖形
 		bmp_center.LoadBitmap(IDB_CENTER, RGB(0, 0, 0));	// 載入球圓心的圖形
+		bmp_big.LoadBitmap(IDB_BIGBALL, RGB(0, 0, 0));			// 載入大球的圖形
 	}
 
 	void CBall::OnMove()
@@ -59,8 +60,10 @@ namespace game_framework {
 			// 計算球向對於圓心的位移量dx, dy
 			//
 			const int STEPS = 18;
-			static const int DIFFX[] = { 35, 32, 26, 17, 6, -6, -17, -26, -32, -34, -32, -26, -17, -6, 6, 17, 26, 32, };
-			static const int DIFFY[] = { 0, 11, 22, 30, 34, 34, 30, 22, 11, 0, -11, -22, -30, -34, -34, -30, -22, -11, };
+		//	static const int DIFFX[] = { 35, 32, 26, 17, 6, -6, -17, -26, -32, -34, -32, -26, -17, -6, 6, 17, 26, 32, };
+		//	static const int DIFFY[] = { 0, 11, 22, 30, 34, 34, 30, 22, 11, 0, -11, -22, -30, -34, -34, -30, -22, -11, };
+			static const int DIFFX[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, };
+			static const int DIFFY[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, };
 			index++;
 			if (index >= STEPS)
 				index = 0;
@@ -91,6 +94,13 @@ namespace game_framework {
 			bmp.ShowBitmap();
 			bmp_center.SetTopLeft(x, y);
 			bmp_center.ShowBitmap();
+		}
+	}
+
+	void CBall::OnShowBig() {
+		if (is_alive) {
+			bmp_big.SetTopLeft(x + dx, y + dy);
+			bmp_big.ShowBitmap();
 		}
 	}
 }
