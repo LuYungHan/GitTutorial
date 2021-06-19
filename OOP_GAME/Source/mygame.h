@@ -129,6 +129,11 @@ namespace game_framework {
 	public:
 		CGameStateSecond(CGame *g);
 		~CGameStateSecond();
+<<<<<<< HEAD
+=======
+		void OnInit();
+		void OnBeginState();							// 設定每次重玩所需的變數
+>>>>>>> a3683c9791fd87a7d2b61e9ac55a628f17778c21
 	protected:
 	private:
 		const int		NUMBALLS;	// 球的總數
@@ -143,6 +148,10 @@ namespace game_framework {
 		CInteger		hits_left;	// 剩下的撞擊數
 		CInteger		score;		//總共的得分數
 		CInteger        hits_ghost;
+<<<<<<< HEAD
+=======
+		CInteger		my_lives;	//剩下的生命數
+>>>>>>> a3683c9791fd87a7d2b61e9ac55a628f17778c21
 		CBouncingBall   bball;		// 反覆彈跳的紅色鬼
 		BlueGhost       blueball;		// 反覆彈跳的藍色鬼
 	

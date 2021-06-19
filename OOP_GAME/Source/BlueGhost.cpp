@@ -149,11 +149,19 @@ void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman,int num)
 			SetTryingRight(false);
 			SetTryingUp(false);
 			if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1) {
+<<<<<<< HEAD
 				SetMovingDown(false);
 			}
 			else {
 				SetMovingDown(true);
 				SetTryingDown(false);
+=======
+				SetTryingDown(false);
+			}
+			else {
+				SetTryingDown(true);
+				SetMovingDown(false);
+>>>>>>> a3683c9791fd87a7d2b61e9ac55a628f17778c21
 				SetMovingLeft(false);
 				SetMovingRight(false);
 				SetMovingUp(false);
@@ -164,11 +172,19 @@ void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman,int num)
 			SetTryingDown(false);
 			SetTryingUp(false);
 			if (backgroundArray[y][x_right + STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
+<<<<<<< HEAD
 				SetMovingRight(false);
 			}
 			else {
 				SetMovingRight(true);
 				SetTryingRight(false);
+=======
+				SetTryingRight(false);
+			}
+			else {
+				SetTryingRight(true);
+				SetMovingRight(false);
+>>>>>>> a3683c9791fd87a7d2b61e9ac55a628f17778c21
 				SetMovingLeft(false);
 				SetMovingDown(false);
 				SetMovingUp(false);
@@ -179,11 +195,19 @@ void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman,int num)
 			SetTryingRight(false);
 			SetTryingUp(false);
 			if (backgroundArray[y][x - STEP_SIZE] == 1 || backgroundArray[y_bottom][x - STEP_SIZE] == 1) {
+<<<<<<< HEAD
 				SetMovingLeft(false);
 			}
 			else {
 				SetMovingLeft(true);
 				SetTryingLeft(false);
+=======
+				SetTryingLeft(false);
+			}
+			else {
+				SetTryingLeft(true);
+				SetMovingLeft(false);
+>>>>>>> a3683c9791fd87a7d2b61e9ac55a628f17778c21
 				SetMovingDown(false);
 				SetMovingRight(false);
 				SetMovingUp(false);
@@ -194,11 +218,19 @@ void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman,int num)
 			SetTryingRight(false);
 			SetTryingDown(false);
 			if (backgroundArray[y - STEP_SIZE][x] == 1 || backgroundArray[y - STEP_SIZE][x_right] == 1) {
+<<<<<<< HEAD
 				SetMovingUp(false);
 			}
 			else {
 				SetMovingUp(true);
 				SetTryingUp(false);
+=======
+				SetTryingUp(false);
+			}
+			else {
+				SetTryingUp(true);
+				SetMovingUp(false);
+>>>>>>> a3683c9791fd87a7d2b61e9ac55a628f17778c21
 				SetMovingLeft(false);
 				SetMovingRight(false);
 				SetMovingDown(false);
@@ -206,7 +238,11 @@ void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman,int num)
 		}
 
 		if ((pacman->GetX2() < x_right) && (pacman->GetY2() < y_bottom)) {
+<<<<<<< HEAD
 			SetTryingLeft(false);
+=======
+			//SetMovingLeft(false);
+>>>>>>> a3683c9791fd87a7d2b61e9ac55a628f17778c21
 			if (backgroundArray[y][x - STEP_SIZE] == 1 || backgroundArray[y_bottom][x - STEP_SIZE] == 1) {
 				x = x;
 			}
@@ -215,7 +251,11 @@ void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman,int num)
 			}
 		}
 		if ((pacman->GetX2() > x_right) && (pacman->GetY2() > y_bottom)) {
+<<<<<<< HEAD
 			SetTryingRight(false);
+=======
+			//SetMovingRight(false);
+>>>>>>> a3683c9791fd87a7d2b61e9ac55a628f17778c21
 			if (backgroundArray[y][x_right + STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
 				x = x;
 			}
@@ -224,7 +264,11 @@ void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman,int num)
 			}
 		}
 		if ((pacman->GetX2() < x_right) && (pacman->GetY2() < y_bottom)) {
+<<<<<<< HEAD
 			SetTryingUp(false);
+=======
+			//SetMovingUp(false);
+>>>>>>> a3683c9791fd87a7d2b61e9ac55a628f17778c21
 			if (backgroundArray[y - STEP_SIZE][x] == 1 || backgroundArray[y - STEP_SIZE][x_right] == 1) {
 				y = y;
 			}
@@ -233,7 +277,11 @@ void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman,int num)
 			}
 		}
 		if ((pacman->GetX2() > x_right) && (pacman->GetY2() > y_bottom)) {
+<<<<<<< HEAD
 			SetTryingDown(false);
+=======
+			//SetMovingDown(false);
+>>>>>>> a3683c9791fd87a7d2b61e9ac55a628f17778c21
 			if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1) {
 				y = y;
 			}

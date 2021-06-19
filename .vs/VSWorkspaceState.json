@@ -1,6 +1,16 @@
 {
   "ExpandedNodes": [
+<<<<<<< HEAD
     ""
   ],
+=======
+    "",
+    "\\OOP_GAME",
+    "\\OOP_GAME\\Bitmaps",
+    "\\OOP_GAME\\RES",
+    "\\OOP_GAME\\Source"
+  ],
+  "SelectedNode": "\\OOP_GAME\\Bitmaps\\level1.bmp",
+>>>>>>> a3683c9791fd87a7d2b61e9ac55a628f17778c21
   "PreviewInSolutionExplorer": false
 }

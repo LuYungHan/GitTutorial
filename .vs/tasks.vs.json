@@ -1,0 +1,15 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskName": "工作-pacman_music01",
+      "appliesTo": "OOP_GAME/Sounds/pacman_music01.mp3",
+      "type": "launch"
+    },
+    {
+      "taskName": "工作-ntut",
+      "appliesTo": "OOP_GAME/Sounds/ntut.mid",
+      "type": "launch"
+    }
+  ]
+}

@@ -303,6 +303,10 @@ namespace game_framework {
 		virtual void OnRButtonUp(UINT nFlags, CPoint point) {}	// 處理滑鼠的動作
 	protected:
 		void GotoGameState(int state);							// 跳躍至指定的state
+<<<<<<< HEAD
+=======
+		void GotoGameState_2(int state);						// 跳躍至指定的state, for new states
+>>>>>>> a3683c9791fd87a7d2b61e9ac55a628f17778c21
 		void ShowInitProgress(int percent);						// 顯示初始化的進度
 		//
 		// virtual functions, 由繼承者提供implementation
@@ -339,6 +343,10 @@ namespace game_framework {
 		void OnSetFocus();								// 處理Focus
 		void OnSuspend();								// 處理「待命」的動作
 		void SetGameState(int);
+<<<<<<< HEAD
+=======
+		void SetGameState_2(int);
+>>>>>>> a3683c9791fd87a7d2b61e9ac55a628f17778c21
 		static CGame *Instance();
 	private:
 		bool			running;			// 遊戲是否正在進行中(未被Pause)
