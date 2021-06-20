@@ -62,7 +62,6 @@ namespace game_framework {
 			SetTryingDown(true);
 		}
 	}
-
 	int CBouncingBall::GetX1()
 	{
 		return x;
@@ -110,6 +109,7 @@ namespace game_framework {
 		for (int i = 0; i < 4; i++)	// 載入動畫(由4張圖形構成)
 			animation.AddBitmap(filename[i], RGB(0, 0, 0));
 		//animation.AddBitmap(IDB_STARGHOST, RGB(255, 255, 255));
+		animationStar.AddBitmap(IDB_STARGHOST, RGB(0, 0, 0));
 	}
 
 
@@ -267,7 +267,10 @@ namespace game_framework {
 			}
 		}
 	}
+	void CBouncingBall::OnMoveStar(int backgroundArray[479][636], Pacman * pacman)
+	{
 
+	}
 	/*void CBouncingBall::Change_Dir(int backgroundArray[479][636],int change) {
 		const int STEP_SIZE = 2;
 		static int count = 0;
@@ -380,24 +383,35 @@ namespace game_framework {
 	{
 		is_alive = alive;
 	}
-	void CBouncingBall::OnShow()
+	void CBouncingBall::OnShow(int backgroundArray[479][636], Pacman *pacman)
 	{
-		animation.SetTopLeft(x, y);
-		animation.OnShow();
-		if (isMovingRight) {
-			SetTryingRight(false);
-		}
-		if (isMovingLeft) {
+		int x_right = pacman->GetX2();
+		int y_bottom = pacman->GetY2();
+		int x_left = pacman->GetX1();
+		int y_top = pacman->GetY1();
+		const int STEP_SIZE = 3;
+		if (is_alive && (!(backgroundArray[y_top + STEP_SIZE][x] == 8 || backgroundArray[y_top + STEP_SIZE][x_left] == 8))) {
+			animation.SetTopLeft(x, y);
+			//animationStar.SetTopLeft(x, y);
+			animation.OnShow();
+			//animationStar.OnShow();
+			//pacman eats ghost
+			/*if (backgroundArray[y_top + STEP_SIZE][x] == 8 || backgroundArray[y_top+ STEP_SIZE][x_left] == 8) {
+				animationStar.OnShow();
+			}*/
 
-			SetTryingLeft(false);
 		}
-		if (isMovingUp) {
-
-			SetTryingUp(false);
-		}
-		if (isMovingDown) {
-
-			SetTryingDown(false);
+	}
+	void CBouncingBall::OnShowStar(int backgroundArray[479][636], Pacman *pacman) {
+		int x_right = GetX2();
+		int y_bottom = GetY2();
+		int x_left = pacman->GetX1();
+		int y_top = pacman->GetY1();
+		const int STEP_SIZE = 4;
+		animationStar.SetTopLeft(x, y);
+		if ((is_alive) && (backgroundArray[y_top + STEP_SIZE][x] == 8 || backgroundArray[y_top + STEP_SIZE][x_left] == 8)) {
+			animationStar.OnShow();
+			
 		}
 	}
 

@@ -812,9 +812,11 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	// pacman hits bigball
 	if (pacman.HitBigball(backgroundArray)) {
 		blueball.OnMoveStar(backgroundArray, &pacman, temp);
+		bball.OnMoveStar(backgroundArray, &pacman);
 	}
 	else {
 		blueball.OnMove(backgroundArray, &pacman, temp);
+		bball.OnMove(backgroundArray, &pacman, temp);
 	}
 	
 	// blueghost and redghost collision
@@ -1027,7 +1029,8 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		ball[i].OnShow();
 
 		// 貼上第i號球
-		bball.OnShow();						// 貼上彈跳的球
+		bball.OnShow(backgroundArray, &pacman);						// 貼上彈跳的球
+		bball.OnShowStar(backgroundArray, &pacman);
 		pacman.OnShow();					// 貼上擦子
 		blueball.OnShow(backgroundArray, &pacman);
 		blueball.OnShowStar(backgroundArray, &pacman);
@@ -1305,7 +1308,8 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		ball[i].OnShow();
 
 		// 貼上第i號球
-		bball.OnShow();						// 貼上彈跳的球
+		bball.OnShow(backgroundArray,&pacman);						// 貼上彈跳的球
+		bball.OnShowStar(backgroundArray, &pacman);
 		pacman.OnShow();					// 貼上擦子
 		blueball.OnShow(backgroundArray,&pacman);
 		blueball.OnShowStar(backgroundArray, &pacman);
