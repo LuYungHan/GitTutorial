@@ -121,7 +121,7 @@ namespace game_framework {
 			}
 		}
 	}
-/*	int CBouncingBall::Random_Time(int is_wall)
+	/*	int CBouncingBall::Random_Time(int is_wall)
 	{
 		if (is_wall == 1) {
 			srand((unsigned int)time(NULL));
@@ -134,7 +134,7 @@ namespace game_framework {
 		std::cout << "hello world" << std::endl;
 		if (num >= 25) {
 
-			const int STEP_SIZE = 2;
+			const int STEP_SIZE = 3;
 			animation.OnMove();
 			static int count = 0;
 			int x_right = GetX2();
@@ -142,12 +142,13 @@ namespace game_framework {
 			int x_left = GetX1();
 			int y_top = GetY1();
 			srand((unsigned int)time(NULL));
-			
+
 			int random = rand() % 4;
-			std::cout << random <<" HERE"<< std::endl;
-			if (count%2 == 0) {
+			std::cout << random << " HERE" << std::endl;
+			/*if (count % 4 == 0) {
+				//Change_Dir(backgroundArray, random);
 				if (random == 1) { //down
-					//std::cout << random << std::endl;
+				//std::cout << random << std::endl;
 					if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1) {
 						//Random_Time(1);
 						SetMovingDown(false);
@@ -170,6 +171,7 @@ namespace game_framework {
 						//Random_Time(1);
 						SetMovingRight(false);
 						x = x;
+
 					}
 					else {
 						x += STEP_SIZE;
@@ -183,7 +185,7 @@ namespace game_framework {
 				}
 				else if (random == 3) { //left
 					//std::cout << random << std::endl;
-					if (backgroundArray[y][x - STEP_SIZE] == 1 || backgroundArray[y_bottom][x - STEP_SIZE] == 1) {
+					if (backgroundArray[y][x_left - STEP_SIZE] == 1 || backgroundArray[y_top][x_left - STEP_SIZE] == 1) {
 						//Random_Time(1);
 						SetMovingLeft(false);
 						x = x;
@@ -200,7 +202,7 @@ namespace game_framework {
 				}
 				else if (random == 0) { //up
 					//std::cout << random << std::endl;
-					if (backgroundArray[y - STEP_SIZE][x] == 1 || backgroundArray[y - STEP_SIZE][x_right] == 1) {
+					if (backgroundArray[y_top - STEP_SIZE][x] == 1 || backgroundArray[y_top - STEP_SIZE][x_right] == 1) {
 						//Random_Time(1);
 						SetMovingUp(false);
 						y = y;
@@ -217,220 +219,147 @@ namespace game_framework {
 					//y_bottom += STEP_SIZE;
 				}
 			}
-			else {
+			else if (count % 4 != 0) {*/
 				if ((pacman->GetX2() < x_right) || (pacman->GetX1() < x_left)) {
 					SetTryingLeft(false);
 					if (backgroundArray[y][x_left - STEP_SIZE] == 1 || backgroundArray[y_top][x_left - STEP_SIZE] == 1) {
 						x = x;
+						if (backgroundArray[y_top - STEP_SIZE][x] != 1 || backgroundArray[y_top - STEP_SIZE][x_right] != 1) {
+							y -= STEP_SIZE;
+						}
+						if (backgroundArray[y_bottom + STEP_SIZE][x] != 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] != 1) {
+							y += STEP_SIZE;
+						}
 					}
 					else {
 						x -= STEP_SIZE;
+						
 					}
 				}
 				if ((pacman->GetX2() > x_right) || (pacman->GetX1() > x_left)) {
 					SetTryingRight(false);
 					if (backgroundArray[y][x_right + STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
 						x = x;
+						if (backgroundArray[y_top - STEP_SIZE][x] != 1 || backgroundArray[y_top - STEP_SIZE][x_right] != 1) {
+							y -= STEP_SIZE;
+						}
+						if (backgroundArray[y_bottom + STEP_SIZE][x] != 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] != 1) {
+							y += STEP_SIZE;
+						}
+
 					}
 					else {
 						x += STEP_SIZE;
+				
 					}
 				}
 				if ((pacman->GetY2() < y_bottom) || (pacman->GetY2() < y_top)) {
 					SetTryingUp(false);
 					if (backgroundArray[y_top - STEP_SIZE][x] == 1 || backgroundArray[y_top - STEP_SIZE][x_right] == 1) {
 						y = y;
+						if (backgroundArray[y][x_right + STEP_SIZE] != 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] != 1) {
+							x += STEP_SIZE;
+						}
+						if (backgroundArray[y][x_left - STEP_SIZE] != 1 || backgroundArray[y_top][x_left - STEP_SIZE] != 1) {
+							x -= STEP_SIZE;
+						}
 					}
 					else {
 						y -= STEP_SIZE;
+						 
+						
 					}
 				}
 				if ((pacman->GetY2() > y_bottom) || (pacman->GetY2() > y_top)) {
 					SetTryingDown(false);
 					if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1) {
 						y = y;
+						if (backgroundArray[y][x_right + STEP_SIZE] != 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] != 1) {
+							x += STEP_SIZE;
+						}
+						if (backgroundArray[y][x_left - STEP_SIZE] != 1 || backgroundArray[y_top][x_left - STEP_SIZE] != 1) {
+							x -= STEP_SIZE;
+						}
 					}
 					else {
 						y += STEP_SIZE;
+						
 					}
 				}
-			}
-			count++;
-			/*if ((pacman->GetX2() < x_right)  || (pacman->GetX1() < x_left) ) {
-				SetTryingLeft(false);
-				if (backgroundArray[y][x_left - STEP_SIZE] == 1 || backgroundArray[y_top][x_left - STEP_SIZE] == 1) {
-					x = x;
-				}
-				else {
-					x -= STEP_SIZE;
-				}
-			}
-			if ((pacman->GetX2() > x_right)  || (pacman->GetX1() > x_left) ) {
-				SetTryingRight(false);
-				if (backgroundArray[y][x_right + STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
-					x = x;
-				}
-				else {
-					x += STEP_SIZE;
-				}
-			}
-			if ( (pacman->GetY2() < y_bottom) || (pacman->GetY2() < y_top)) {
-				SetTryingUp(false);
-				if (backgroundArray[y_top - STEP_SIZE][x] == 1 || backgroundArray[y_top - STEP_SIZE][x_right] == 1) {
-					y = y;
-				}
-				else {
-					y -= STEP_SIZE;
-				}
-			}
-			if ( (pacman->GetY2() > y_bottom) ||  (pacman->GetY2() > y_top)) {
-				SetTryingDown(false);
-				if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1) {
-					y = y;
-				}
-				else {
-					y += STEP_SIZE;
-				}
-			}*/
-			
-			/*if (pacman->GetX2() < x_right) {
-				x_right -= STEP_SIZE;
-			}else {
-				x_right += STEP_SIZE;
-			}
-			if (pacman->GetY2() < y_bottom) {
-				y_bottom -= STEP_SIZE;
-			}else {
-				y_bottom += STEP_SIZE;
-			}*/
-			//for (;(abs(pacman->GetX2() - x_right)) > 5;) {
-			/*if ((pacman->GetX2() > x_right) && (pacman->GetY2() < y_bottom) || (pacman->GetX1() > x_left) && (pacman->GetY2() < y_top)||((pacman->GetX1() == x_left) && (pacman->GetY2() < y_top))) {
-				//SetTryingLeft(false);
-				//SetTryingRight(false);
-				//SetTryingUp(false);
-				if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1) {
-					SetMovingDown(false);
-				}
-				else {
-					SetMovingDown(true);
-					SetTryingDown(false);
-					SetMovingLeft(false);
-					SetMovingRight(false);
-					SetMovingUp(false);
-				}
-			}
-			if ((pacman->GetX2() > x_right) && (pacman->GetY2() < y_bottom)||(pacman->GetX1() > x_left)&&(pacman->GetY2() < y_top)|| (pacman->GetX1() > x_left) && (pacman->GetY2() == y_top)) {
-				//SetTryingLeft(false);
-				//SetTryingDown(false);
-				//SetTryingUp(false);
-				if (backgroundArray[y][x_right + STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
-					SetMovingRight(false);
-				}
-				else {
-					SetMovingRight(true);
-					SetTryingRight(false);
-					SetMovingLeft(false);
-					SetMovingDown(false);
-					SetMovingUp(false);
-				}
-			}
-			if ((pacman->GetX2() < x_right) && (pacman->GetY2() < y_bottom) || (pacman->GetX1() < x_left) && (pacman->GetY2() < y_top)|| (pacman->GetX1() < x_left) && (pacman->GetY2() == y_top)) {
-				//SetTryingDown(false);
-				//SetTryingRight(false);
-				//SetTryingUp(false);
-				if (backgroundArray[y][x - STEP_SIZE] == 1 || backgroundArray[y_bottom][x - STEP_SIZE] == 1) {
-					SetMovingLeft(false);
-				}
-				else {
-					SetMovingLeft(true);
-					SetTryingLeft(false);
-					SetMovingDown(false);
-					SetMovingRight(false);
-					SetMovingUp(false);
-				}
-			}
-			if ((pacman->GetX2() < x_right) || (pacman->GetY2() < y_bottom) || (pacman->GetX1() < x_left) || (pacman->GetY2() < y_top)|| (pacman->GetX1() == x_left) || (pacman->GetY2() < y_top)) {
-				//SetTryingLeft(false);
-				//SetTryingRight(false);
-				//SetTryingDown(false);
-				if (backgroundArray[y - STEP_SIZE][x] == 1 || backgroundArray[y - STEP_SIZE][x_right] == 1) {
-					SetMovingUp(false);
-				}
-				else {
-					SetMovingUp(true);
-					SetTryingUp(false);
-					SetMovingLeft(false);
-					SetMovingRight(false);
-					SetMovingDown(false);
-				}
-			}
-
-			if ((pacman->GetX2() < x_right) && (pacman->GetY2() < y_bottom) || (pacman->GetX1() < x_left) && (pacman->GetY2() < y_top)) {
-				SetTryingLeft(false);
-				if (backgroundArray[y][x - STEP_SIZE] == 1 || backgroundArray[y_bottom][x - STEP_SIZE] == 1) {
-					x = x;
-				}
-				else {
-					x -= STEP_SIZE;
-				}
-			}
-			if ((pacman->GetX2() > x_right) && (pacman->GetY2() > y_bottom) || (pacman->GetX1() > x_left) && (pacman->GetY2() > y_top)) {
-				SetTryingRight(false);
-				if (backgroundArray[y][x_right + STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
-					x = x;
-				}
-				else {
-					x += STEP_SIZE;
-				}
-			}
-			if ((pacman->GetX2() < x_right) && (pacman->GetY2() < y_bottom) || (pacman->GetX1() < x_left) && (pacman->GetY2() < y_top)) {
-				SetTryingUp(false);
-				if (backgroundArray[y - STEP_SIZE][x] == 1 || backgroundArray[y - STEP_SIZE][x_right] == 1) {
-					y = y;
-				}
-				else {
-					y -= STEP_SIZE;
-				}
-			}
-			if ((pacman->GetX2() > x_right) && (pacman->GetY2() > y_bottom) || (pacman->GetX1() > x_left) && (pacman->GetY2() > y_top)) {
-				SetTryingDown(false);
-				if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1) {
-					y = y;
-				}
-				else {
-					y += STEP_SIZE;
-				}
-			}*/
-			
-		}
-		//Sleep(3000);
-	//}
-	/*if (rising) {			// 左右狀態
-		if (velocity > 0) {
-			y -= velocity/3;	// 當速度 > 0時，x軸左右(移動velocity個點，velocity的單位為 點/次)
-			velocity-=3;		// 受重力影響，下次的左速度降低
-		}
-		else {
-			rising = false; // 當速度 <= 0，上升終止，下次改為右移
-			velocity = 1;	// 下降的初速(velocity)為1
+			//}
+			count = count + 1;
 		}
 	}
-	else {				// 下降狀態
-		if (y < floor - 1) {  // 當y座標還沒碰到地板
-			y += velocity/3;	// y軸下降(移動velocity個點，velocity的單位為 點/次)
-			velocity+=3;		// 受重力影響，下次的下降速度增加
-		}
-		else {
-			y = floor - 1;  // 當y座標低於地板，更正為地板上
-			rising = true;	// 探底反彈，下次改為上升
-			velocity = initial_velocity; // 重設上升初始速度
-		}
 
+	/*void CBouncingBall::Change_Dir(int backgroundArray[479][636],int change) {
+		const int STEP_SIZE = 2;
+		static int count = 0;
+		int x_right = GetX2();
+		int y_bottom = GetY2();
+		int x = GetX1();
+		int y = GetY1();
+		int random;
+		if (change == 0)	//right
+		{
+			if (backgroundArray[y][x_right + STEP_SIZE] != 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] != 1) {
+				x += 1;
+				Change_Dir(backgroundArray, 0);
+			}
+			else if (backgroundArray[y][x_right + STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
+				srand((unsigned int)time(NULL));
+				random = rand() % 4;
+				while (random == 0) {
+					random = rand() % 4;
+				}
+				Change_Dir(backgroundArray, random);
+			}
+		}
+		if (change == 1)	//left
+		{
+			if (backgroundArray[y][x - STEP_SIZE] != 1 || backgroundArray[y_bottom][x - STEP_SIZE] != 1) {
+				x -= 1;
+				Change_Dir(backgroundArray, 0);
+			}
+			else if (backgroundArray[y][x - STEP_SIZE] == 1 || backgroundArray[y_bottom][x - STEP_SIZE] == 1) {
+				srand((unsigned int)time(NULL));
+				random = rand() % 4;
+				while(random == 1) {
+					random = rand() % 4;
+				}
+				Change_Dir(backgroundArray, random);
+			}
+		}
+		if (change == 2)	//up
+		{
+			if (backgroundArray[y - STEP_SIZE][x] != 1 || backgroundArray[y - STEP_SIZE][x_right] != 1) {
+				y -= 1;
+				Change_Dir(backgroundArray, 2);
+			}
+			else if (backgroundArray[y - STEP_SIZE][x] == 1 || backgroundArray[y - STEP_SIZE][x_right] == 1) {
+				srand((unsigned int)time(NULL));
+				random = rand() % 4;
+				while (random == 2) {
+					random = rand() % 4;
+				}
+				Change_Dir(backgroundArray, random);
+			}
+		}
+		if (change == 3)	//down
+		{
+			if (backgroundArray[y_bottom + STEP_SIZE][x] != 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] != 1) {
+				y += 1;
+				Change_Dir(backgroundArray, 3);
+			}
+			else if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1) {
+				srand((unsigned int)time(NULL));
+				random = rand() % 4;
+				while (random == 3) {
+					random = rand() % 4;
+				}
+				Change_Dir(backgroundArray, random);
+			}
+		}
 	}*/
-	//animation.OnMove();		// 執行一次animation.OnMove()，animation才會換圖
-	}
-
-
 	void CBouncingBall::SetTryingDown(bool flag)
 	{
 		tryingDown = flag;

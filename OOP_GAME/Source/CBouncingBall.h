@@ -23,7 +23,8 @@ namespace game_framework {
 		void LoadBitmap();		// 載入圖形
 		void Initialize();				// 設定初始值
 		void TrackPacman(Pacman *pacman, int num);
-	//	int Random_Time(int is_wall);
+		//int Random_num(int backgroundArray[479][636], int num);
+		void Change_Dir(int backgroundArray[479][636], int change);
 		void OnMove(int backgroundArray[479][636], Pacman *pacman,int num);			// 移動
 		void OnShow();			// 將圖形貼到畫面
 		bool is_alive;				// 是否活著

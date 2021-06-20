@@ -139,15 +139,31 @@ void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman,int num)
 	int x_left = GetX1();
 	int y_top = GetY1();
 	if (num >= 25 && (backgroundArray[y_top][x_left] != 8)) {
-		
-		srand((unsigned int)time(NULL));
+		/*if (26<=num && num<=30) {
+			if (backgroundArray[y][x_right + STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
+				//Random_Time(1);
+				SetMovingRight(false);
+				x = x;
+			}
+			else {
+				x += STEP_SIZE;
+				SetMovingRight(true);
+				SetTryingRight(false);
+				SetMovingLeft(false);
+				SetMovingDown(false);
+				SetMovingUp(false);
+			}
+			//x_right += STEP_SIZE;
 
+		}*/
+		srand((unsigned int)time(NULL));
+		static int count = 0;
 		int random = rand() % 4;
 		std::cout << random << " HERE" << std::endl;
-		if ((backgroundArray[y_bottom + STEP_SIZE][x] != 1 && backgroundArray[y_bottom + STEP_SIZE][x_right] != 1)
+		/*if ((backgroundArray[y_bottom + STEP_SIZE][x] != 1 && backgroundArray[y_bottom + STEP_SIZE][x_right] != 1)
 			|| (backgroundArray[y][x_right + STEP_SIZE] != 1 && backgroundArray[y_bottom][x_right + STEP_SIZE] != 1)
 			|| (backgroundArray[y][x - STEP_SIZE] != 1 && backgroundArray[y_bottom][x - STEP_SIZE] == 1)
-			|| (backgroundArray[y - STEP_SIZE][x] != 1 && backgroundArray[y - STEP_SIZE][x_right] != 1)) {
+			|| (backgroundArray[y - STEP_SIZE][x] != 1 && backgroundArray[y - STEP_SIZE][x_right] != 1)&&count%2 == 0) {
 
 
 			if (random == 1) { //down
@@ -166,6 +182,21 @@ void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman,int num)
 					SetMovingUp(false);
 				}
 				//x_right -= STEP_SIZE;
+				if (backgroundArray[y - STEP_SIZE][x] == 1 || backgroundArray[y - STEP_SIZE][x_right] == 1) {
+					//Random_Time(1);
+					SetMovingUp(false);
+					y = y;
+
+				}
+				else {
+					y -= STEP_SIZE;
+					SetMovingUp(true);
+					SetTryingUp(false);
+					SetMovingLeft(false);
+					SetMovingRight(false);
+					SetMovingDown(false);
+				}
+				//y_bottom += STEP_SIZE;
 
 			}
 			else if (random == 2) { //right
@@ -221,6 +252,48 @@ void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman,int num)
 				//y_bottom += STEP_SIZE;
 			}
 		}
+		else if ((backgroundArray[y_bottom + STEP_SIZE][x] != 1 && backgroundArray[y_bottom + STEP_SIZE][x_right] != 1)
+			|| (backgroundArray[y][x_right + STEP_SIZE] != 1 && backgroundArray[y_bottom][x_right + STEP_SIZE] != 1)
+			|| (backgroundArray[y][x - STEP_SIZE] != 1 && backgroundArray[y_bottom][x - STEP_SIZE] == 1)
+			|| (backgroundArray[y - STEP_SIZE][x] != 1 && backgroundArray[y - STEP_SIZE][x_right] != 1) && count % 2 == 1)
+		{*/
+			if ((pacman->GetX2() < x_right) || (pacman->GetX1() < x_left)) {
+				SetTryingLeft(false);
+				if (backgroundArray[y][x_left - STEP_SIZE] == 1 || backgroundArray[y_top][x_left - STEP_SIZE] == 1) {
+					x = x;
+				}
+				else {
+					x -= STEP_SIZE;
+				}
+			}
+			if ((pacman->GetX2() > x_right) || (pacman->GetX1() > x_left)) {
+				SetTryingRight(false);
+				if (backgroundArray[y][x_right + STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
+					x = x;
+				}
+				else {
+					x += STEP_SIZE;
+				}
+			}
+			if ((pacman->GetY2() < y_bottom) || (pacman->GetY2() < y_top)) {
+				SetTryingUp(false);
+				if (backgroundArray[y_top - STEP_SIZE][x] == 1 || backgroundArray[y_top - STEP_SIZE][x_right] == 1) {
+					y = y;
+				}
+				else {
+					y -= STEP_SIZE;
+				}
+			}
+			if ((pacman->GetY2() > y_bottom) || (pacman->GetY2() > y_top)) {
+				SetTryingDown(false);
+				if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1) {
+					y = y;
+				}
+				else {
+					y += STEP_SIZE;
+				}
+			}
+		//}
 		/*if ((pacman->GetX2() < x_right) || (pacman->GetX1() < x_left)) {
 			SetTryingLeft(false);
 			if (backgroundArray[y][x_left - STEP_SIZE] == 1 || backgroundArray[y_top][x_left - STEP_SIZE] == 1) {
