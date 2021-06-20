@@ -476,18 +476,114 @@ void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman,int num)
 	//animation.OnMove();		// 執行一次animation.OnMove()，animation才會換圖
 }
 void BlueGhost::OnMoveStar(int backgroundArray[479][636], Pacman *pacman, int num) {
-	const int STEP_SIZE = 3;
-	//animation.OnMove();
-	//animationStar.OnMove();
-	int x_right = GetX2();
-	int y_bottom = GetY2();
-	int x_left = pacman -> GetX1();
-	int y_top = pacman-> GetY1();
-	if ((num >= 25) && ( backgroundArray[y_top][x_left] == 8) ) {
-		
+		const int STEP_SIZE = 3;
+		//animation.OnMove();
+		//animationStar.OnMove();
+		int x_right = GetX2();
+		int y_bottom = GetY2();
+		int x_left = pacman->GetX1();
+		int y_top = pacman->GetY1();
+		srand((unsigned int)time(NULL));
+		int random = rand() % 4;
+		if ((num >= 25) && (backgroundArray[y_top][x_left] == 8)) {
+			if (random == 1) { //down
+					//std::cout << random << std::endl;
+				if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1) {
+					//Random_Time(1);
+					SetMovingDown(false);
+					y = y;
+					if (backgroundArray[y][x_right + STEP_SIZE] != 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] != 1 || backgroundArray[y_top - STEP_SIZE][x] == 5 || backgroundArray[y_top - STEP_SIZE][x_right] == 5) {
+						x += STEP_SIZE;
+					}
+					if (backgroundArray[y][x_left - STEP_SIZE] != 1 || backgroundArray[y_top][x_left - STEP_SIZE] != 1) {
+						x -= STEP_SIZE;
+					}
+				}
+				else {
+					y += STEP_SIZE;
+					SetMovingDown(true);
+					SetTryingDown(false);
+					SetMovingLeft(false);
+					SetMovingRight(false);
+					SetMovingUp(false);
+				}
+				//x_right -= STEP_SIZE;
+
+			}
+			else if (random == 2) { //right
+				//std::cout << random << std::endl;
+				if (backgroundArray[y][x_right + STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
+					//Random_Time(1);
+					SetMovingRight(false);
+					x = x;
+					if (backgroundArray[y_top - STEP_SIZE][x] != 1 || backgroundArray[y_top - STEP_SIZE][x_right] != 1) {
+						y -= STEP_SIZE;
+					}
+					if (backgroundArray[y_bottom + STEP_SIZE][x] != 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] != 1) {
+						y += STEP_SIZE;
+					}
+
+				}
+				else {
+					x += STEP_SIZE;
+					SetMovingRight(true);
+					SetTryingRight(false);
+					SetMovingLeft(false);
+					SetMovingDown(false);
+					SetMovingUp(false);
+				}
+				//x_right += STEP_SIZE;
+			}
+			else if (random == 3) { //left
+				//std::cout << random << std::endl;
+				if (backgroundArray[y][x_left - STEP_SIZE] == 1 || backgroundArray[y_top][x_left - STEP_SIZE] == 1) {
+					//Random_Time(1);
+					SetMovingLeft(false);
+					x = x;
+					if (backgroundArray[y_top - STEP_SIZE][x] != 1 || backgroundArray[y_top - STEP_SIZE][x_right] != 1) {
+						y -= STEP_SIZE;
+					}
+					if (backgroundArray[y_bottom + STEP_SIZE][x] != 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] != 1) {
+						y += STEP_SIZE;
+					}
+				}
+				else {
+					x -= STEP_SIZE;
+					SetMovingLeft(true);
+					SetTryingLeft(false);
+					SetMovingDown(false);
+					SetMovingRight(false);
+					SetMovingUp(false);
+				}
+				//y_bottom -= STEP_SIZE;
+			}
+			else if (random == 0) { //up
+				//std::cout << random << std::endl;
+				if (backgroundArray[y_top - STEP_SIZE][x] == 1 || backgroundArray[y_top - STEP_SIZE][x_right] == 1) {
+					//Random_Time(1);
+					SetMovingUp(false);
+					y = y;
+					if (backgroundArray[y][x_right + STEP_SIZE] != 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] != 1 || backgroundArray[y_top - STEP_SIZE][x] == 5 || backgroundArray[y_top - STEP_SIZE][x_right] == 5) {
+						x += STEP_SIZE;
+					}
+					if (backgroundArray[y][x_left - STEP_SIZE] != 1 || backgroundArray[y_top][x_left - STEP_SIZE] != 1) {
+						x -= STEP_SIZE;
+					}
+
+				}
+				else {
+					y -= STEP_SIZE;
+					SetMovingUp(true);
+					SetTryingUp(false);
+					SetMovingLeft(false);
+					SetMovingRight(false);
+					SetMovingDown(false);
+				}
+				//y_bottom += STEP_SIZE;
+			}
 			animationStar.OnMove();
 
-	}
+		}
 }
 
 
@@ -535,17 +631,16 @@ void BlueGhost::SetIsAlive(bool alive)
 	is_alive = alive;
 }
 
-void BlueGhost::OnShow(int backgroundArray[479][636])
+void BlueGhost::OnShow(int backgroundArray[479][636], Pacman *pacman)
 {	
-	int x_right = GetX2();
-	int y_bottom = GetY2();
-	int x_left = GetX1();
-	int y_top = GetY1();
+	int x_right = pacman->GetX2();
+	int y_bottom = pacman->GetY2();
+	int x_left =pacman-> GetX1();
+	int y_top = pacman->GetY1();
 	const int STEP_SIZE = 3;
-	if (is_alive) {
-
+	if (is_alive &&(!(backgroundArray[y_top + STEP_SIZE][x] == 8 || backgroundArray[y_top + STEP_SIZE][x_left] == 8))) {
 		animation.SetTopLeft(x, y);
-		animationStar.SetTopLeft(x, y);
+		//animationStar.SetTopLeft(x, y);
 		animation.OnShow();
 		//animationStar.OnShow();
 		//pacman eats ghost
@@ -568,6 +663,10 @@ void BlueGhost::OnShowStar(int backgroundArray[479][636],Pacman *pacman) {
 	animationStar.SetTopLeft(x, y);
 	if ((is_alive)&&(backgroundArray[y_top + STEP_SIZE][x] == 8 || backgroundArray[y_top + STEP_SIZE][x_left] == 8)) {
 		animationStar.OnShow();
+		if (counter == 0) {
+			animation.OnShow();
+		}
+			
 	}
 }
 

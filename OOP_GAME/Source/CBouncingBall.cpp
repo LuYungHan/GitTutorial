@@ -145,7 +145,7 @@ namespace game_framework {
 
 			int random = rand() % 4;
 			std::cout << random << " HERE" << std::endl;
-			/*if (count % 4 == 0) {
+			if (count % 2 == 0) {
 				//Change_Dir(backgroundArray, random);
 				if (random == 1) { //down
 				//std::cout << random << std::endl;
@@ -153,6 +153,12 @@ namespace game_framework {
 						//Random_Time(1);
 						SetMovingDown(false);
 						y = y;
+						/*if (backgroundArray[y][x_right + STEP_SIZE] != 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] != 1 || backgroundArray[y_top - STEP_SIZE][x] == 5 || backgroundArray[y_top - STEP_SIZE][x_right] == 5) {
+							x += STEP_SIZE;
+						}
+						if (backgroundArray[y][x_left - STEP_SIZE] != 1 || backgroundArray[y_top][x_left - STEP_SIZE] != 1) {
+							x -= STEP_SIZE;
+						}*/
 					}
 					else {
 						y += STEP_SIZE;
@@ -171,6 +177,12 @@ namespace game_framework {
 						//Random_Time(1);
 						SetMovingRight(false);
 						x = x;
+						/*if (backgroundArray[y_top - STEP_SIZE][x] != 1 || backgroundArray[y_top - STEP_SIZE][x_right] != 1) {
+							y -= STEP_SIZE;
+						}
+						if (backgroundArray[y_bottom + STEP_SIZE][x] != 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] != 1) {
+							y += STEP_SIZE;
+						}*/
 
 					}
 					else {
@@ -189,6 +201,12 @@ namespace game_framework {
 						//Random_Time(1);
 						SetMovingLeft(false);
 						x = x;
+						/*if (backgroundArray[y_top - STEP_SIZE][x] != 1 || backgroundArray[y_top - STEP_SIZE][x_right] != 1) {
+							y -= STEP_SIZE;
+						}
+						if (backgroundArray[y_bottom + STEP_SIZE][x] != 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] != 1) {
+							y += STEP_SIZE;
+						}*/
 					}
 					else {
 						x -= STEP_SIZE;
@@ -206,6 +224,12 @@ namespace game_framework {
 						//Random_Time(1);
 						SetMovingUp(false);
 						y = y;
+						/*if (backgroundArray[y][x_right + STEP_SIZE] != 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] != 1 || backgroundArray[y_top - STEP_SIZE][x] == 5 || backgroundArray[y_top - STEP_SIZE][x_right] == 5) {
+							x += STEP_SIZE;
+						}
+						if (backgroundArray[y][x_left - STEP_SIZE] != 1 || backgroundArray[y_top][x_left - STEP_SIZE] != 1) {
+							x -= STEP_SIZE;
+						}*/
 
 					}
 					else {
@@ -219,7 +243,7 @@ namespace game_framework {
 					//y_bottom += STEP_SIZE;
 				}
 			}
-			else if (count % 4 != 0) {*/
+			else if (count % 4 != 0) {
 				if ((pacman->GetX2() < x_right) || (pacman->GetX1() < x_left)) {
 					SetTryingLeft(false);
 					if (backgroundArray[y][x_left - STEP_SIZE] == 1 || backgroundArray[y_top][x_left - STEP_SIZE] == 1) {
@@ -257,7 +281,7 @@ namespace game_framework {
 					SetTryingUp(false);
 					if (backgroundArray[y_top - STEP_SIZE][x] == 1 || backgroundArray[y_top - STEP_SIZE][x_right] == 1) {
 						y = y;
-						if (backgroundArray[y][x_right + STEP_SIZE] != 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] != 1) {
+						if (backgroundArray[y][x_right + STEP_SIZE] != 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] != 1 || backgroundArray[y_top - STEP_SIZE][x] == 5 || backgroundArray[y_top - STEP_SIZE][x_right] == 5) {
 							x += STEP_SIZE;
 						}
 						if (backgroundArray[y][x_left - STEP_SIZE] != 1 || backgroundArray[y_top][x_left - STEP_SIZE] != 1) {
@@ -272,7 +296,7 @@ namespace game_framework {
 				}
 				if ((pacman->GetY2() > y_bottom) || (pacman->GetY2() > y_top)) {
 					SetTryingDown(false);
-					if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1) {
+					if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1 || backgroundArray[y_bottom + STEP_SIZE][x] == 5 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 5) {
 						y = y;
 						if (backgroundArray[y][x_right + STEP_SIZE] != 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] != 1) {
 							x += STEP_SIZE;
@@ -286,7 +310,7 @@ namespace game_framework {
 						
 					}
 				}
-			//}
+			}
 			count = count + 1;
 		}
 	}
@@ -407,6 +431,21 @@ namespace game_framework {
 	{
 		animation.SetTopLeft(x, y);
 		animation.OnShow();
+		if (isMovingRight) {
+			SetTryingRight(false);
+		}
+		if (isMovingLeft) {
+
+			SetTryingLeft(false);
+		}
+		if (isMovingUp) {
+
+			SetTryingUp(false);
+		}
+		if (isMovingDown) {
+
+			SetTryingDown(false);
+		}
 	}
 
 

@@ -78,6 +78,20 @@ namespace game_framework {
 			animationCenter.AddBitmap(IDB_BALL3, RGB(255, 255, 255));	//center
 	}
 
+	bool Pacman::HitBigball(int backgroundArray[479][636])
+	{
+		int x = GetX1();
+		int y = GetY1();
+		int xx = GetX2();
+		int yy = GetY2();
+		// 檢測擦子所構成的矩形是否碰到球
+		if (backgroundArray[y][x] == 8 || backgroundArray[yy][xx] == 8) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
+	}
 
 	void Pacman::OnMove(int backgroundArray[479][636])
 

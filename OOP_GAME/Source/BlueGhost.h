@@ -22,7 +22,7 @@ public:
 	void OnMove(int backgroundArray[479][636], Pacman *pacman,int num);	
 	void OnMoveStar(int backgroundArray[479][636], Pacman *pacman, int num);// 移動
 	void SetIsAlive(bool alive);							// 設定是否活著
-	void OnShow(int backgroundArray[479][636]);			// 將圖形貼到畫面
+	void OnShow(int backgroundArray[479][636],  Pacman *pacman);			// 將圖形貼到畫面
 	void OnShowStar(int backgroundArray[479][636],  Pacman *pacman);
 	void Initialize();				// 設定初始值
 	void TrackPacman(Pacman *pacman, int num);
@@ -64,6 +64,6 @@ protected:
 private:
 	
 	
-
+	int counter = 30 * 20;
 	bool HitRectangle(int tx1, int ty1, int tx2, int ty2);	// 是否碰到參數範圍的矩形
 };

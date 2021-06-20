@@ -24,7 +24,7 @@ namespace game_framework {
 		void SetMovingRight(bool flag); // 設定是否正在往右移動
 		void SetMovingUp(bool flag);	// 設定是否正在往上移動
 		void SetXY(int nx, int ny);		// 設定擦子左上角座標
-
+		bool HitBigball(int backgroundArray[479][636]);
 		void SetTryingDown(bool flag);	// 設定嘗試往下移動
 		void SetTryingLeft(bool flag);	// 設定嘗試往左移動
 		void SetTryingRight(bool flag);	// 設定嘗試往右移動
