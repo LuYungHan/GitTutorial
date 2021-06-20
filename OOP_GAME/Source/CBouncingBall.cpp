@@ -43,7 +43,26 @@ namespace game_framework {
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
 		tryingDown = tryingLeft = tryingRight = tryingUp = false;
 
+		/* 隨機初始化鬼在開始遊戲時的走向 */
+		int init_random = rand() % 4;
+
+		if (init_random == 0) {
+			SetTryingLeft(true);
+		}
+
+		else if (init_random == 1) {
+			SetTryingRight(true);
+		}
+
+		else if (init_random == 2) {
+			SetTryingUp(true);
+		}
+
+		else {
+			SetTryingDown(true);
+		}
 	}
+
 	int CBouncingBall::GetX1()
 	{
 		return x;
@@ -131,187 +150,121 @@ namespace game_framework {
 	}*/
 	void CBouncingBall::OnMove(int backgroundArray[479][636], Pacman *pacman, int num)
 	{
-		std::cout << "hello world" << std::endl;
 		if (num >= 25) {
 
-			const int STEP_SIZE = 3;
+			const int STEP_SIZE = 2;
 			animation.OnMove();
-			static int count = 0;
+			std::cout << "hello world" << std::endl;
 			int x_right = GetX2();
 			int y_bottom = GetY2();
 			int x_left = GetX1();
 			int y_top = GetY1();
-			srand((unsigned int)time(NULL));
 
-			int random = rand() % 4;
-			std::cout << random << " HERE" << std::endl;
-			if (count % 2 == 0) {
-				//Change_Dir(backgroundArray, random);
-				if (random == 1) { //down
-				//std::cout << random << std::endl;
-					if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1) {
-						//Random_Time(1);
-						SetMovingDown(false);
-						y = y;
-						/*if (backgroundArray[y][x_right + STEP_SIZE] != 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] != 1 || backgroundArray[y_top - STEP_SIZE][x] == 5 || backgroundArray[y_top - STEP_SIZE][x_right] == 5) {
-							x += STEP_SIZE;
-						}
-						if (backgroundArray[y][x_left - STEP_SIZE] != 1 || backgroundArray[y_top][x_left - STEP_SIZE] != 1) {
-							x -= STEP_SIZE;
-						}*/
+			/* 鬼隨機移動的邏輯處理 (目前僅撞牆才會改向) */
+			TRACE("%d %d\n", isMovingLeft, tryingLeft);
+			if (isMovingLeft || tryingLeft) {
+				SetTryingLeft(false);
+				if (backgroundArray[y_top][x_left - STEP_SIZE] == 1) {
+					int random = rand() % 3;
+
+					if (random == 0) {
+						SetTryingRight(true);
 					}
+
+					else if (random == 1) {
+						SetTryingUp(true);
+					}
+
 					else {
-						y += STEP_SIZE;
-						SetMovingDown(true);
-						SetTryingDown(false);
-						SetMovingLeft(false);
-						SetMovingRight(false);
-						SetMovingUp(false);
+						SetTryingDown(true);
 					}
-					//x_right -= STEP_SIZE;
 
+					SetMovingLeft(false);
 				}
-				else if (random == 2) { //right
-					//std::cout << random << std::endl;
-					if (backgroundArray[y][x_right + STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
-						//Random_Time(1);
-						SetMovingRight(false);
-						x = x;
-						/*if (backgroundArray[y_top - STEP_SIZE][x] != 1 || backgroundArray[y_top - STEP_SIZE][x_right] != 1) {
-							y -= STEP_SIZE;
-						}
-						if (backgroundArray[y_bottom + STEP_SIZE][x] != 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] != 1) {
-							y += STEP_SIZE;
-						}*/
 
-					}
-					else {
-						x += STEP_SIZE;
-						SetMovingRight(true);
-						SetTryingRight(false);
-						SetMovingLeft(false);
-						SetMovingDown(false);
-						SetMovingUp(false);
-					}
-					//x_right += STEP_SIZE;
-				}
-				else if (random == 3) { //left
-					//std::cout << random << std::endl;
-					if (backgroundArray[y][x_left - STEP_SIZE] == 1 || backgroundArray[y_top][x_left - STEP_SIZE] == 1) {
-						//Random_Time(1);
-						SetMovingLeft(false);
-						x = x;
-						/*if (backgroundArray[y_top - STEP_SIZE][x] != 1 || backgroundArray[y_top - STEP_SIZE][x_right] != 1) {
-							y -= STEP_SIZE;
-						}
-						if (backgroundArray[y_bottom + STEP_SIZE][x] != 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] != 1) {
-							y += STEP_SIZE;
-						}*/
-					}
-					else {
-						x -= STEP_SIZE;
-						SetMovingLeft(true);
-						SetTryingLeft(false);
-						SetMovingDown(false);
-						SetMovingRight(false);
-						SetMovingUp(false);
-					}
-					//y_bottom -= STEP_SIZE;
-				}
-				else if (random == 0) { //up
-					//std::cout << random << std::endl;
-					if (backgroundArray[y_top - STEP_SIZE][x] == 1 || backgroundArray[y_top - STEP_SIZE][x_right] == 1) {
-						//Random_Time(1);
-						SetMovingUp(false);
-						y = y;
-						/*if (backgroundArray[y][x_right + STEP_SIZE] != 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] != 1 || backgroundArray[y_top - STEP_SIZE][x] == 5 || backgroundArray[y_top - STEP_SIZE][x_right] == 5) {
-							x += STEP_SIZE;
-						}
-						if (backgroundArray[y][x_left - STEP_SIZE] != 1 || backgroundArray[y_top][x_left - STEP_SIZE] != 1) {
-							x -= STEP_SIZE;
-						}*/
-
-					}
-					else {
-						y -= STEP_SIZE;
-						SetMovingUp(true);
-						SetTryingUp(false);
-						SetMovingLeft(false);
-						SetMovingRight(false);
-						SetMovingDown(false);
-					}
-					//y_bottom += STEP_SIZE;
+				else {
+					x -= STEP_SIZE;
+					SetMovingLeft(true);
 				}
 			}
-			else if (count % 4 != 0) {
-				if ((pacman->GetX2() < x_right) || (pacman->GetX1() < x_left)) {
-					SetTryingLeft(false);
-					if (backgroundArray[y][x_left - STEP_SIZE] == 1 || backgroundArray[y_top][x_left - STEP_SIZE] == 1) {
-						x = x;
-						if (backgroundArray[y_top - STEP_SIZE][x] != 1 || backgroundArray[y_top - STEP_SIZE][x_right] != 1) {
-							y -= STEP_SIZE;
-						}
-						if (backgroundArray[y_bottom + STEP_SIZE][x] != 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] != 1) {
-							y += STEP_SIZE;
-						}
-					}
-					else {
-						x -= STEP_SIZE;
-						
-					}
-				}
-				if ((pacman->GetX2() > x_right) || (pacman->GetX1() > x_left)) {
-					SetTryingRight(false);
-					if (backgroundArray[y][x_right + STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
-						x = x;
-						if (backgroundArray[y_top - STEP_SIZE][x] != 1 || backgroundArray[y_top - STEP_SIZE][x_right] != 1) {
-							y -= STEP_SIZE;
-						}
-						if (backgroundArray[y_bottom + STEP_SIZE][x] != 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] != 1) {
-							y += STEP_SIZE;
-						}
 
+			else if (isMovingRight || tryingRight) {
+				SetTryingRight(false);
+				if (backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
+					int random = rand() % 3;
+
+					if (random == 0) {
+						SetTryingLeft(true);
 					}
+
+					else if (random == 1) {
+						SetTryingUp(true);
+					}
+
 					else {
-						x += STEP_SIZE;
-				
+						SetTryingDown(true);
 					}
+
+					SetMovingRight(false);
 				}
-				if ((pacman->GetY2() < y_bottom) || (pacman->GetY2() < y_top)) {
-					SetTryingUp(false);
-					if (backgroundArray[y_top - STEP_SIZE][x] == 1 || backgroundArray[y_top - STEP_SIZE][x_right] == 1) {
-						y = y;
-						if (backgroundArray[y][x_right + STEP_SIZE] != 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] != 1 || backgroundArray[y_top - STEP_SIZE][x] == 5 || backgroundArray[y_top - STEP_SIZE][x_right] == 5) {
-							x += STEP_SIZE;
-						}
-						if (backgroundArray[y][x_left - STEP_SIZE] != 1 || backgroundArray[y_top][x_left - STEP_SIZE] != 1) {
-							x -= STEP_SIZE;
-						}
-					}
-					else {
-						y -= STEP_SIZE;
-						 
-						
-					}
-				}
-				if ((pacman->GetY2() > y_bottom) || (pacman->GetY2() > y_top)) {
-					SetTryingDown(false);
-					if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1 || backgroundArray[y_bottom + STEP_SIZE][x] == 5 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 5) {
-						y = y;
-						if (backgroundArray[y][x_right + STEP_SIZE] != 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] != 1) {
-							x += STEP_SIZE;
-						}
-						if (backgroundArray[y][x_left - STEP_SIZE] != 1 || backgroundArray[y_top][x_left - STEP_SIZE] != 1) {
-							x -= STEP_SIZE;
-						}
-					}
-					else {
-						y += STEP_SIZE;
-						
-					}
+
+				else {
+					x += STEP_SIZE;
+					SetMovingRight(true);
 				}
 			}
-			count = count + 1;
+
+			else if (isMovingUp || tryingUp) {
+				SetTryingUp(false);
+				if (backgroundArray[y_top - STEP_SIZE][x_left] == 1) {
+					int random = rand() % 3;
+
+					if (random == 0) {
+						SetTryingLeft(true);
+					}
+
+					else if (random == 1) {
+						SetTryingRight(true);
+					}
+
+					else {
+						SetTryingDown(true);
+					}
+
+					SetMovingUp(false);
+				}
+
+				else {
+					y -= STEP_SIZE;
+					SetMovingUp(true);
+				}
+			}
+
+			else if (isMovingDown || tryingDown) {
+				SetTryingDown(false);
+				if (backgroundArray[y_bottom + STEP_SIZE][x_right] == 1) {
+					int random = rand() % 3;
+
+					if (random == 0) {
+						SetTryingLeft(true);
+					}
+
+					else if (random == 1) {
+						SetTryingRight(true);
+					}
+
+					else {
+						SetTryingUp(true);
+					}
+
+					SetMovingDown(false);
+				}
+
+				else {
+					y += STEP_SIZE;
+					SetMovingDown(true);
+				}
+			}
 		}
 	}
 
