@@ -6,6 +6,9 @@
 #include "gamelib.h"
 #include "Pacman.h"
 #include "BlueGhost.h"
+#include <iostream>
+#include <time.h>
+#include <random>
 
 using namespace game_framework;
 
@@ -137,76 +140,88 @@ void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman,int num)
 	int y_top = GetY1();
 	if (num >= 25 && (backgroundArray[y_top][x_left] != 8)) {
 		
-		//srand(time(0));
+		srand((unsigned int)time(NULL));
 
-		/* 指定亂數範圍 */
+		int random = rand() % 4;
+		std::cout << random << " HERE" << std::endl;
+		if ((backgroundArray[y_bottom + STEP_SIZE][x] != 1 && backgroundArray[y_bottom + STEP_SIZE][x_right] != 1)
+			|| (backgroundArray[y][x_right + STEP_SIZE] != 1 && backgroundArray[y_bottom][x_right + STEP_SIZE] != 1)
+			|| (backgroundArray[y][x - STEP_SIZE] != 1 && backgroundArray[y_bottom][x - STEP_SIZE] == 1)
+			|| (backgroundArray[y - STEP_SIZE][x] != 1 && backgroundArray[y - STEP_SIZE][x_right] != 1)) {
 
-		/* 產生 [min , max] 的整數亂數 */
-		//int random = rand() % 4;
 
+			if (random == 1) { //down
+				//std::cout << random << std::endl;
+				if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1) {
+					//Random_Time(1);
+					SetMovingDown(false);
+					y = y;
+				}
+				else {
+					y += STEP_SIZE;
+					SetMovingDown(true);
+					SetTryingDown(false);
+					SetMovingLeft(false);
+					SetMovingRight(false);
+					SetMovingUp(false);
+				}
+				//x_right -= STEP_SIZE;
 
-
-		 //int random = rand() ;
-		/*std::cout << random << std::endl;
-		if (random  == 1) { //down
-			std::cout << random << std::endl;
-			if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1) {
-				SetMovingDown(false);
 			}
-			else {
-				SetMovingDown(true);
-				SetTryingDown(false);
-				SetMovingLeft(false);
-				SetMovingRight(false);
-				SetMovingUp(false);
+			else if (random == 2) { //right
+				//std::cout << random << std::endl;
+				if (backgroundArray[y][x_right + STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
+					//Random_Time(1);
+					SetMovingRight(false);
+					x = x;
+				}
+				else {
+					x += STEP_SIZE;
+					SetMovingRight(true);
+					SetTryingRight(false);
+					SetMovingLeft(false);
+					SetMovingDown(false);
+					SetMovingUp(false);
+				}
+				//x_right += STEP_SIZE;
 			}
-			//x_right -= STEP_SIZE;
+			else if (random == 3) { //left
+				//std::cout << random << std::endl;
+				if (backgroundArray[y][x - STEP_SIZE] == 1 || backgroundArray[y_bottom][x - STEP_SIZE] == 1) {
+					//Random_Time(1);
+					SetMovingLeft(false);
+					x = x;
+				}
+				else {
+					x -= STEP_SIZE;
+					SetMovingLeft(true);
+					SetTryingLeft(false);
+					SetMovingDown(false);
+					SetMovingRight(false);
+					SetMovingUp(false);
+				}
+				//y_bottom -= STEP_SIZE;
+			}
+			else if (random == 0) { //up
+				//std::cout << random << std::endl;
+				if (backgroundArray[y - STEP_SIZE][x] == 1 || backgroundArray[y - STEP_SIZE][x_right] == 1) {
+					//Random_Time(1);
+					SetMovingUp(false);
+					y = y;
 
+				}
+				else {
+					y -= STEP_SIZE;
+					SetMovingUp(true);
+					SetTryingUp(false);
+					SetMovingLeft(false);
+					SetMovingRight(false);
+					SetMovingDown(false);
+				}
+				//y_bottom += STEP_SIZE;
+			}
 		}
-		else if (random == 2) { //right
-			std::cout << random << std::endl;
-			if (backgroundArray[y][x_right + STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
-				SetMovingRight(false);
-			}
-			else {
-				SetMovingRight(true);
-				SetTryingRight(false);
-				SetMovingLeft(false);
-				SetMovingDown(false);
-				SetMovingUp(false);
-			}
-			//x_right += STEP_SIZE;
-		}
-		else if (random == 3) { //left
-			std::cout << random << std::endl;
-			if (backgroundArray[y][x - STEP_SIZE] == 1 || backgroundArray[y_bottom][x - STEP_SIZE] == 1) {
-				SetMovingLeft(false);
-			}
-			else {
-				SetMovingLeft(true);
-				SetTryingLeft(false);
-				SetMovingDown(false);
-				SetMovingRight(false);
-				SetMovingUp(false);
-			}
-			//y_bottom -= STEP_SIZE;
-		}
-		else if (random == 0) { //up
-			std::cout << random << std::endl;
-			if (backgroundArray[y - STEP_SIZE][x] == 1 || backgroundArray[y - STEP_SIZE][x_right] == 1) {
-				SetMovingUp(false);
-				SetMovingRight(true);
-			}
-			else {
-				SetMovingUp(true);
-				SetTryingUp(false);
-				SetMovingLeft(false);
-				SetMovingRight(false);
-				SetMovingDown(false);
-			}
-			//y_bottom += STEP_SIZE;
-		}*/
-		if ((pacman->GetX2() < x_right) || (pacman->GetX1() < x_left)) {
+		/*if ((pacman->GetX2() < x_right) || (pacman->GetX1() < x_left)) {
 			SetTryingLeft(false);
 			if (backgroundArray[y][x_left - STEP_SIZE] == 1 || backgroundArray[y_top][x_left - STEP_SIZE] == 1) {
 				x = x;
@@ -241,7 +256,7 @@ void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman,int num)
 			else {
 				y += STEP_SIZE;
 			}
-		}
+		}*/
 		/*if ((backgroundArray[y_top + STEP_SIZE][x] == 8 || backgroundArray[y_top +STEP_SIZE][x_left] == 8)) {
 			animationStar.OnMove();
 		}*/
