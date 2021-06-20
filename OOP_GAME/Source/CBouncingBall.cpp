@@ -152,7 +152,7 @@ namespace game_framework {
 	{
 		if (num >= 25) {
 
-			const int STEP_SIZE = 2;
+			const int STEP_SIZE = 1;
 			animation.OnMove();
 			std::cout << "hello world" << std::endl;
 			int x_right = GetX2();

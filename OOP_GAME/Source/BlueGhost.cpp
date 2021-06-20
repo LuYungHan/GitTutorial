@@ -67,6 +67,24 @@ void BlueGhost::Initialize() {
 	xx = yy = dxx = dyy = 0;
 	isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
 	tryingDown = tryingLeft = tryingRight = tryingUp = false;
+	/* 隨機初始化鬼在開始遊戲時的走向 */
+	int init_random = rand() % 4;
+
+	if (init_random == 0) {
+		SetTryingLeft(true);
+	}
+
+	else if (init_random == 1) {
+		SetTryingRight(true);
+	}
+
+	else if (init_random == 2) {
+		SetTryingUp(true);
+	}
+
+	else {
+		SetTryingDown(true);
+	}
 	
 }
 
@@ -144,115 +162,124 @@ void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman,int num)
 
 		int random = rand() % 4;
 		std::cout << random << " HERE" << std::endl;
-		if (count % 2 == 0) {
-			//Change_Dir(backgroundArray, random);
-			if (random == 1) { //down
-			//std::cout << random << std::endl;
-				if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1) {
-					//Random_Time(1);
-					SetMovingDown(false);
-					y = y;
-					/*if (backgroundArray[y][x_right + STEP_SIZE] != 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] != 1 || backgroundArray[y_top - STEP_SIZE][x] == 5 || backgroundArray[y_top - STEP_SIZE][x_right] == 5) {
-						x += STEP_SIZE;
-					}
-					if (backgroundArray[y][x_left - STEP_SIZE] != 1 || backgroundArray[y_top][x_left - STEP_SIZE] != 1) {
-						x -= STEP_SIZE;
-					}*/
-				}
-				else {
-					y += STEP_SIZE;
-					SetMovingDown(true);
-					SetTryingDown(false);
-					SetMovingLeft(false);
-					SetMovingRight(false);
-					SetMovingUp(false);
-				}
-				//x_right -= STEP_SIZE;
+		if (count % 2 != 0) {
+			/* 鬼隨機移動的邏輯處理 (目前僅撞牆才會改向) */
+			TRACE("%d %d\n", isMovingLeft, tryingLeft);
+			if (isMovingLeft || tryingLeft) {
+				SetTryingLeft(false);
+				if (backgroundArray[y_top][x_left - STEP_SIZE] == 1) {
+					int random = rand() % 3;
 
-			}
-			else if (random == 2) { //right
-				//std::cout << random << std::endl;
-				if (backgroundArray[y][x_right + STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
-					//Random_Time(1);
-					SetMovingRight(false);
-					x = x;
-					/*if (backgroundArray[y_top - STEP_SIZE][x] != 1 || backgroundArray[y_top - STEP_SIZE][x_right] != 1) {
-						y -= STEP_SIZE;
+					if (random == 0) {
+						SetTryingRight(true);
 					}
-					if (backgroundArray[y_bottom + STEP_SIZE][x] != 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] != 1) {
-						y += STEP_SIZE;
-					}*/
 
-				}
-				else {
-					x += STEP_SIZE;
-					SetMovingRight(true);
-					SetTryingRight(false);
-					SetMovingLeft(false);
-					SetMovingDown(false);
-					SetMovingUp(false);
-				}
-				//x_right += STEP_SIZE;
-			}
-			else if (random == 3) { //left
-				//std::cout << random << std::endl;
-				if (backgroundArray[y][x_left - STEP_SIZE] == 1 || backgroundArray[y_top][x_left - STEP_SIZE] == 1) {
-					//Random_Time(1);
-					SetMovingLeft(false);
-					x = x;
-					/*if (backgroundArray[y_top - STEP_SIZE][x] != 1 || backgroundArray[y_top - STEP_SIZE][x_right] != 1) {
-						y -= STEP_SIZE;
+					else if (random == 1) {
+						SetTryingUp(true);
 					}
-					if (backgroundArray[y_bottom + STEP_SIZE][x] != 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] != 1) {
-						y += STEP_SIZE;
-					}*/
+
+					else {
+						SetTryingDown(true);
+					}
+
+					SetMovingLeft(false);
 				}
+
 				else {
 					x -= STEP_SIZE;
 					SetMovingLeft(true);
-					SetTryingLeft(false);
-					SetMovingDown(false);
-					SetMovingRight(false);
-					SetMovingUp(false);
 				}
-				//y_bottom -= STEP_SIZE;
 			}
-			else if (random == 0) { //up
-				//std::cout << random << std::endl;
-				if (backgroundArray[y_top - STEP_SIZE][x] == 1 || backgroundArray[y_top - STEP_SIZE][x_right] == 1) {
-					//Random_Time(1);
-					SetMovingUp(false);
-					y = y;
-					/*if (backgroundArray[y][x_right + STEP_SIZE] != 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] != 1 || backgroundArray[y_top - STEP_SIZE][x] == 5 || backgroundArray[y_top - STEP_SIZE][x_right] == 5) {
-						x += STEP_SIZE;
-					}
-					if (backgroundArray[y][x_left - STEP_SIZE] != 1 || backgroundArray[y_top][x_left - STEP_SIZE] != 1) {
-						x -= STEP_SIZE;
-					}*/
 
+			else if (isMovingRight || tryingRight) {
+				SetTryingRight(false);
+				if (backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
+					int random = rand() % 3;
+
+					if (random == 0) {
+						SetTryingLeft(true);
+					}
+
+					else if (random == 1) {
+						SetTryingUp(true);
+					}
+
+					else {
+						SetTryingDown(true);
+					}
+
+					SetMovingRight(false);
 				}
+
+				else {
+					x += STEP_SIZE;
+					SetMovingRight(true);
+				}
+			}
+
+			else if (isMovingUp || tryingUp) {
+				SetTryingUp(false);
+				if (backgroundArray[y_top - STEP_SIZE][x_left] == 1) {
+					int random = rand() % 3;
+
+					if (random == 0) {
+						SetTryingLeft(true);
+					}
+
+					else if (random == 1) {
+						SetTryingRight(true);
+					}
+
+					else {
+						SetTryingDown(true);
+					}
+
+					SetMovingUp(false);
+				}
+
 				else {
 					y -= STEP_SIZE;
 					SetMovingUp(true);
-					SetTryingUp(false);
-					SetMovingLeft(false);
-					SetMovingRight(false);
+				}
+			}
+
+			else if (isMovingDown || tryingDown) {
+				SetTryingDown(false);
+				if (backgroundArray[y_bottom + STEP_SIZE][x_right] == 1) {
+					int random = rand() % 3;
+
+					if (random == 0) {
+						SetTryingLeft(true);
+					}
+
+					else if (random == 1) {
+						SetTryingRight(true);
+					}
+
+					else {
+						SetTryingUp(true);
+					}
+
 					SetMovingDown(false);
 				}
-				//y_bottom += STEP_SIZE;
+
+				else {
+					y += STEP_SIZE;
+					SetMovingDown(true);
+				}
 			}
 		}
-		else if (count % 2 != 0) {
+		else if (count % 2 == 0) {
 			if ((pacman->GetX2() < x_right) || (pacman->GetX1() < x_left)) {
 				SetTryingLeft(false);
 				if (backgroundArray[y][x_left - STEP_SIZE] == 1 || backgroundArray[y_top][x_left - STEP_SIZE] == 1) {
 					x = x;
-					if (backgroundArray[y_top - STEP_SIZE][x] != 1 || backgroundArray[y_top - STEP_SIZE][x_right] != 1) {
+					/*if (backgroundArray[y_top - STEP_SIZE][x] != 1 || backgroundArray[y_top - STEP_SIZE][x_right] != 1) {
 						y -= STEP_SIZE;
 					}
 					if (backgroundArray[y_bottom + STEP_SIZE][x] != 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] != 1) {
 						y += STEP_SIZE;
-					}
+					}*/
 				}
 				else {
 					x -= STEP_SIZE;
@@ -263,12 +290,12 @@ void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman,int num)
 				SetTryingRight(false);
 				if (backgroundArray[y][x_right + STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
 					x = x;
-					if (backgroundArray[y_top - STEP_SIZE][x] != 1 || backgroundArray[y_top - STEP_SIZE][x_right] != 1) {
+					/*if (backgroundArray[y_top - STEP_SIZE][x] != 1 || backgroundArray[y_top - STEP_SIZE][x_right] != 1) {
 						y -= STEP_SIZE;
 					}
 					if (backgroundArray[y_bottom + STEP_SIZE][x] != 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] != 1) {
 						y += STEP_SIZE;
-					}
+					}*/
 
 				}
 				else {
@@ -280,12 +307,12 @@ void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman,int num)
 				SetTryingUp(false);
 				if (backgroundArray[y_top - STEP_SIZE][x] == 1 || backgroundArray[y_top - STEP_SIZE][x_right] == 1) {
 					y = y;
-					if (backgroundArray[y][x_right + STEP_SIZE] != 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] != 1 || backgroundArray[y_top - STEP_SIZE][x] == 5 || backgroundArray[y_top - STEP_SIZE][x_right] == 5) {
+					/*if (backgroundArray[y][x_right + STEP_SIZE] != 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] != 1 || backgroundArray[y_top - STEP_SIZE][x] == 5 || backgroundArray[y_top - STEP_SIZE][x_right] == 5) {
 						x += STEP_SIZE;
 					}
 					if (backgroundArray[y][x_left - STEP_SIZE] != 1 || backgroundArray[y_top][x_left - STEP_SIZE] != 1) {
 						x -= STEP_SIZE;
-					}
+					}*/
 				}
 				else {
 					y -= STEP_SIZE;
@@ -297,12 +324,12 @@ void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman,int num)
 				SetTryingDown(false);
 				if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1 || backgroundArray[y_bottom + STEP_SIZE][x] == 5 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 5) {
 					y = y;
-					if (backgroundArray[y][x_right + STEP_SIZE] != 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] != 1) {
+					/*if (backgroundArray[y][x_right + STEP_SIZE] != 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] != 1) {
 						x += STEP_SIZE;
 					}
 					if (backgroundArray[y][x_left - STEP_SIZE] != 1 || backgroundArray[y_top][x_left - STEP_SIZE] != 1) {
 						x -= STEP_SIZE;
-					}
+					}*/
 				}
 				else {
 					y += STEP_SIZE;
