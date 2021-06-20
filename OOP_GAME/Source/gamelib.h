@@ -206,6 +206,7 @@ namespace game_framework {
 		void  ShowBitmap();					// 將圖貼到螢幕
 		void  ShowBitmap(double factor);	// 將圖貼到螢幕 factor < 1時縮小，>1時放大。注意：需要VGA卡硬體的支援，否則會很慢
 		void  ShowBitmap(CMovingBitmap &);	// 將圖貼到到另一張圖上 (僅供特殊用途)
+		void  UnloadBitmap();
 		int   Top();						// 取得圖形的左上角的 y 座標
 		int   Width();						// 取得圖形的寬度
 	protected:
@@ -260,6 +261,7 @@ namespace game_framework {
 		void SetInteger(int);		// 設定整數值
 		void SetTopLeft(int, int);	// 將動畫的左上角座標移至 (x,y)
 		void ShowBitmap();			// 將動畫貼到螢幕
+		void UnloadBitmap();		// 卸載0..9及負號之圖形
 	private:
 		const int NUMDIGITS;			// 共顯示NUMDIGITS個位數
 		static CMovingBitmap digit[11]; // 儲存0..9及負號之圖形(bitmap)

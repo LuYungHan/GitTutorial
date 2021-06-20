@@ -271,6 +271,20 @@ void CInteger::LoadBitmap()
 	}
 }
 
+void CInteger::UnloadBitmap()
+{
+	//
+	//因為要避免重複LoadBitmap，所以要delete掉
+	//
+	if (isBmpLoaded) {
+		for (int i = 0; i < 11; i++) {
+			digit[i].UnloadBitmap();
+			digit[i].LoadBitmap(0);
+		}
+		isBmpLoaded = false;
+	}
+}
+
 void CInteger::SetInteger(int i)
 {
 	n = i;
@@ -313,6 +327,11 @@ void CInteger::ShowBitmap()
 /////////////////////////////////////////////////////////////////////////////
 
 CMovingBitmap::CMovingBitmap()
+{
+	isBitmapLoaded = false;
+}
+
+void CMovingBitmap::UnloadBitmap()
 {
 	isBitmapLoaded = false;
 }

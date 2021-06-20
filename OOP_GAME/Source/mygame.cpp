@@ -816,11 +816,13 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			//
 			// 若剩餘碰撞次數為0，則跳到Game Over狀態
 			//
-			if (hits_left.GetInteger() >= 1220) {
+			if (hits_left.GetInteger() >= 220) {
 				//	CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
 				//	CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
 				CAudio::Instance()->Stop(AUDIO_PACMAN);	// 停止 MIDI
+				
 				GotoGameState_2(GAME_STATE_SECOND);
+				//hits_left.UnloadBitmap();
 				//GotoGameState(GAME_STATE_RUN);
 			}
 
@@ -1120,9 +1122,8 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	/////////////////////////////////////////////////////////////////////////////
 	
 	CGameStateSecond::CGameStateSecond(CGame *g)
-		: CGameStateRun(g), NUMBALLS(10000), GHOSTBLUE(2)
+		: CGameState(g), NUMBALLS(10000), GHOSTBLUE(2)
 	{
-		std::cout << "into second" << endl;
 		ball = new CBall[NUMBALLS];
 		blueball_arr = new BlueGhost[GHOSTBLUE];
 	}
@@ -1135,11 +1136,6 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	
 	void CGameStateSecond::OnInit()  								// 遊戲的初值及圖形設定
 	{
-		//
-		// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
-		//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
-		//
-		//ShowInitProgress(33);	// 接個前一個狀態的進度，此處進度視為33%
 		//
 		// 開始載入資料
 		//
@@ -1155,25 +1151,17 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		pacman.LoadBitmap();
 		blueball.LoadBitmap();
 		background.LoadBitmap(IDB_BACKGROUND);					// 載入背景的圖形
-		//
-		// 完成部分Loading動作，提高進度
-		//
-		//ShowInitProgress(50);
-		//Sleep(300); // 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
-		//
-		// 繼續載入其他資料
-		//
 		help.LoadBitmap(IDB_HELP, RGB(255, 255, 255));				// 載入說明的圖形
 		corner.LoadBitmap(IDB_CORNER);							// 載入角落圖形
 		corner.ShowBitmap(background);							// 將corner貼到background
 		bball.LoadBitmap();										// 載入圖形
 
-		hits_left.LoadBitmap();
-		CAudio::Instance()->Load(AUDIO_DING, "sounds\\pacman_chomp.wav");	// 載入編號0的聲音ding.wav
+		//hits_left.LoadBitmap();
+		//CAudio::Instance()->Load(AUDIO_DING, "sounds\\pacman_chomp.wav");	// 載入編號0的聲音ding.wav
 		//CAudio::Instance()->Load(AUDIO_LAKE,  "sounds\\lake.mp3");	// 載入編號1的聲音lake.mp3
 		//CAudio::Instance()->Load(AUDIO_NTUT,  "sounds\\ntut.mid");	// 載入編號2的聲音ntut.mid
-		CAudio::Instance()->Load(AUDIO_PACMAN, "sounds\\pacman_music01.mp3");	// 載入編號4的聲音pacman_music01.mp3
-		CAudio::Instance()->Load(AUDIO_DEATH, "sounds\\pacman_death.wav");	// 載入編號4的聲音pacman_music01.mp3
+		//CAudio::Instance()->Load(AUDIO_PACMAN, "sounds\\pacman_music01.mp3");	// 載入編號4的聲音pacman_music01.mp3
+		//CAudio::Instance()->Load(AUDIO_DEATH, "sounds\\pacman_death.wav");	// 載入編號4的聲音pacman_music01.mp3
 
 		//
 		// 此OnInit動作會接到CGameStaterOver::OnInit()，所以進度還沒到100%
@@ -1219,14 +1207,6 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 				}
 			}
 		}
-
-		//}*/// 設定球的起始座標
-			//int x_pos = i % BALL_PER_ROW;
-			//int y_pos = i / BALL_PER_ROW;
-			//ball[i].SetXY(x_pos * BALL_GAP + BALL_XY_OFFSET, y_pos * BALL_GAP + BALL_XY_OFFSET);
-			//ball[i].SetDelay(x_pos);
-			//ball[i].SetIsAlive(true);
-		//}
 		pacman.Initialize();
 		blueball.Initialize();
 		background.SetTopLeft(BACKGROUND_X, 0);				// 設定背景的起始座標
@@ -1243,4 +1223,175 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		CAudio::Instance()->Play(AUDIO_PACMAN, true);
 	}
 	
+	void CGameStateSecond::OnMove()							// 移動遊戲元素
+	{
+		//
+		// 移動球
+		//
+		int i;
+		pacman.OnMove(backgroundArray);
+		//
+		//移動鬼
+		//
+		int temp = 0;
+		temp = hits_left.GetInteger();
+		blueball.TrackPacman(&pacman, temp);     //前五秒blue ghost上下移
+		bball.TrackPacman(&pacman, temp);		//前五秒red ghost左右移
+
+		blueball.OnMove(backgroundArray, &pacman, temp);
+		blueball.OnMoveStar(backgroundArray, &pacman, temp);
+		//
+		// 判斷擦子是否碰到球
+		//
+		//for (i = 0, j = 0; (i < NUMBALLS) || (j < GHOSTBLUE); i++, j++) {
+		for (i = 0; i < NUMBALLS; i++) {
+
+			if (ball[i].IsAlive() && ball[i].HitEraser(&pacman)) {
+				ball[i].SetIsAlive(false);
+				CAudio::Instance()->Play(AUDIO_DING);
+				CAudio::Instance()->Stop(AUDIO_PACMAN);	// 停止 MIDI
+				hits_left.Add(5);
+				//
+				// 若剩餘碰撞次數為0，則跳到Game Over狀態
+				//
+				if (hits_left.GetInteger() >= 20) {
+					//	CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
+					//	CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
+					CAudio::Instance()->Stop(AUDIO_PACMAN);	// 停止 MIDI
+					GotoGameState_2(GAME_STATE_SECOND);
+					//GotoGameState(GAME_STATE_RUN);
+				}
+			}
+		}
+
+		// blueghost and redghost collision
+		if ((blueball.HitEraser(&pacman)) || (bball.HitEraser(&pacman))) {
+			my_lives.Add(-1);
+			pacman.Initialize();
+			blueball.Initialize();
+			bball.Initialize();
+			pacman.OnShow();
+			CAudio::Instance()->Play(AUDIO_DEATH);
+
+		}
+		//three times of player's lives
+		if (my_lives.GetInteger() == 0) {
+			GotoGameState(GAME_STATE_OVER);
+		}
+
+		bball.OnMove(backgroundArray, &pacman, temp);
+	}
+
+	
+	void CGameStateSecond::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+	{
+		const char KEY_LEFT = 0x25; // keyboard左箭頭
+		const char KEY_UP = 0x26; // keyboard上箭頭
+		const char KEY_RIGHT = 0x27; // keyboard右箭頭
+		const char KEY_DOWN = 0x28; // keyboard下箭頭
+		int y = pacman.GetY1();
+		int x = pacman.GetX1();
+		if (nChar == KEY_LEFT) {
+			pacman.SetTryingDown(false);
+			pacman.SetTryingLeft(true);
+			pacman.SetTryingRight(false);
+			pacman.SetTryingUp(false);
+		}
+		if (nChar == KEY_RIGHT) {
+			pacman.SetTryingDown(false);
+			pacman.SetTryingLeft(false);
+			pacman.SetTryingRight(true);
+			pacman.SetTryingUp(false);
+		}
+		if (nChar == KEY_UP) {
+			pacman.SetTryingDown(false);
+			pacman.SetTryingLeft(false);
+			pacman.SetTryingRight(false);
+			pacman.SetTryingUp(true);
+		}
+		if (nChar == KEY_DOWN) {
+			pacman.SetTryingDown(true);
+			pacman.SetTryingLeft(false);
+			pacman.SetTryingRight(false);
+			pacman.SetTryingUp(false);
+		}
+	}
+
+	void CGameStateSecond::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
+	{
+		
+	}
+
+	void CGameStateSecond::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
+	{
+		pacman.SetMovingLeft(true);
+	}
+
+	void CGameStateSecond::OnLButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
+	{
+		pacman.SetMovingLeft(false);
+	}
+
+	void CGameStateSecond::OnMouseMove(UINT nFlags, CPoint point)	// 處理滑鼠的動作
+	{
+		// 沒事。如果需要處理滑鼠移動的話，寫code在這裡
+	}
+
+	void CGameStateSecond::OnRButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
+	{
+		pacman.SetMovingRight(true);
+	}
+
+	void CGameStateSecond::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
+	{
+		pacman.SetMovingRight(false);
+	}
+
+	void CGameStateSecond::OnShow()
+	{
+		//
+		//  注意：Show裡面千萬不要移動任何物件的座標，移動座標的工作應由Move做才對，
+		//        否則當視窗重新繪圖時(OnDraw)，物件就會移動，看起來會很怪。換個術語
+		//        說，Move負責MVC中的Model，Show負責View，而View不應更動Model。
+		//
+		//
+		//  貼上背景圖、撞擊數、球、擦子、彈跳的球
+		//
+		background.ShowBitmap();			// 貼上背景圖
+		help.ShowBitmap();					// 貼上說明圖
+		//hits_left.ShowBitmap();
+		int i = 0;
+		for (int j = 0; j < 479; j++) {
+			for (int k = 0; k < 636; k++) {
+				if (backgroundArray[j][k] == 99) {
+					ball[i].OnShow();
+					i++;
+					if (i == NUMBALLS)
+						break;
+				}
+				else if (backgroundArray[j][k] == 88) {
+					ball[i].OnShowBig();
+					i++;
+					if (i == NUMBALLS)
+						break;
+				}
+
+			}
+		}
+		ball[i].OnShow();
+
+		// 貼上第i號球
+		bball.OnShow();						// 貼上彈跳的球
+		pacman.OnShow();					// 貼上擦子
+		blueball.OnShow(backgroundArray);
+		blueball.OnShowStar(backgroundArray, &pacman);
+		blueball.SetIsAlive(true);
+		//
+		//  貼上左上及右下角落的圖
+		//
+		corner.SetTopLeft(0, 0);
+		corner.ShowBitmap();
+		corner.SetTopLeft(SIZE_X - corner.Width(), SIZE_Y - corner.Height());
+		corner.ShowBitmap();
+	}
 }
