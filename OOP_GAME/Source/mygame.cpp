@@ -801,7 +801,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			//
 			// 若剩餘碰撞次數為0，則跳到Game Over狀態
 			//
-			if (hits_left.GetInteger() >= 1220) {
+			if (hits_left.GetInteger() >= 220) {
 				CAudio::Instance()->Stop(AUDIO_PACMAN);	// 停止 MIDI
 				GotoGameState_2(GAME_STATE_SECOND);
 				//hits_left.UnloadBitmap();
@@ -892,6 +892,10 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		const char KEY_UP = 0x26; // keyboard上箭頭
 		const char KEY_RIGHT = 0x27; // keyboard右箭頭
 		const char KEY_DOWN = 0x28; // keyboard下箭頭
+		const char TAB = 0x9;
+		if (nChar == TAB) {
+			GotoGameState_2(GAME_STATE_SECOND);						// 切換至GAME_STATE_RUN
+		}
 		//if (nChar == KEY_LEFT)
 		//	eraser.SetMovingLeft(true);
 		//if (nChar == KEY_RIGHT)
@@ -954,6 +958,9 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
+		const char KEY_SPACE = ' ';
+		if (nChar == KEY_SPACE)
+			GotoGameState(GAME_STATE_RUN);						// 切換至GAME_STATE_RUN
 		/*
 		const char KEY_LEFT  = 0x25; // keyboard左箭頭
 		const char KEY_UP    = 0x26; // keyboard上箭頭
@@ -1106,7 +1113,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		const int HITS_LEFT_X = 150;
 		const int HITS_LEFT_Y = 15;
 		const int BACKGROUND_X = 0;
-		const int ANIMATION_SPEED = 15;
+		const int ANIMATION_SPEED = 30;
 		const int SCORE_LEFT_X = 0;
 		const int SCORE_LEFT_Y = 0;
 		const int TOTAL_SCORE = 0;
@@ -1181,11 +1188,11 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 				//
 				// 若剩餘碰撞次數為0，則跳到Game Over狀態
 				//
-				if (hits_left.GetInteger() >= 20) {
+				if (hits_left.GetInteger() >= 420) {
 					//	CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
 					//	CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
 					CAudio::Instance()->Stop(AUDIO_PACMAN);	// 停止 MIDI
-					GotoGameState_2(GAME_STATE_SECOND);
+					GotoGameState(GAME_STATE_OVER);
 					//GotoGameState(GAME_STATE_RUN);
 				}
 			}
