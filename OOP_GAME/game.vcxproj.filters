@@ -193,5 +193,53 @@
     <Image Include="res\ball4.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="res\bigball.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ballLeft1 .bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ballLeft2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ballLeft3 .bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ballLeft4 .bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ballUp1 .bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ballUp2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ballUp3 .bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ballUp4 .bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ballDown1 .bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ballDown2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ballDown3 .bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ballDown4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Fantasma01.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Bitmaps\level1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\level1begin.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

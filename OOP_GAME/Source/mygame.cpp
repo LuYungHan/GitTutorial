@@ -664,7 +664,7 @@ namespace game_framework {
 		//
 		// 最終進度為100%
 		//
-		ShowInitProgress(100);
+		//ShowInitProgress(100);
 	}
 
 
@@ -683,13 +683,77 @@ namespace game_framework {
 		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 	}
 
+	/////////////////////////////////////////////////////////////////////////////
+	// 這個class為遊戲的勝利狀態(Game Win)
+	/////////////////////////////////////////////////////////////////////////////
+
+	CGameStateWin::CGameStateWin(CGame *g)
+		: CGameState(g)
+	{
+	}
+
+	void CGameStateWin::OnMove()
+	{
+		if (counter == 150) {
+			CAudio::Instance()->Stop(AUDIO_PACMAN); // 停止 MIDI
+			CAudio::Instance()->Stop(AUDIO_SIREN); // 停止 MIDI
+			CAudio::Instance()->Play(AUDIO_DEATH);	// 開啟 MIDI
+		}
+		counter--;
+		if (counter < 0) {
+			CAudio::Instance()->Stop(AUDIO_PACMAN); // 停止 MIDI
+			//CAudio::Instance()->Play(AUDIO_DEATH);	// 開啟 MIDI
+			GotoGameState(GAME_STATE_INIT);
+
+		}
+
+	}
+
+	void CGameStateWin::OnBeginState()
+	{
+		counter = 30 * 5; // 5 seconds
+		//CAudio::Instance()->Play(AUDIO_DEATH);
+	}
+
+	void CGameStateWin::OnInit()
+	{
+		//
+		// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
+		//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
+		//
+		ShowInitProgress(88);	// 接個前一個狀態的進度，此處進度視為66%
+		//
+		// 開始載入資料
+		//
+		Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
+		//
+		// 最終進度為100%
+		//
+		ShowInitProgress(100);
+	}
+
+
+	void CGameStateWin::OnShow()
+	{
+		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+		CFont f, *fp;
+		f.CreatePointFont(110, "Joystix");	// 產生 font f; 160表示16 point的字
+		fp = pDC->SelectObject(&f);					// 選用 font f
+		pDC->SetBkColor(RGB(0, 0, 0));
+		pDC->SetTextColor(RGB(255, 255, 0));
+		char str[80];								// Demo 數字對字串的轉換
+		sprintf(str, "YOU WIN ! (%d)", counter / 30);
+		pDC->TextOut(240, 210, str);
+		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+	}
 
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的遊戲執行物件，主要的遊戲程式都在這裡
 	/////////////////////////////////////////////////////////////////////////////
 
 	CGameStateRun::CGameStateRun(CGame *g)
-		: CGameState(g), NUMBALLS(10000), GHOSTBLUE(1)
+		: CGameState(g), NUMBALLS(10000), GHOSTBLUE(2)
 	{
 		ball = new CBall[NUMBALLS];
 		blueball_arr = new BlueGhost[GHOSTBLUE];
@@ -742,6 +806,7 @@ namespace game_framework {
 
 	pacman.Initialize();
 	blueball.Initialize();
+	bball.Initialize();
 	background.SetTopLeft(BACKGROUND_X,0);				// 設定背景的起始座標
 	help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 	hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
@@ -803,7 +868,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			//
 			if (hits_left.GetInteger() >= 220) {
 				CAudio::Instance()->Stop(AUDIO_PACMAN);	// 停止 MIDI
-				GotoGameState_2(GAME_STATE_SECOND);
+				GotoGameState(GAME_STATE_SECOND);
 				//hits_left.UnloadBitmap();
 				//GotoGameState(GAME_STATE_RUN);
 			}
@@ -824,7 +889,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		my_lives.Add(-1);
 		pacman.Initialize();
 		blueball.Initialize();
-		bball.Initialize();
+		bball.Initialize_2();
 		pacman.OnShow();
 		CAudio::Instance()->Play(AUDIO_DEATH);
 
@@ -894,7 +959,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		const char KEY_DOWN = 0x28; // keyboard下箭頭
 		const char TAB = 0x9;
 		if (nChar == TAB) {
-			GotoGameState_2(GAME_STATE_SECOND);						// 切換至GAME_STATE_RUN
+			GotoGameState(GAME_STATE_SECOND);						// 切換至GAME_STATE_RUN
 		}
 		//if (nChar == KEY_LEFT)
 		//	eraser.SetMovingLeft(true);
@@ -1113,7 +1178,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		const int HITS_LEFT_X = 150;
 		const int HITS_LEFT_Y = 15;
 		const int BACKGROUND_X = 0;
-		const int ANIMATION_SPEED = 30;
+		const int ANIMATION_SPEED = 50;
 		const int SCORE_LEFT_X = 0;
 		const int SCORE_LEFT_Y = 0;
 		const int TOTAL_SCORE = 0;
@@ -1192,7 +1257,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 					//	CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
 					//	CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
 					CAudio::Instance()->Stop(AUDIO_PACMAN);	// 停止 MIDI
-					GotoGameState(GAME_STATE_OVER);
+					GotoGameState(GAME_STATE_WIN);
 					//GotoGameState(GAME_STATE_RUN);
 				}
 			}
@@ -1223,6 +1288,9 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		const char KEY_UP = 0x26; // keyboard上箭頭
 		const char KEY_RIGHT = 0x27; // keyboard右箭頭
 		const char KEY_DOWN = 0x28; // keyboard下箭頭
+		const char TAB = 0x9;
+		if (nChar == TAB)
+			GotoGameState(GAME_STATE_WIN);						// 切換至GAME_STATE_WIN
 		int y = pacman.GetY1();
 		int x = pacman.GetX1();
 		if (nChar == KEY_LEFT) {

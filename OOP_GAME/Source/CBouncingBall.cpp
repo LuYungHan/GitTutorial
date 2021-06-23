@@ -62,6 +62,55 @@ namespace game_framework {
 			SetTryingDown(true);
 		}
 	}
+
+	void CBouncingBall::CBouncingBall_2()
+	{
+		Initialize_2();
+		/*
+		const int INITIAL_VELOCITY = 15;	// 初始左右速度
+		const int FLOOR = 350;				// 地板座標
+		floor = FLOOR;
+		y = 180; x = FLOOR - 1;				// y座標比地板高1點(站在地板上)
+		rising = true;
+		initial_velocity = INITIAL_VELOCITY;
+		velocity = initial_velocity;
+		*/
+	}
+	void CBouncingBall::Initialize_2() {
+
+		const int INITIAL_VELOCITY = 30;	// 初始左右速度
+		const int FLOOR = 200;				// 地板座標
+		floor = FLOOR;
+		y = 180; x = FLOOR - 1;				// y座標比地板高1點(站在地板上)
+		rising = true;
+		initial_velocity = INITIAL_VELOCITY;
+		velocity = initial_velocity;
+
+		is_alive = true;
+		//xx = yy = dxx = dyy = 0;
+		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
+		tryingDown = tryingLeft = tryingRight = tryingUp = false;
+
+		/* 隨機初始化鬼在開始遊戲時的走向 */
+		int init_random = rand() % 4;
+
+		if (init_random == 0) {
+			SetTryingLeft(true);
+		}
+
+		else if (init_random == 1) {
+			SetTryingRight(true);
+		}
+
+		else if (init_random == 2) {
+			SetTryingUp(true);
+		}
+
+		else {
+			SetTryingDown(true);
+		}
+	}
+
 	int CBouncingBall::GetX1()
 	{
 		return x;

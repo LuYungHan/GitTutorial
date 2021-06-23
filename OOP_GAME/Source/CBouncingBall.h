@@ -15,6 +15,7 @@ namespace game_framework {
 	{
 	public:
 		CBouncingBall();
+		void CBouncingBall_2();
 		int  GetX1();					// ghost左上角 x 座標
 		int  GetY1();					// ghost左上角 y 座標
 		int  GetX2();					// ghost右下角 x 座標
@@ -22,6 +23,7 @@ namespace game_framework {
 		int random_time;
 		void LoadBitmap();		// 載入圖形
 		void Initialize();				// 設定初始值
+		void Initialize_2();
 		void TrackPacman(Pacman *pacman, int num);
 		//int Random_num(int backgroundArray[479][636], int num);
 		//void Change_Dir(int backgroundArray[479][636], int change);

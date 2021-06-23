@@ -62,9 +62,9 @@ END
 // Bitmap
 //
 
-IDB_BALL                BITMAP                  "..\\res\ball.bmp"
+IDB_BALL                BITMAP                  "..\\res\\ball.bmp"
 
-IDB_BIGBALL    			BITMAP					"..\\res\bigball.bmp"
+IDB_BIGBALL             BITMAP                  "..\\res\\bigball.bmp"
 
 IDB_BALL1               BITMAP                  "..\\res\\ball1.bmp"
 
@@ -82,13 +82,13 @@ IDB_BALLLEFT3           BITMAP                  "..\\res\\ballLeft3 .bmp"
 
 IDB_BALLLEFT4           BITMAP                  "..\\res\\ballLeft4 .bmp"
 
-IDB_BALLUP1				BITMAP                  "..\\res\\ballUp1 .bmp"
+IDB_BALLUP1             BITMAP                  "..\\res\\ballUp1 .bmp"
 
-IDB_BALLUP2				BITMAP                  "..\\res\\ballUp2.bmp"
+IDB_BALLUP2             BITMAP                  "..\\res\\ballUp2.bmp"
 
-IDB_BALLUP3				BITMAP                  "..\\res\\ballUp3 .bmp"
+IDB_BALLUP3             BITMAP                  "..\\res\\ballUp3 .bmp"
 
-IDB_BALLUP4				BITMAP                  "..\\res\\ballUp4 .bmp"
+IDB_BALLUP4             BITMAP                  "..\\res\\ballUp4 .bmp"
 
 IDB_BALLDOWN1           BITMAP                  "..\\res\\ballDown1 .bmp"
 
@@ -104,7 +104,7 @@ IDB_ERASER1             BITMAP                  "..\\res\\eraser1.bmp"
 
 IDB_BACKGROUND          BITMAP                  "..\\Bitmaps\\level1.bmp"
 
-IDB_BACKGROUNDBEGIN     BITMAP      			"..\\res\\level1begin.bmp"
+IDB_BACKGROUNDBEGIN     BITMAP                  "..\\res\\level1begin.bmp"
 
 IDB_CORNER              BITMAP                  "..\\res\\corner.bmp"
 
@@ -149,14 +149,6 @@ IDB_LOADING             BITMAP                  "..\\res\\loading.bmp"
 //
 
 IDC_GAMECURSOR          CURSOR                  "..\\res\\gamecurs.cur"
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// PNG
-//
-
-// IDB_PNG1                PNG                     "D:\\Han_data\\OOPL\\pacman picture\\map.png"
 
 #endif    // 中文 (繁體，台灣) resources
 /////////////////////////////////////////////////////////////////////////////
@@ -268,8 +260,8 @@ BEGIN
     DEFPUSHBUTTON   "OK",IDOK,172,7,39,14,WS_GROUP
     LTEXT           "Liense: GPL",IDC_STATIC,39,35,119,8
     PUSHBUTTON      "ReadMe",IDC_README,172,24,39,13,WS_GROUP
-    LTEXT           "Author: Woei-Kae Chen, CSIE Department, NTUT",IDC_STATIC,39,47,159,8
-    LTEXT           "http://www.ntut.edu.tw/~wkchen/game",IDC_STATIC,39,60,159,8
+    LTEXT           "Author: Chia-Chun Chen, Yung-Han Lu, CSIE Department, NTUT",IDC_STATIC,39,47,159,8
+    LTEXT           "https://github.com/LuYungHan/Pacman_Game",IDC_STATIC,39,60,159,8
 END
 
 
@@ -328,6 +320,17 @@ BEGIN
     END
 END
 #endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_ABOUTBOX AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
 
 
 /////////////////////////////////////////////////////////////////////////////

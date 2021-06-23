@@ -327,10 +327,26 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\pacman picture\map.png" />
+    <Image Include="Bitmaps\level1.bmp" />
     <Image Include="res\ball1.bmp" />
     <Image Include="res\ball2.bmp" />
     <Image Include="res\ball3.bmp" />
     <Image Include="res\ball4.bmp" />
+    <Image Include="res\ballDown1 .bmp" />
+    <Image Include="res\ballDown2.bmp" />
+    <Image Include="res\ballDown3 .bmp" />
+    <Image Include="res\ballDown4.bmp" />
+    <Image Include="res\ballLeft1 .bmp" />
+    <Image Include="res\ballLeft2.bmp" />
+    <Image Include="res\ballLeft3 .bmp" />
+    <Image Include="res\ballLeft4 .bmp" />
+    <Image Include="res\ballUp1 .bmp" />
+    <Image Include="res\ballUp2.bmp" />
+    <Image Include="res\ballUp3 .bmp" />
+    <Image Include="res\ballUp4 .bmp" />
+    <Image Include="res\bigball.bmp" />
+    <Image Include="res\Fantasma01.bmp" />
+    <Image Include="res\level1begin.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
