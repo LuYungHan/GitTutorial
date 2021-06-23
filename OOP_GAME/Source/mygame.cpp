@@ -697,7 +697,7 @@ namespace game_framework {
 		if (counter == 150) {
 			CAudio::Instance()->Stop(AUDIO_PACMAN); // 停止 MIDI
 			CAudio::Instance()->Stop(AUDIO_SIREN); // 停止 MIDI
-			CAudio::Instance()->Play(AUDIO_DEATH);	// 開啟 MIDI
+			CAudio::Instance()->Play(AUDIO_WIN);	// 開啟 MIDI
 		}
 		counter--;
 		if (counter < 0) {
@@ -816,6 +816,7 @@ namespace game_framework {
 	//score.SetTopLeft(SCORE_LEFT_X, SCORE_LEFT_Y);			// 指定目前得分數座標
 	//CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
 	CAudio::Instance()->Play(AUDIO_DEATH, false);
+	CAudio::Instance()->Play(AUDIO_WIN, false);
 	CAudio::Instance()->Play(AUDIO_SIREN, true);
 	CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
 	//CAudio::Instance()->Play(AUDIO_NTUT, true);			// 撥放 MIDI
@@ -824,6 +825,8 @@ namespace game_framework {
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
+	CAudio::Instance()->Stop(AUDIO_DEATH);
+	CAudio::Instance()->Stop(AUDIO_WIN);
 	//
 	// 如果希望修改cursor的樣式，則將下面程式的commment取消即可
 	//
@@ -945,6 +948,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		//CAudio::Instance()->Load(AUDIO_NTUT,  "sounds\\ntut.mid");	// 載入編號2的聲音ntut.mid
 		CAudio::Instance()->Load(AUDIO_PACMAN, "sounds\\pacman_music01.mp3");	// 載入編號4的聲音pacman_music01.mp3
 		CAudio::Instance()->Load(AUDIO_DEATH, "sounds\\pacman_death.wav");	// 載入編號4的聲音pacman_music01.mp3
+		CAudio::Instance()->Load(AUDIO_WIN, "sounds\\pacman_intermission.wav");	// 載入編號6的聲音pacman_music01.mp3
 
 		//
 		// 此OnInit動作會接到CGameStaterOver::OnInit()，所以進度還沒到100%

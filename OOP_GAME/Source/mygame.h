@@ -55,7 +55,8 @@ namespace game_framework {
 	//	AUDIO_NTUT,				// 2
 		AUDIO_PACMAN,			// 3
 		AUDIO_DEATH,			// 4
-		AUDIO_SIREN				// 5
+		AUDIO_SIREN	,			// 5
+		AUDIO_WIN				// 6
 	};
 
 
