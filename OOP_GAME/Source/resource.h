@@ -12,6 +12,8 @@
 #define IDB_BITMAP1                     132
 #define IDB_BACKGROUND                  132
 #define IDB_BACKGROUNDBEGIN             163
+#define IDB_BACKGROUNDBEGIN1            173
+#define IDB_BACKGROUNDBEGIN2            174
 #define IDB_CORNER                      133
 #define IDB_BALL1                       134
 #define IDB_BALL2                       135
