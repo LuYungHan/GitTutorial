@@ -79,9 +79,9 @@ namespace game_framework {
 	void CBouncingBall::Initialize_2() {
 
 		const int INITIAL_VELOCITY = 30;	// 初始左右速度
-		const int FLOOR = 200;				// 地板座標
+		const int FLOOR = 350;				// 地板座標
 		floor = FLOOR;
-		y = 180; x = FLOOR - 1;				// y座標比地板高1點(站在地板上)
+		y = 261; x = FLOOR - 1;				// y座標比地板高1點(站在地板上)
 		rising = true;
 		initial_velocity = INITIAL_VELOCITY;
 		velocity = initial_velocity;

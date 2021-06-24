@@ -58,7 +58,7 @@ void BlueGhost::Initialize() {
 	const int INITIAL_VELOCITY = 15;	// 初始左右速度
 	const int FLOOR = 225;				// 地板座標
 	floor = FLOOR;
-	x = 260; y = FLOOR - 1;				// y座標比地板高1點(站在地板上)
+	x = 225; y = FLOOR - 1;				// y座標比地板高1點(站在地板上)
 	rising = true;
 	initial_velocity = INITIAL_VELOCITY;
 	velocity = initial_velocity;
@@ -149,7 +149,7 @@ void BlueGhost::TrackPacman(Pacman *pacman,int num)
 
 void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman,int num)
 {
-	if (num >= 25) {
+	if (num >= 50) {
 
 		const int STEP_SIZE = 3;
 		animation.OnMove();
@@ -162,7 +162,6 @@ void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman,int num)
 
 		int random = rand() % 4;
 		std::cout << random << " HERE" << std::endl;
-		if (count % 2 != 0) {
 			/* 鬼隨機移動的邏輯處理 (目前僅撞牆才會改向) */
 			TRACE("%d %d\n", isMovingLeft, tryingLeft);
 			if (isMovingLeft || tryingLeft) {
@@ -268,76 +267,9 @@ void BlueGhost::OnMove(int backgroundArray[479][636], Pacman *pacman,int num)
 					SetMovingDown(true);
 				}
 			}
-		}
-		else if (count % 2 == 0) {
-			if ((pacman->GetX2() < x_right) || (pacman->GetX1() < x_left)) {
-				SetTryingLeft(false);
-				if (backgroundArray[y][x_left - STEP_SIZE] == 1 || backgroundArray[y_top][x_left - STEP_SIZE] == 1) {
-					x = x;
-					/*if (backgroundArray[y_top - STEP_SIZE][x] != 1 || backgroundArray[y_top - STEP_SIZE][x_right] != 1) {
-						y -= STEP_SIZE;
-					}
-					if (backgroundArray[y_bottom + STEP_SIZE][x] != 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] != 1) {
-						y += STEP_SIZE;
-					}*/
-				}
-				else {
-					x -= STEP_SIZE;
-
-				}
-			}
-			if ((pacman->GetX2() > x_right) || (pacman->GetX1() > x_left)) {
-				SetTryingRight(false);
-				if (backgroundArray[y][x_right + STEP_SIZE] == 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] == 1) {
-					x = x;
-					/*if (backgroundArray[y_top - STEP_SIZE][x] != 1 || backgroundArray[y_top - STEP_SIZE][x_right] != 1) {
-						y -= STEP_SIZE;
-					}
-					if (backgroundArray[y_bottom + STEP_SIZE][x] != 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] != 1) {
-						y += STEP_SIZE;
-					}*/
-
-				}
-				else {
-					x += STEP_SIZE;
-
-				}
-			}
-			if ((pacman->GetY2() < y_bottom) || (pacman->GetY2() < y_top)) {
-				SetTryingUp(false);
-				if (backgroundArray[y_top - STEP_SIZE][x] == 1 || backgroundArray[y_top - STEP_SIZE][x_right] == 1) {
-					y = y;
-					/*if (backgroundArray[y][x_right + STEP_SIZE] != 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] != 1 || backgroundArray[y_top - STEP_SIZE][x] == 5 || backgroundArray[y_top - STEP_SIZE][x_right] == 5) {
-						x += STEP_SIZE;
-					}
-					if (backgroundArray[y][x_left - STEP_SIZE] != 1 || backgroundArray[y_top][x_left - STEP_SIZE] != 1) {
-						x -= STEP_SIZE;
-					}*/
-				}
-				else {
-					y -= STEP_SIZE;
+		
 
 
-				}
-			}
-			if ((pacman->GetY2() > y_bottom) || (pacman->GetY2() > y_top)) {
-				SetTryingDown(false);
-				if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1 || backgroundArray[y_bottom + STEP_SIZE][x] == 5 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 5) {
-					y = y;
-					/*if (backgroundArray[y][x_right + STEP_SIZE] != 1 || backgroundArray[y_bottom][x_right + STEP_SIZE] != 1) {
-						x += STEP_SIZE;
-					}
-					if (backgroundArray[y][x_left - STEP_SIZE] != 1 || backgroundArray[y_top][x_left - STEP_SIZE] != 1) {
-						x -= STEP_SIZE;
-					}*/
-				}
-				else {
-					y += STEP_SIZE;
-
-				}
-			}
-		}
-		count = count + 1;
 	}
 }
 void BlueGhost::OnMoveStar(int backgroundArray[479][636], Pacman *pacman, int num) {
@@ -350,7 +282,7 @@ void BlueGhost::OnMoveStar(int backgroundArray[479][636], Pacman *pacman, int nu
 		int y_top = pacman->GetY1();
 		srand((unsigned int)time(NULL));
 		int random = rand() % 4;
-		if ((num >= 25) && (backgroundArray[y_top][x_left] == 8)) {
+		if ((num >= 50) && (backgroundArray[y_top][x_left] == 8)) {
 			if (random == 1) { //down
 					//std::cout << random << std::endl;
 				if (backgroundArray[y_bottom + STEP_SIZE][x] == 1 || backgroundArray[y_bottom + STEP_SIZE][x_right] == 1) {

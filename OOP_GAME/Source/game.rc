@@ -106,10 +106,6 @@ IDB_BACKGROUND          BITMAP                  "..\\Bitmaps\\level1.bmp"
 
 IDB_BACKGROUNDBEGIN     BITMAP                  "..\\res\\level1begin.bmp"
 
-IDB_BACKGROUNDBEGIN1     BITMAP                  "..\\Bitmaps\\level101.bmp"
-
-IDB_BACKGROUNDBEGIN2     BITMAP                  "..\\Bitmaps\\level102.bmp"
-
 IDB_CORNER              BITMAP                  "..\\res\\corner.bmp"
 
 IDB_0                   BITMAP                  "..\\res\\bmp0.bmp"
