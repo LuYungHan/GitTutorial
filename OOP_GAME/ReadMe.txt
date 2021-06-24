@@ -1,142 +1,43 @@
-========================================================================
-                        About Game Framework 4.8
+ï»¿========================================================================
+                        About Game Pacman
 ========================================================================
                             Please refer to 
-   http://www.cc.ntut.edu.tw/~wkchen/game/ for more information.
+   https://github.com/LuYungHan/Pacman_Game for more information.
 ========================================================================
+æŒ‡å°Žè€å¸«: é™³ç¢©æ¼¢
+åŠ©æ•™: å³æ‰¿å²³
+çµ„åˆ¥: ç¬¬38çµ„
+æˆå“¡: è³‡å·¥äºŒ 108590451 é™¸è© æ¶µ
+      è³‡å·¥äºŒ 108830035 é™³ä½³å‡
 
-¤@¡BÂ²¤¶
-
-Game Framework¬O¤@­Ó¶}µo¹CÀ¸µ{¦¡ªº¥­¥x¡A¨ä¥Øªº¬O§@¬°¤@­Óª«¥ó¾É¦Vµ{¦¡³]­p
-±Ð¾Çªº»²§U¤u¨ã¡C§Ú¦b¥x¥_¬ì¤j¸ê¤u¨t¥ô±Ð¡A¸g±`±Ð±Âª«¥ó¾É¦Vµ{¦¡³]­p©Î¨ä¹ê²ß
-½Òµ{¡A³o¨Ç½Òµ{ªº±Ð¾Ç¥Ø¼Ð¬OÅý¾Ç¥Í¼ô½mµ{¦¡³]­p»P¼¶¼gªº§Þ¥©¡A§Æ±æ¯à²`´Ó¨Ï¥Î
-C++ ªº¯à¤O¡B¼ô½mVC++ªº¶}µoÀô¹Ò¡B¼ô±xµøµ¡µ{¦¡³]­pªº¤¸¯À¡A¥H¤Î°V½m¼g§@¤j«¬
-µ{¦¡ªº¯à¤O¡C§Ú¦bªø´Áªº±Ð¾Ç¸gÅç¤¤µo²{¡A¼g¦A¦hªº¤pµ{¦¡¡A³£«ÜÃøÅý¾Ç¥Í²`¨èªº
-Åé·|¨ìª«¥óªº¥Îªk»Pª«¥óªº¤¬°Ê¡A¦Ó¥BµLªk°ö¾i¨t²ÎªºÆ[©À¡A§ó¹N½×¶}µo³nÅéªº¯à
-¤O¡C¦]¦¹¡A§Ú¦b¹ê²ß½Òµ{¤¤¡A­n¨D¾Ç¥Í¥Î¤@¾ã­Ó¾Ç´Áªº®É¶¡¡A¼g§@¤@­Ó¤j¤@ÂIªºµ{
-¦¡¡A¦Ó³]­pµøµ¡¹CÀ¸µ{¦¡¡A´N¦¨¬°·¥¦nªº¿ï¾Ü¡C
-
-§Úµo²{³z¹L¹CÀ¸³]­p¡A¥i¥H¨Ïµ{¦¡³]­pªº½Òµ{ÅÜ±o¤ñ¸û¥Í°Ê¦³½ì¡C¤@¯ë¦Ó¨¥¡A¤@­Ó
-¤¤¤p«¬ªº¹CÀ¸(¨Ò¦p¤pºëÆF)§Y¤w¨ã³Æ¤p«¬À³¥Î¨t²Îªº³W¼Ò¡A¨ä½ÆÂø«×¨¬¥HÅçÃÒ½Ò°ó
-¤WÁ¿ªºµ{¦¡³]­p²z½×¡A¦b¹ê§@¹Lµ{¤¤¡A¾Ç¥Í¥i¥HÅé·|¨ì¡A¤@­ÓÀ³¥Î¨t²Îªº¾ãÅéµ²ºc
-¡A¨Ã¯à§ó²`¤JÁA¸Ñª«¥ó¾É¦V³]­pªº­ì²z¤ÎºëµØ¡C·íµM¾Ç¥Í¦b¹ê§@¹Lµ{¤¤·|¤£Â_µo²{
-°ÝÃD¡A§Ú«h§êºt¨ó§U¾Ç¥Í«ä¦Ò¡B³]­p¡A°£¿ùªº¨¤¦â¡C¹L¥h´X¦~·í¤¤¡A¤j¦h¼Æªº¾Ç¥Í
-³£¯à¦b½Òµ{¤¤±o¨ì¥R¤Àªº¦¬Ã¬¡A¤]±`±`¦³«D±`±M·~ªº§@«~¥X²{¡C
-
-µM¦Ó¡A­n³]­p¤@­Ó±M·~ªº¹CÀ¸¡A¨Ã¤£¬O¤@¥ó«Ü®e©öªº¨Æ¡C¨ä¤¤¯A¤Î³\¦h§@·~¨t²Î¡]
-Ã¸¹Ï¤Î­µ®Ä¡^ªº¤¶­±¾Þ§@¡A»P³t«×±±¨î¤Wªº¦Ò¶q¡A¨Ã¤£¬O¤@­Ó¾Ç´Áªº½Òµ{¥i¥H¥æ¥N
-²M·¡ªº¡A¦Ó¥B³o¨Ç²Ó¸`¡A¦h¤Ö·|¼Ò½kµ{¦¡¹ê²ßªºµJÂI¡A¯S§O¬O¦b¾Ç¥Íªºµ{¦¡³]­p¯à
-¤OÁÙ¤£¬O«Ü±j¤§«e¡A¨Ã¤£¦X¾A¡C¦]¦¹¡Agameªº¥­¥xÀ³¹B¦Ó¥Í¡A°ò¥»¤W¡A§Úªººc·Q¬O
-§Ú¦Û¤v¥ý±NÃ¸¹Ï¤Î­µ®Äªº°ÝÃD¸Ñ¨M¡A¨Ã¥B¼g¦¨²{¦¨ªºª«¥ó¡A¨Ñ¾Ç¥Íª½±µ¤Þ¥Î¡A¨º»ò
-¾Ç¥Í­Ì´N¥i¥H±Mª`¦b¦p¦ó³]­p¦Û¤vªº¹CÀ¸À³¥Îµ{¦¡¡A¦Ó³z¹L¹CÀ¸³]­p¡A´N¥i¥H¾Ç¨ì
-«Ü¦h¹ê§@¸gÅç¡A¤Î¸Ñ¨M°ÝÃDªº¤èªk¡C
-
-¦b³o­Ó²Ä¥|ª©ªºgame¤¤¡A§Ú§â¹CÀ¸ªºª¬ºA©ú½T¦a¤À¦¨ 3­Ó³¡¥÷¡A¤À§O¬O¹CÀ¸°_©lª¬
-ºA¡B¹CÀ¸°õ¦æª¬ºA¤Î¹CÀ¸µ²§ôª¬ºA¡A³o¨Ï±ogameªº¬[ºc§óÁÍªñ©ó¤@­Óframework¡A
-¦Ó¤£¦A¬O¤@­ÓÂ²³æªºlibrary¡Cgame¦Uª©¥»¤§¶¡ªº¥D­n¥\¯à¦p¤U¡G
-
-        ²Ä¤@ª© ¤ä´©DirectDrawÃ¸¹Ï¤¶­±                   (game 1.0)
-        ²Ä¤Gª© ¼W¥[¤ä´©DirectSound­µ®Ä¤¶­±              (game 2.0-2.2)
-        ²Ä¤Tª© ¼W¥[¤ä´©¥þ¿Ã¹õ»PDirectMusic(MIDI)        (game 3.0-3.1)
-        ²Ä¥|ª© ¤º«Ø¹CÀ¸ª¬ºA©Êªº±±¨î                     (game 4.0-4.4)
-               ¥i½Õ¾ãªº¹CÀ¸°Ñ¼Æ
-               ·sªº½d¨Òµ{¦¡
-               Åã¥Ü¸ü¤Jªº¶i«×
-               ¤ä´©Visual Studio 2005 (C++)
-               §½³¡­×¥¿¤ÎBug Fix
-               ¤ä´©Visual Studio 2008 (C++)             (game 4.5)
-               ¥ÎMCI´À¥NDirectMusic                     (game 4.6)
-               ¤ä´©MP3ÀÉ­µ®Ä¼½©ñ
-               ¤ä´©Windows 7
-               ¤ä´©Visual Studio 2010 (C++)             (game 4.7)
-               §ó·sCAudio¤ÎBug Fix (C++)                (game 4.8)
-
-¦Û²Ä¤Tª©¶}©l¡A§Ú±Ngameªº­ì©lµ{¦¡ªºª©Åv³]©w¬°GPL(¸ÔCOPYINGÀÉ®×)¡C¥u­n§AÄ±
-±o¦³¥Î¡A§ÚÅwªï¥ô¦ó¤H®³³o¨Ç­ì©lµ{¦¡¥hµo®i·sªº¹CÀ¸¡C¦ý¬O¡A§Ú§Æ±æ¦pªG§A¯uªº
-¥Î³o­Ó¥­¥x¶}µo¥X¹CÀ¸®É¡A¤]¯àÅý§Úª¾¹D¡C¦pªG§Aµo²{§Úªºµ{¦¡¦³ bug¡A¤]½Ð³qª¾
-§Ú¡C
-
-	³¯°¶³Í
-	¥x¥_¬ì¤j ¸ê¤u¨t°Æ±Ð±Â
-	http://www.ntut.edu.tw/~wkchen
-
-¤G¡B¨Ï¥Î¤èªk
-
-Game Framework¥i¥H¥Î¦bWindows 2000/XP/7¡C­º¥ý§A¥²¶·¦³Visual Studio 2010
-C++ ¡A¨Ã¥ý¦w¸ËDirectX SDK (ª©¥»µøcomplier¦Ó©w)¡A¹q¸£°t³Æ«hµø¹CÀ¸ªº½ÆÂø«×
-¦Ó©w¡A¤@¯ë¦Ó¨¥¡A¦pªG¤£¬O«Ü½ÆÂøªºgame¡APentium II©ÎCeleronµ¥¯ÅªºCPU´N¨¬°÷
-¤F¡C
-
-­n³]­p¤@­Ó·sªº¹CÀ¸¡A°ò¥»¤W´N¬O§ï¼gCGameStateInit¡BCGameStateRun¡B¥H¤Î
-CGameStateOver³o¤T­Óclass(¦bmygame.h¤Îmygame.cpp)¡A³o¤T­Óclass¤À§O¥Nªí
-¹CÀ¸ªº°_©lµe­±¡B¹CÀ¸ªº°õ¦æ¤Î¹CÀ¸µ²§ôµe­±µ¥¤T­Óª¬ºA¡A¦b¨C­Óª¬ºA¤¤³Ì¥D­n
-ªº°Ê§@¤À¬°¡GOnMove()¤ÎOnShow()¡A¥ÑOnMove()­t³d²¾°Ê¹CÀ¸¤¤ªºª«¥ó¡A¦A¥Ñ
-OnShow()­t³dÅã¥Ü¦U­Óª«¥ó¦Ü¿Ã¹õ¡C½Ð°Ñ¦ÒGameºô­¶©Ò´£¨Ñªº½m²ß¤Î¬ÛÃö¸ê®Æ:
-http://www.cc.ntut.edu.tw/~wkchen/game/¡C
-
-¤T¡Bª©¥»®t²§
-
- * Game 4.8»PGame 4.7ªº®t§O (2012/5/13)
-   * §ó·sCAudio¡A§Q¥ÎThread´î¤Ö¼½©ñ­µ®Ä®É¡A°õ¦æMCI Command©Ò»Ý¤§µ¥«Ý®É¶¡
-   * Bug fix: ¦³¨Ç±¡§Î¦æ¤UCtrl-Q¨S¦³³Q¥¿½TªºÅã¥Ü
-   * ¼W¥[Source¤l¥Ø¿ý
-   * Complier »P Direct X¤§²Õ¦X
-       * Visual Studio 2010 (C++) ·f°t DirectX February 2010
-
-   Game 4.7»PGame 4.6ªº®t§O
-   * ¤ä´©µøµ¡¤º«ö·Æ¹«¥ªÁä¡A¦Ó¦bµøµ¡¥~¤~©ñ¶}ªºªºLButtonUp¡BMouseMove¨Æ¥ó
-   * Complier »P Direct X¤§²Õ¦X
-       * Visual Studio 2010 (C++) ·f°t DirectX February 2010
-
- * Game 4.6»PGame 4.5ªº®t§O
-   * ¥ÎMCI´À¥NDirectMusic
-   * ¤ä´©MP3ÀÉ­µ®Ä¼½©ñ
-   * ¤ä´© Windows 7 (¦]¬°Windows 7¤ä´©DirectMusicªºDirectX SDK¤£¬Û®e)
-   * Complier »P Direct X¤§²Õ¦X
-       * Visual Studio 2008 (C++) ·f°t DirectX February 2010
-
- * Game 4.5»PGame 4.4ªº®t§O
-   * ¤ä´©Visual Studio 2008¡A¤£¦A»PVC++6.0¬Û®e
-   * Complier »P Direct X¤§²Õ¦X
-       * Visual Studio 2008 (C++) ·f°t DirectX August 2006
-
- * Game 4.4»PGame 4.3ªº®t§O
-   * ¹ïVisual Studio 2005¡A·s¼W¤@­Ósetup project¡A¥HÂ²¤Æ¦w¸Ëµ{§Ç¡C
-   * ·s¼W bitmap ©ñ¤j©ÎÁY¤pªº¤ä´©
-   * ·s¼W game_framework namespace¡Agame¬ÛÃöªºclass³£©ñ¨ì¦¹namespace¡C
-   * ·s¼W bitmap ¦ÛÀÉ®×¸ü¤Jªº¤ä´©(¥H«e¥u¯à¦Ûresource¸ü¤J)¡C
-   * ·s¼W ShowInitProgress(percent) Åã¥Ü¸ü¤J¹Ï§Î¤Î­µ®Äªº¶i«×¡C
-   * Complier »P Direct X¤§²Õ¦X
-       * Visual Studio 2005 (C++) ·f°t DirectX August 2006
-       * VC++6.0 ·f°t DirectX 8.x
+ä¸€ã€ç°¡ä»‹
+1.	å‹•æ©Ÿ:
+æˆ‘å€‘ä¿®ç¿’é€™é–€èª²æ˜¯ç‚ºäº†è¦å¯¦ç¾é‹ç”¨C++å¯¦ä½œå‡ºä¸€å€‹éŠæˆ²ã€‚ä¸€é–‹å§‹ï¼Œå› ç‚ºæˆ‘å€‘éƒ½æ²’ä»€éº¼æƒ³æ³•ï¼Œ
+å°±é–‹å§‹ä¸ŠYoutubeçœ‹åˆ¥äººä»‹ç´¹éŠæˆ²ã€‚åŽŸæœ¬åœ¨è€ƒæ…®å†°ç«å§Šå¼Ÿè·Ÿçˆ†çˆ†çŽ‹ï¼Œä¸€ç›´åˆ°çœ‹åˆ°å°ç²¾éˆï¼Œä¹Ÿ
+å°±æ˜¯æˆ‘å€‘é€™æ¬¡çš„éŠæˆ²æ™‚ã€‚æˆ‘å€‘ä¸€è‡´è¦ºå¾—é€™æ‰æ˜¯ç¶“å…¸ä¸­çš„ç¶“å…¸å•Š!æ–¼æ˜¯æˆ‘å€‘æ­£å¼æ±ºå®šè¦å¯¦ä½œé€™
+å€‹æˆ‘å€‘è¨˜æ†¶ä¸­çš„éŠæˆ²ã€‚
+2.	åˆ†å·¥:
+æˆ‘å€‘çš„åˆ†å·¥ä¸€é–‹å§‹ä¸¦æ²’æœ‰ç”šéº¼ç‰¹å®šçš„æ–¹å‘ï¼Œå®Œå…¨å°±æ˜¯è¨Žè«–å®Œä¹‹å¾Œè¦ºå¾—ä¸‹å€‹éšŽæ®µéœ€è¦å…ˆä½œå‡ºç”š
+éº¼æ±è¥¿ï¼Œå°±ç›´æŽ¥èªª "é‚£æˆ‘é€™å‘¨å°±å…ˆæŠŠé€™å€‹åšå‡ºä¾†"ã€‚å› ç‚ºæˆ‘å€‘å…©å€‹çœ‹åˆ°çš„åœ°æ–¹éƒ½ä¸å¤ªä¸€æ¨£ï¼Œå¯
+èƒ½æ˜¯ä¸‹æ„è­˜åœ°åŽ»æ‰¾è‡ªå·±å–œæ­¡çš„éƒ¨åˆ†å§ï¼Œæ‰€ä»¥æˆ‘å€‘é‚„æ²’æœ‰å‡ºç¾æ¶å·¥ä½œçš„æƒ…æ³ã€‚åˆ°äº†å¾ŒæœŸï¼Œå› ç‚ºä¸€
+å€‹æ¯”è¼ƒèµ°æž¶æ§‹çš„éƒ¨åˆ†ï¼Œä¸€å€‹æ¯”è¼ƒèµ°åœ–åƒè™•ç†çš„éƒ¨åˆ†ï¼Œæ‰€ä»¥ç•¶æˆ‘å€‘å„è‡ªæƒ³åšçš„éƒ¨åˆ†æœ‰è‡ªå·±ä¸æ“…é•·
+çš„éƒ¨ä»½æ™‚ã€‚å°±æœƒå§”è¨—å°æ–¹å¹«å¿™åšï¼Œæˆ–è€…åœ¨è¨Žè«–æ™‚æå‡ºä¾†è½å–å°æ–¹æ„è¦‹ã€‚
 
 
- * Game 4.3»PGame 4.2ªº®t§O
-   * ¤ä´©Visual Studio 2005 (C++); ¤£¦A¤ä´©Visual Studio .net 2003¡C
-   * Move()§ï¬°OnMove(); Show()§ï¬°OnShow()¡C
-   * ·s¼WENABLE_GAME_PAUSE¿ï¶µ¡C
-   * ­×´_¹q·½suspend¦A±Ò°Ê«á¡A­µ®Ä¥¢ÆFªº°ÝÃD¡C
-   * Complier »P Direct X¤§²Õ¦X
-       * Visual Studio 2005 (C++) ·f°t DirectX August 2006
-       * VC++6.0 ·f°t DirectX 8.x
+äºŒã€	éŠæˆ²ä»‹ç´¹
+	1.	éŠæˆ²ï¥¯æ˜Ž:
+			éŠæˆ²ç•«é¢æ˜¯åƒæ˜¯è¿·å®®çš„é€šé“ä¸­ä½ˆæ»¿äº†ä¸€èˆ¬ç²‰è‰²è±†å­å’Œå¤§é¡†ç²‰è‰²è±†å­ï¼Œ
+		éŠæˆ²ç›®æ¨™æ˜¯è¦æ“æŽ§å°ç²¾éˆåƒæŽ‰ç•«é¢ä¸­çš„æ‰€æœ‰è±†å­ï¼Œè¦å°å¿ƒä¸èƒ½è¢«é¬¼é­‚
+		æŠ“åˆ°ï¼Œå› ç‚ºæŠ“åˆ°å°±æ­»äº†ï¼Œè€Œä½ åªæœ‰ä¸‰æ¢å‘½å¯ä»¥ç”¨ã€‚å¦‚æžœä½ åœ¨åƒè±†å­é€”ä¸­
+		åƒåˆ°äº†å¤§é¡†ç™½è‰²è±†å­ï¼Œä½ æœƒè®Šæˆç„¡æ•µï¼Œé¬¼é­‚å…¨éƒ½æœƒè®Šæˆè—è‰²ï¼Œç„¶å¾Œèµ°è·¯
+		è®Šæ…¢ï¼Œç•¶ä½ ç¢°åˆ°é¬¼é­‚ï¼Œä½ åè€Œé‚„æœƒåƒæŽ‰ä»–å€‘ï¼Œè®“ä»–å€‘å›žåˆ°ä¸­é–“çš„ç± å­è£¡
+		ã€‚æœ‰æ™‚å€™ä¸­é–“æœƒå‡ºç¾æ°´æžœå¯ä»¥åƒï¼Œåƒäº†å¯ä»¥åŠ åˆ†ã€‚
 
- * Game 4.2»PGame 4.1ªº®t§O
-   * ­«¼g½d¨Òµ{¦¡¡C
-   * ¦P®É¤ä´©Visual Studio .net 2003 (C++) »P VC++6.0¡C
-   * §½³¡­×¥¿¤ÎBug Fix¡C
-   * ·s¼WMouseMove¹ïÀ³µ{¦¡¡C
-   * Complier »P Direct X¤§²Õ¦X
-       * Visual Studio .net 2003 (C++) ·f°t DirectX 8.x
-       * VC++6.0 ·f°t DirectX 8.x
+2.	éŠæˆ²éŸ³æ•ˆ: 
+(1)	éŠæˆ²é–‹å§‹çš„éŸ³æ¨‚: pacman_beginning.wav
+(2)	éŠæˆ²è¼¸çš„éŸ³æ¨‚: pacman_death.wav
+(3)	éŠæˆ²è´çš„éŸ³æ¨‚: pacman_intermission.wa
+(4)	éŠæˆ²ä¸­åƒè±†å­çš„éŸ³æ¨‚: pacman_chomp.wav
+(5)	éŠæˆ²ä¸­è¡Œèµ°çš„éŸ³æ¨‚: siren_1.wav
 
- * Game 4.1»PGame 3.1ªº®t§O
-   * ¤º«Ø¹CÀ¸ª¬ºA©Êªº±±¨î¡C
-   * ¥i½Õ¾ãªº¹CÀ¸°Ñ¼Æ¡C
-   * Complier »P Direct X¤§²Õ¦X
-       * VC++6.0 ·f°t DirectX 8.x
 
- * Game 3.1»PGame 2.2ªº®t§O
-   * ¤ä´©¥þ¿Ã¹õ¡C
-   * ¤ä´©MIDI¡C
-   * ¼W¥[¤F¤@­Ó°Êµeªºª«¥ó¡C
-   * ­×¥¿¤F¤@¨Ç bug¡C
