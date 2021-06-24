@@ -805,7 +805,7 @@ namespace game_framework {
 		}
 
 	pacman.Initialize();
-	blueball.Initialize();
+	//blueball.Initialize();
 	bball.Initialize();
 	background.SetTopLeft(BACKGROUND_X,0);				// 設定背景的起始座標
 	help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
@@ -849,7 +849,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	//
 	int temp = 0;
 	temp = hits_left.GetInteger();
-	blueball.TrackPacman(&pacman, temp);     //前五秒blue ghost上下移
+	//blueball.TrackPacman(&pacman, temp);     //前五秒blue ghost上下移
 	bball.TrackPacman(&pacman, temp);		//前五秒red ghost左右移
 	
 	//blueball.OnMove(backgroundArray, &pacman,temp);
@@ -876,19 +876,20 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	}
 	// pacman hits bigball
 	if (pacman.HitBigball(backgroundArray)) {
-		blueball.OnMoveStar(backgroundArray, &pacman, temp);
+		//blueball.OnMoveStar(backgroundArray, &pacman, temp);
 		bball.OnMoveStar(backgroundArray, &pacman);
 	}
 	else {
-		blueball.OnMove(backgroundArray, &pacman, temp);
+		//blueball.OnMove(backgroundArray, &pacman, temp);
 		bball.OnMove(backgroundArray, &pacman, temp);
 	}
 	
 	// blueghost and redghost collision
-	if ((blueball.HitEraser(&pacman))||(bball.HitEraser(&pacman))) {
+	//if ((blueball.HitEraser(&pacman))||(bball.HitEraser(&pacman))) {
+	if (bball.HitEraser(&pacman)) {
 		my_lives.Add(-1);
 		pacman.Initialize();
-		blueball.Initialize();
+		//blueball.Initialize();
 		bball.Initialize_2();
 		pacman.OnShow();
 		CAudio::Instance()->Play(AUDIO_DEATH);
@@ -924,7 +925,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		//	}
 		//}*/
 		pacman.LoadBitmap();
-		blueball.LoadBitmap();
+		//blueball.LoadBitmap();
 		background.LoadBitmap(IDB_BACKGROUND);					// 載入背景的圖形
 		//
 		// 完成部分Loading動作，提高進度
@@ -1023,9 +1024,6 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
-		const char KEY_SPACE = ' ';
-		if (nChar == KEY_SPACE)
-			GotoGameState(GAME_STATE_RUN);						// 切換至GAME_STATE_RUN
 		/*
 		const char KEY_LEFT  = 0x25; // keyboard左箭頭
 		const char KEY_UP    = 0x26; // keyboard上箭頭
@@ -1104,9 +1102,9 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		bball.OnShow(backgroundArray, &pacman);						// 貼上彈跳的球
 		bball.OnShowStar(backgroundArray, &pacman);
 		pacman.OnShow();					// 貼上擦子
-		blueball.OnShow(backgroundArray, &pacman);
-		blueball.OnShowStar(backgroundArray, &pacman);
-		blueball.SetIsAlive(true);
+		//blueball.OnShow(backgroundArray, &pacman);
+		//blueball.OnShowStar(backgroundArray, &pacman);
+		//blueball.SetIsAlive(true);
 		//
 		//  貼上左上及右下角落的圖
 		//
