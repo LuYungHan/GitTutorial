@@ -252,15 +252,15 @@ END
 IDD_ABOUTBOX DIALOGEX 0, 0, 218, 79
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "About game"
-FONT 8, "MS Sans Serif", 0, 0, 0x0
+FONT 8, "Muyao-Softbrush", 400, 0, 0x86
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,11,17,21,23
     LTEXT           "Pacman",IDC_STATIC,39,10,119,8,SS_NOPREFIX
     LTEXT           "Copyright (C) 2002-2012",IDC_STATIC,39,23,119,8
     DEFPUSHBUTTON   "OK",IDOK,172,7,39,14,WS_GROUP
-    LTEXT           "Professor: ???  assistant: ???",IDC_STATIC,39,35,119,8
-    PUSHBUTTON      "ReadMe",IDC_README,172,24,39,13,WS_GROUP
-    LTEXT           "Author: ???,???, CSIE Department, NTUT",IDC_STATIC,39,47,159,8
+    LTEXT           "Professor: Chen, Shuo-Han  assistant: Wu, Cheng-Yueh",IDC_STATIC,39,35,172,8
+    PUSHBUTTON      "ReadMe",IDC_README,172,21,39,13,WS_GROUP
+    LTEXT           "Author: Chen, Chia-Chun, Lu, Yung-Han, CSIE Department, NTUT",IDC_STATIC,39,47,159,8
     LTEXT           "https://github.com/LuYungHan/Pacman_Game",IDC_STATIC,39,60,159,8
 END
 

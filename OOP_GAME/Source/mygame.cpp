@@ -564,7 +564,7 @@ namespace game_framework {
 		//
 		logo.LoadBitmap(IDB_BACKGROUNDBEGIN);
 		tmp_about.LoadBitmap(IDB_ERASER1);
-		Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
+		//Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 		//
 		// 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
 		//
@@ -669,7 +669,7 @@ namespace game_framework {
 		//
 		// 開始載入資料
 		//
-		Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
+		//Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 		//
 		// 最終進度為100%
 		//
@@ -735,7 +735,7 @@ namespace game_framework {
 		//
 		// 開始載入資料
 		//
-		Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
+		//Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 		//
 		// 最終進度為100%
 		//

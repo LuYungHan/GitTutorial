@@ -241,5 +241,11 @@
     <Image Include="res\level1begin.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="res\aboutgame.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\game2.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

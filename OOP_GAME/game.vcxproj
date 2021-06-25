@@ -328,6 +328,7 @@
   <ItemGroup>
     <Image Include="..\..\..\pacman picture\map.png" />
     <Image Include="Bitmaps\level1.bmp" />
+    <Image Include="res\aboutgame.bmp" />
     <Image Include="res\ball1.bmp" />
     <Image Include="res\ball2.bmp" />
     <Image Include="res\ball3.bmp" />
@@ -346,6 +347,7 @@
     <Image Include="res\ballUp4 .bmp" />
     <Image Include="res\bigball.bmp" />
     <Image Include="res\Fantasma01.bmp" />
+    <Image Include="res\game2.ico" />
     <Image Include="res\level1begin.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
