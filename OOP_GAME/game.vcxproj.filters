@@ -247,5 +247,32 @@
     <Image Include="res\game2.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="res\bitmap3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\bitmap4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\blueghost01.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\blueghost02.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\blueghost03.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\blueghost04.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\blueghostcenter01.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\blueghostDown01.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\blueghostUP01.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

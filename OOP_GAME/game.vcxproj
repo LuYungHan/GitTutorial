@@ -346,6 +346,15 @@
     <Image Include="res\ballUp3 .bmp" />
     <Image Include="res\ballUp4 .bmp" />
     <Image Include="res\bigball.bmp" />
+    <Image Include="res\bitmap3.bmp" />
+    <Image Include="res\bitmap4.bmp" />
+    <Image Include="RES\blueghost01.bmp" />
+    <Image Include="RES\blueghost02.bmp" />
+    <Image Include="RES\blueghost03.bmp" />
+    <Image Include="RES\blueghost04.bmp" />
+    <Image Include="RES\blueghostcenter01.bmp" />
+    <Image Include="RES\blueghostDown01.bmp" />
+    <Image Include="RES\blueghostUP01.bmp" />
     <Image Include="res\Fantasma01.bmp" />
     <Image Include="res\game2.ico" />
     <Image Include="res\level1begin.bmp" />

@@ -142,6 +142,20 @@ IDB_HELP                BITMAP                  "..\\res\\help.bmp"
 
 IDB_LOADING             BITMAP                  "..\\res\\loading.bmp"
 
+IDB_blueghost01         BITMAP                  "D:\\oop\\pacman\\OOP_GAME\\RES\\blueghost01.bmp"
+
+IDB_blueghost02         BITMAP                  "D:\\oop\\pacman\\OOP_GAME\\RES\\blueghost02.bmp"
+
+IDB_blueghost03         BITMAP                  "D:\\oop\\pacman\\OOP_GAME\\RES\\blueghost03.bmp"
+
+IDB_blueghost04         BITMAP                  "D:\\oop\\pacman\\OOP_GAME\\RES\\blueghost04.bmp"
+
+IDB_blueghostcenter01   BITMAP                  "D:\\oop\\pacman\\OOP_GAME\\RES\\blueghostcenter01.bmp"
+
+IDB_blueghostDown01     BITMAP                  "D:\\oop\\pacman\\OOP_GAME\\RES\\blueghostDown01.bmp"
+
+IDB_blueghostUp01       BITMAP                  "D:\\oop\\pacman\\OOP_GAME\\RES\\blueghostUP01.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
