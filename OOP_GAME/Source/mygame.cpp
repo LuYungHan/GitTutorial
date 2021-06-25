@@ -614,7 +614,8 @@ namespace game_framework {
 		pDC->SetBkColor(RGB(0, 0, 0));
 		pDC->SetTextColor(RGB(255, 255, 0));
 		pDC->TextOut(266, 261, "READY !!");
-		pDC->TextOut(5, 395, "Press Ctrl-F : full screen mode,Press Tab : next level");
+		pDC->TextOut(5, 365, "Press  Tab :pass the Game.");
+		pDC->TextOut(5, 395, "Press Ctrl-F : full screen mode");
 		if (ENABLE_GAME_PAUSE)
 			pDC->TextOut(5, 425, "Press Ctrl-Q :pause the Game.");
 		pDC->TextOut(5, 455, "Press Alt-F4 or ESC to Quit.");
@@ -878,7 +879,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			//
 			// 若剩餘碰撞次數為0，則跳到Game Over狀態
 			//
-			if (hits_left.GetInteger() >= 220) {
+			if (hits_left.GetInteger() >= 1220) {
 				CAudio::Instance()->Stop(AUDIO_PACMAN);	// 停止 MIDI
 				GotoGameState(GAME_STATE_SECOND);
 				//hits_left.UnloadBitmap();
@@ -1265,7 +1266,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 				//
 				// 若剩餘碰撞次數為0，則跳到Game Over狀態
 				//
-				if (hits_left.GetInteger() >= 420) {
+				if (hits_left.GetInteger() >= 2440) {
 					//	CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
 					//	CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
 					CAudio::Instance()->Stop(AUDIO_PACMAN);	// 停止 MIDI
