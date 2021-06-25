@@ -106,6 +106,7 @@ namespace game_framework {
 		const int		NUMBALLS;	// 球的總數
 		const int       GHOSTBLUE;  //blue ghost
 		CMovingBitmap	background;	// 背景圖
+		//CMovingBitmap	background1;	// 背景圖
 		CMovingBitmap	help;		// 說明圖
 		CBall			*ball;		// 球的陣列
 		CBall			*bigball;		// 大球的陣列

@@ -607,10 +607,9 @@ namespace game_framework {
 		pDC->SetBkColor(RGB(0, 0, 0));
 		pDC->SetTextColor(RGB(255, 255, 0));
 		pDC->TextOut(266, 261, "READY !!");
-		pDC->TextOut(5, 395, "Press Ctrl-F to switch in between window mode and full screen mode.");
-
+		pDC->TextOut(5, 395, "Press Ctrl-F : full screen mode,Press Tab : next level");
 		if (ENABLE_GAME_PAUSE)
-			pDC->TextOut(5, 425, "Press Ctrl-Q to pause the Game.");
+			pDC->TextOut(5, 425, "Press Ctrl-Q :pause the Game.");
 		pDC->TextOut(5, 455, "Press Alt-F4 or ESC to Quit.");
 		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
@@ -677,7 +676,8 @@ namespace game_framework {
 		pDC->SetBkColor(RGB(0, 0, 0));
 		pDC->SetTextColor(RGB(255, 255, 0));
 		char str[80];								// Demo 數字對字串的轉換
-		sprintf(str, "Game Over ! (%d)", counter / 30);
+		sprintf(str, "Game Over ! (%d)\n", counter / 30);
+		//sprintf(str, "Score: (%d)", hits_left.GetInteger());
 		pDC->TextOut(240, 210, str);
 		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
@@ -930,6 +930,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		pacman.LoadBitmap();
 		//blueball.LoadBitmap();
 		background.LoadBitmap(IDB_BACKGROUND);					// 載入背景的圖形
+		//background1.LoadBitmap(IDB_BACKGROUND1);					// 載入背景的圖形
 		//
 		// 完成部分Loading動作，提高進度
 		//
