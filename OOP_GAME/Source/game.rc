@@ -100,7 +100,7 @@ IDB_BALLDOWN4           BITMAP                  "..\\res\\ballDown4.bmp"
 
 IDB_STARGHOST           BITMAP                  "..\\res\\Fantasma01.bmp"
 
-IDB_ERASER1             BITMAP                  "..\\res\\eraser1.bmp"
+IDB_ERASER1             BITMAP                  "..\\res\\aboutgame.bmp"
 
 IDB_BACKGROUND          BITMAP                  "..\\Bitmaps\\level1.bmp"
 
