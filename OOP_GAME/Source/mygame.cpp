@@ -563,6 +563,7 @@ namespace game_framework {
 		// 開始載入資料
 		//
 		logo.LoadBitmap(IDB_BACKGROUNDBEGIN);
+		tmp_about.LoadBitmap(IDB_ERASER1);
 		Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 		//
 		// 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
@@ -585,7 +586,13 @@ namespace game_framework {
 
 	void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
 	{
-		GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
+		if ((point.x <= 140 && point.x >= 60) && (point.y <= 210 && point.y >= 180)) {
+			show_about = 1;
+		}
+		else {
+			show_about = 0;
+			GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
+		}
 	}
 
 	void CGameStateInit::OnShow()
@@ -596,7 +603,7 @@ namespace game_framework {
 		logo.SetTopLeft(0, 0);
 		logo.ShowBitmap();
 		//
-
+		tmp_about.SetTopLeft(150, 150);
 		//
 		// Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好
 		//
@@ -614,7 +621,9 @@ namespace game_framework {
 		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 
-
+		if (show_about == 1) {
+			tmp_about.ShowBitmap();
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////////////////
